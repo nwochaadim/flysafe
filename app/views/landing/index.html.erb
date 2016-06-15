@@ -19,10 +19,10 @@
   </section>
 
   <section id="booking">
-      <h2 class="ui horizontal divider header">
-        <i class="tag icon"></i>
-           Book a Flight Now
-      </h2>
+    <h2 class="ui horizontal divider header">
+      <i class="tag icon"></i>
+         Book a Flight Now
+    </h2>
     <div class="ui centered grid">
     <div class="ui steps">
       <div class="step">
@@ -59,136 +59,7 @@
     </div>
 
     <div class="ui raised segment">
-      <form class="ui form">
-        <h4 class="ui dividing header">Shipping Information</h4>
-        <div class="field">
-          <label>Name</label>
-          <div class="two fields">
-            <div class="field">
-              <input type="text" name="shipping[first-name]" placeholder="First Name">
-            </div>
-            <div class="field">
-              <input type="text" name="shipping[last-name]" placeholder="Last Name">
-            </div>
-          </div>
-        </div>
-        <div class="field">
-          <label>Billing Address</label>
-          <div class="fields">
-            <div class="twelve wide field">
-              <input type="text" name="shipping[address]" placeholder="Street Address">
-            </div>
-            <div class="four wide field">
-              <input type="text" name="shipping[address-2]" placeholder="Apt #">
-            </div>
-          </div>
-        </div>
-
-        <div class="two fields">
-          <div class="field">
-            <label>State</label>
-            <select class="ui fluid dropdown">
-              <option value="">State</option>
-                <option value="AL">Alabama</option>
-                <option value="AK">Alaska</option>
-                <option value="AZ">Arizona</option>
-                <option value="AR">Arkansas</option>
-                <option value="CA">California</option>
-                <option value="CO">Colorado</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Country</label>
-            <div class="ui fluid search selection dropdown">
-              <input type="hidden" name="country">
-              <i class="dropdown icon"></i>
-              <div class="default text">Select Country</div>
-              <div class="menu">
-                <div class="item" data-value="vi"><i class="vi flag"></i>Us Virgin Islands</div>
-                <div class="item" data-value="uz"><i class="uz flag"></i>Uzbekistan</div>
-                <div class="item" data-value="vu"><i class="vu flag"></i>Vanuatu</div>
-                <div class="item" data-value="va"><i class="va flag"></i>Vatican City</div>
-                <div class="item" data-value="ve"><i class="ve flag"></i>Venezuela</div>
-                <div class="item" data-value="vn"><i class="vn flag"></i>Vietnam</div>
-                <div class="item" data-value="wf"><i class="wf flag"></i>Wallis and Futuna</div>
-                <div class="item" data-value="eh"><i class="eh flag"></i>Western Sahara</div>
-                <div class="item" data-value="ye"><i class="ye flag"></i>Yemen</div>
-                <div class="item" data-value="zm"><i class="zm flag"></i>Zambia</div>
-                <div class="item" data-value="zw"><i class="zw flag"></i>Zimbabwe</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <h4 class="ui dividing header">Billing Information</h4>
-        <div class="field">
-          <label>Card Type</label>
-          <div class="ui selection dropdown">
-            <input type="hidden" name="card[type]">
-            <div class="default text">Type</div>
-            <i class="dropdown icon"></i>
-            <div class="menu">
-              <div class="item" data-value="visa">
-                <i class="visa icon"></i>
-                Visa
-              </div>
-              <div class="item" data-value="amex">
-                <i class="amex icon"></i>
-                American Express
-              </div>
-              <div class="item" data-value="discover">
-                <i class="discover icon"></i>
-                Discover
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="fields">
-          <div class="seven wide field">
-            <label>Card Number</label>
-            <input type="text" name="card[number]" maxlength="16" placeholder="Card #">
-          </div>
-          <div class="three wide field">
-            <label>CVC</label>
-            <input type="text" name="card[cvc]" maxlength="3" placeholder="CVC">
-          </div>
-          <div class="six wide field">
-            <label>Expiration</label>
-            <div class="two fields">
-              <div class="field">
-                <select class="ui fluid search dropdown" name="card[expire-month]">
-                  <option value="">Month</option>
-                  <option value="1">January</option>
-                  <option value="2">February</option>
-                  <option value="3">March</option>
-                  <option value="4">April</option>
-                  <option value="5">May</option>
-                  <option value="6">June</option>
-                  <option value="7">July</option>
-                  <option value="8">August</option>
-                  <option value="9">September</option>
-                  <option value="10">October</option>
-                  <option value="11">November</option>
-                  <option value="12">December</option>
-                </select>
-              </div>
-              <div class="field">
-                <input type="text" name="card[expire-year]" maxlength="4" placeholder="Year">
-              </div>
-            </div>
-          </div>
-        </div>
-        
-         <div class="ui segment">
-          <div class="field">
-            <div class="ui toggle checkbox">
-              <input type="checkbox" name="gift" tabindex="0" class="hidden">
-              <label>Do not include a receipt in the package</label>
-            </div>
-          </div>
-        </div>
-        <div class="ui button" tabindex="0">Submit Order</div>
-    </form>
-
+      <%= render partial: 'forms/book_flight' %>
     </div>
 
   </div>
