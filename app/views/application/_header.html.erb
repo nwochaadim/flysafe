@@ -1,20 +1,18 @@
 <div class="ui small inverted menu">
-  <a class="active item">
-    Home
-  </a>
-  <a class="item" href="/about">
-    About Us
-  </a>
-  <a class="item" href="/contact">
-    Contact Us
-  </a>
-  <div class="right menu">
-    <a class="item">
-      <div class="ui primary button">Sign Up</div>
-    </a>
+  <%= link_to "Home", root_path,  class: 'active item' %>
 
-    <a class="item">
+  <%= link_to "About Us", about_path,  class: 'item' %>
+
+  <%= link_to "Contact Us", contact_path,  class: 'item' %>
+
+  <div class="right menu">
+    <%= link_to signup_path, class: 'item' do %>
+      <div class="ui primary button">Sign Up</div>
+    <% end %>
+
+    <%= link_to login_path, class: 'item' do %>
       <button class="ui teal button">Login</button>
-    </a>
+    <% end %>
+
   </div>
 </div>

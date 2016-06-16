@@ -1,0 +1,22 @@
+// Place all the styles related to the session controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.ui.fluid.container {
+  background-color: #042833;
+  height: 100%;
+  width: 100%;
+}
+
+.ui.fluid.container > .grid {
+  height: 100%;
+  margin: 0;
+}
+
+.ui.fluid.container .image {
+  margin-top: -100px;
+}
+
+.ui.fluid.container .column {
+  max-width: 450px;
+}

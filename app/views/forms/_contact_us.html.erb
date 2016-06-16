@@ -1,43 +1,33 @@
-<form class="ui form">
+<%= form_tag "/", method: "post", class: "ui form" do %>
   <h4 class="ui dividing header">Please provide your information</h4>
   <div class="two fields">
     <div class="field">
-      <label>First Name</label>
-        <div class="field">
-          <input type="text" name="" placeholder="E.g John">
-        </div>
+      <%= label_tag :first_name, "First Name" %>
+      <%= text_field_tag :first_name, nil, placeholder: "E.g John" %>
     </div>
 
     <div class="field">
-      <label>Last Name</label>
-      <div class="field">
-        <input type="text" name="" placeholder="E.g Doe">
-      </div>
+      <%= label_tag :last_name, "Last Name" %>
+      <%= text_field_tag :last_name, nil, placeholder: "E.g Doe" %>
     </div>
   </div>
 
   <div class="two fields">
     <div class="eight wide field">
-      <label>Email</label>
-      <div class="field">
-        <input type="text" name="" placeholder="E.g johndoe@gmail.com">
-      </div>
+      <%= label_tag :email, "Email" %>
+      <%= text_field_tag :last_name, nil, placeholder: "E.g Doe" %>
     </div>
 
     <div class="eight wide field">
-      <label>Phone Number</label>
-      <div class="field">
-        <input type="text" name="" placeholder="E.g johndoe@gmail.com">
-      </div>
+      <%= label_tag :phone_number, "Phone Number" %>
+      <%= text_field_tag :phone_number, nil, placeholder: "(+234) 734452890" %>
     </div>
   </div>
 
   <div class="twelve wide field">
-    <label>Comment</label>
-    <textarea></textarea>
+    <%= label_tag :comment, "Drop Your Comment" %>
+    <%= text_area_tag :comment %>
   </div>
  
-  <div class="ui basic blue button" tabindex="0">
-    Submit
-  </div>
-</form>
+  <%= submit_tag "Submit", class: "ui basic blue button" %>
+<% end %>

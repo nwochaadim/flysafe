@@ -1,60 +1,44 @@
-<form class="ui form">
+<%= form_tag "/search", method: "post", class: "ui form" do %>
   <h4 class="ui dividing header">Please provide your information</h4>
   <div class="two fields">
     <div class="field">
-      <label>First Name</label>
-        <div class="field">
-          <input type="text" name="" placeholder="E.g John">
-        </div>
+      <%= label_tag :first_name, "First Name" %>
+      <%= text_field_tag :first_name, nil, placeholder: "E.g John" %>
     </div>
 
     <div class="field">
-      <label>Last Name</label>
-      <div class="field">
-        <input type="text" name="" placeholder="E.g Doe">
-      </div>
+      <%= label_tag :last_name, "Last Name" %>
+      <%= text_field_tag :last_name, nil, placeholder: "E.g Doe" %>
     </div>
   </div>
 
   <div class="eight wide field">
-    <label>Email</label>
-    <div class="field">
-      <input type="text" name="" placeholder="E.g johndoe@gmail.com">
-    </div>
+    <%= label_tag :email, "Email" %>
+    <%= text_field_tag :last_name, nil, placeholder: "E.g Doe" %>
   </div>
 
   <div class="four wide field">
-    <label>Gender</label>
-    <select class="ui fluid dropdown">
-      <option value="">Male</option>
-      <option value="">Female</option>
-    </select>
+    <%= label_tag :gender, "Gender" %>
+    <%= select_tag :gender, options_for_select([["Male", 1], ["Female", 2]]), class: "ui fluid dropdown"%>
   </div>
 <!-- Adult Passengers Information -->
   <h4 class="ui dividing header">Adult Passenger 1 Information</h4>
 
   <div class="two fields">
     <div class="field">
-      <label>First Name</label>
-        <div class="field">
-          <input type="text" name="" placeholder="E.g John">
-        </div>
+      <%= label_tag :adult_first_name, "First Name" %>
+      <%= text_field_tag :adult_first_name, nil, placeholder: "E.g John" %>
     </div>
 
     <div class="field">
-      <label>Last Name</label>
-      <div class="field">
-        <input type="text" name="" placeholder="E.g Doe">
-      </div>
+      <%= label_tag :adult_last_name, "Last Name" %>
+      <%= text_field_tag :adult_last_name, nil, placeholder: "E.g Doe" %>
     </div>
   </div>
 
    <div class="four wide field">
-    <label>Gender</label>
-    <select class="ui fluid dropdown">
-      <option value="">Male</option>
-      <option value="">Female</option>
-    </select>
+    <%= label_tag :adult_gender, "Gender" %>
+    <%= select_tag :adult_gender, options_for_select([["Male", 1], ["Female", 2]]), class: "ui fluid dropdown"%>
   </div>
 
 <!-- Adult Passengers Information -->
@@ -64,26 +48,19 @@
 
   <div class="two fields">
     <div class="field">
-      <label>First Name</label>
-        <div class="field">
-          <input type="text" name="" placeholder="E.g John">
-        </div>
+      <%= label_tag :child_first_name, "First Name" %>
+      <%= text_field_tag :child_first_name, nil, placeholder: "E.g John" %>
     </div>
 
     <div class="field">
-      <label>Last Name</label>
-      <div class="field">
-        <input type="text" name="" placeholder="E.g Doe">
-      </div>
+      <%= label_tag :child_last_name, "Last Name" %>
+      <%= text_field_tag :child_last_name, nil, placeholder: "E.g Doe" %>
     </div>
   </div>
 
-   <div class="four wide field">
-    <label>Gender</label>
-    <select class="ui fluid dropdown">
-      <option value="">Male</option>
-      <option value="">Female</option>
-    </select>
+  <div class="four wide field">
+    <%= label_tag :child_gender, "Gender" %>
+    <%= select_tag :child_gender, options_for_select([["Male", 1], ["Female", 2]]), class: "ui fluid dropdown"%>
   </div>
 
 <!-- Child Passengers Information -->
@@ -93,33 +70,23 @@
 
   <div class="two fields">
     <div class="field">
-      <label>First Name</label>
-        <div class="field">
-          <input type="text" name="" placeholder="E.g John">
-        </div>
+      <%= label_tag :infant_first_name, "First Name" %>
+      <%= text_field_tag :infant_first_name, nil, placeholder: "E.g John" %>
     </div>
 
     <div class="field">
-      <label>Last Name</label>
-      <div class="field">
-        <input type="text" name="" placeholder="E.g Doe">
-      </div>
+      <%= label_tag :infant_last_name, "Last Name" %>
+      <%= text_field_tag :child_last_name, nil, placeholder: "E.g Doe" %>
     </div>
   </div>
 
-   <div class="four wide field">
-    <label>Gender</label>
-    <select class="ui fluid dropdown">
-      <option value="">Male</option>
-      <option value="">Female</option>
-    </select>
+  <div class="four wide field">
+    <%= label_tag :infant_gender, "Gender" %>
+    <%= select_tag :infant_gender, options_for_select([["Male", 1], ["Female", 2]]), class: "ui fluid dropdown"%>
   </div>
 
 <!-- Infant Passengers Information -->
 
-
-
-  <div class="ui basic blue button" tabindex="0">
-    Submit
-  </div>
-</form>
+  <%= submit_tag "Submit", class: "ui basic blue button" %>
+  
+<% end %>

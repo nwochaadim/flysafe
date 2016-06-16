@@ -1,65 +1,46 @@
-<form class="ui form">
+<%= form_tag "/users",  method: "post", class: "ui form" do %>
   <h4 class="ui dividing header">Search Flights</h4>
   <div class="three fields">
     <div class="field">
-      <label>From</label>
-        <div class="field">
-          <input type="text" name="" placeholder="Departure">
-        </div>
+      <%= label_tag :name, "First Name" %>
+      <%= text_field_tag :name, nil, placeholder: "Departure" %>
     </div>
 
     <div class="field">
-      <label>Date</label>
-      <div class="field">
-          <input type="date" name="" placeholder="Last Name">
-      </div>
+      <%= label_tag :date, "Date" %>
+      <%= date_field_tag "date" %>
     </div>
 
     <div class="field">
-      <label>Class</label>
-      <select class="ui fluid dropdown">
-        <option value="">Economy</option>
-        <option value="AL">Business</option>
-      </select>
+      <%= label_tag :grade, "Class" %>
+      <%= select_tag :grade, options_for_select([["Economy", "economy"], ["Business", "business"]]), class: "ui fluid dropdown" %>
     </div>
   </div>
 
   <div class="field">
-    <label>To</label>
-    <div class="field">
-      <input type="text" name="" placeholder="Arrival">
-    </div>
+    <%= label_tag :arrival, "Arrival" %>
+    <%= text_field_tag :arrival, nil, placeholder: "Arrival" %>
   </div>
 
   <h4 class="ui dividing header">Passengers</h4>
   <div class="three fields">
     <div class="field">
-      <label>Adults(12+)</label>
-      <select class="ui fluid dropdown">
-        <option value="">Economy</option>
-        <option value="AL">Business</option>
-      </select>
+      <%= label_tag :adults, "Number of Adults(12+)" %>
+      <%= select_tag :adults, options_for_select(1..6), class: "ui fluid dropdown" %>
     </div>
 
     <div class="field">
-      <label>Children (age 2-11)</label>
-      <select class="ui fluid dropdown">
-        <option value="">Economy</option>
-        <option value="AL">Business</option>
-      </select>
+      <%= label_tag :children, "Children (age 2-11)" %>
+      <%= select_tag :children, options_for_select(1..6), class: "ui fluid dropdown" %>
     </div>
 
     <div class="field">
-      <label>Infants (age under 2)</label>
-      <select class="ui fluid dropdown">
-        <option value="">Economy</option>
-        <option value="AL">Business</option>
-      </select>
+      <%= label_tag :infants, "Infants (age 2-11)" %>
+      <%= select_tag :infants, options_for_select(1..6), class: "ui fluid dropdown" %>
     </div>
   </div>
-
-  <div class="ui basic blue button" tabindex="0">
+  <%= submit_tag "Submit", class: "ui basic blue button" do %>
     <i class="search icon"></i>
-    Search
-  </div>
-</form>
+  <% end %>
+
+<% end %>

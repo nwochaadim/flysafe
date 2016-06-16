@@ -4,7 +4,6 @@ class CreateBookings < ActiveRecord::Migration
       t.string :reference_number
       t.references :user, index: true, foreign_key: true
       t.references :flight, index: true, foreign_key: true
-      
 
       t.timestamps null: false
     end
