@@ -2,6 +2,10 @@ Rails.application.routes.draw do
 
 
   root 'landing#index'
+
+  get "/about" => "landing#about", as: :about
+
+  get "/contact" => "landing#contact_us", as: :contact
   
   resources :passengers
   resources :bookings
