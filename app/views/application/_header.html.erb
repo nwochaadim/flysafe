@@ -6,13 +6,6 @@
   <%= link_to "Contact Us", contact_path,  class: 'item' %>
 
   <div class="right menu">
-    <%= link_to signup_path, class: 'item' do %>
-      <div class="ui primary button">Sign Up</div>
-    <% end %>
-
-    <%= link_to login_path, class: 'item' do %>
-      <button class="ui teal button">Login</button>
-    <% end %>
-
+    <%= render partial: "right_menu" %>
   </div>
 </div>

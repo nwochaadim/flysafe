@@ -1,0 +1,16 @@
+<% if current_user %>
+  <div class="item">
+    <%= current_user.first_name+" "+current_user.last_name %>
+  </div>
+  <%= link_to logout_path, class: 'item' do %>
+    <div class="ui primary button">Logout</div>
+  <% end %>
+<% else %>
+  <%= link_to signup_path, class: 'item' do %>
+    <div class="ui primary button">Sign Up</div>
+  <% end %>
+
+  <%= link_to login_path, class: 'item' do %>
+    <button class="ui teal button">Login</button>
+  <% end %>
+<% end %>

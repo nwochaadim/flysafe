@@ -9,7 +9,11 @@ Rails.application.routes.draw do
 
   get "/login" => "session#new", as: :login
 
+  get "/logout" => "session#destroy", as: :logout
+
   get "/signup" => "users#new", as: :signup
+
+  post "/session" => "session#create", as: :session
   
   resources :passengers
   resources :bookings
