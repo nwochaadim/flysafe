@@ -1,0 +1,43 @@
+<h3 class="ui header"> Flights Available (Move Slider to Select Flight) </h3>
+<table class="ui celled padded stripped definition table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Departure</th>
+      <th>Arrival</th>
+      <th>Stops</th>
+      <th>Flight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @retrieved_flights.each_with_index do |flight, index| %>
+      <tr>
+        <td class="collapsing">
+          <div class="ui fitted slider checkbox">
+            <input type="radio" name="selected_flight" value="<%= index %>"> <label></label>
+          </div>
+        </td>
+        <td><%= flight.route.departing_airport.name %></td>
+        <td><%= flight.route.arriving_airport.name %></td>
+        <td><%= flight.stops %></td>
+        <td><%= flight.plane_name %></td>
+      </tr>
+    <% end %>
+    
+  </tbody>
+  <tfoot class="full-width">
+    <tr>
+      <th></th>
+      <th colspan="4">
+        <button class="ui left floated small teal button">
+          <i class="left arrow icon"></i>
+          Go Back
+        </button>
+
+        <%= link_to book_path, class: "ui right floated small primary button", remote: true do %>
+          <i class="right arrow icon"></i>
+        <% end %>
+      </th>
+    </tr>
+  </tfoot>
+</table>

@@ -14,7 +14,13 @@ class BookingsController < ApplicationController
 
   # GET /bookings/new
   def new
-    @booking = Booking.new
+
+  end
+
+  def book
+    respond_to do |format|
+      format.js
+    end
   end
 
   # GET /bookings/1/edit

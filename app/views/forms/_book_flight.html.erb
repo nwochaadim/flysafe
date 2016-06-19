@@ -22,68 +22,77 @@
     <%= select_tag :gender, options_for_select([["Male", 1], ["Female", 2]]), class: "ui fluid dropdown"%>
   </div>
 <!-- Adult Passengers Information -->
-  <h4 class="ui dividing header">Adult Passenger 1 Information</h4>
+  <% if $no_of_adults > 0 %>
+    <% $no_of_adults.times do |index| %>
+      <h4 class="ui dividing header">Adult Passenger <%= index+1 %> Information</h4>
+      <div class="two fields">
+        <div class="field">
+          <%= label_tag :adult_first_name, "First Name" %>
+          <%= text_field_tag :adult_first_name, nil, placeholder: "E.g John" %>
+        </div>
 
-  <div class="two fields">
-    <div class="field">
-      <%= label_tag :adult_first_name, "First Name" %>
-      <%= text_field_tag :adult_first_name, nil, placeholder: "E.g John" %>
-    </div>
+        <div class="field">
+          <%= label_tag :adult_last_name, "Last Name" %>
+          <%= text_field_tag :adult_last_name, nil, placeholder: "E.g Doe" %>
+        </div>
+      </div>
 
-    <div class="field">
-      <%= label_tag :adult_last_name, "Last Name" %>
-      <%= text_field_tag :adult_last_name, nil, placeholder: "E.g Doe" %>
-    </div>
-  </div>
-
-   <div class="four wide field">
-    <%= label_tag :adult_gender, "Gender" %>
-    <%= select_tag :adult_gender, options_for_select([["Male", 1], ["Female", 2]]), class: "ui fluid dropdown"%>
-  </div>
+       <div class="four wide field">
+        <%= label_tag :adult_gender, "Gender" %>
+        <%= select_tag :adult_gender, options_for_select([["Male", 1], ["Female", 2]]), class: "ui fluid dropdown"%>
+      </div>
+    <% end %>
+  <% end %>
 
 <!-- Adult Passengers Information -->
 
 <!-- Child Passengers Information -->
-  <h4 class="ui dividing header">Child Passenger 1 Information</h4>
+  <% if $no_of_children >0 %>
+    <% $no_of_children.times do |index|%>
+      <h4 class="ui dividing header">Child Passenger <%= index+1 %> Information</h4>
+      <div class="two fields">
+        <div class="field">
+          <%= label_tag :child_first_name, "First Name" %>
+          <%= text_field_tag :child_first_name, nil, placeholder: "E.g John" %>
+        </div>
 
-  <div class="two fields">
-    <div class="field">
-      <%= label_tag :child_first_name, "First Name" %>
-      <%= text_field_tag :child_first_name, nil, placeholder: "E.g John" %>
-    </div>
+        <div class="field">
+          <%= label_tag :child_last_name, "Last Name" %>
+          <%= text_field_tag :child_last_name, nil, placeholder: "E.g Doe" %>
+        </div>
+      </div>
 
-    <div class="field">
-      <%= label_tag :child_last_name, "Last Name" %>
-      <%= text_field_tag :child_last_name, nil, placeholder: "E.g Doe" %>
-    </div>
-  </div>
-
-  <div class="four wide field">
-    <%= label_tag :child_gender, "Gender" %>
-    <%= select_tag :child_gender, options_for_select([["Male", 1], ["Female", 2]]), class: "ui fluid dropdown"%>
-  </div>
+      <div class="four wide field">
+        <%= label_tag :child_gender, "Gender" %>
+        <%= select_tag :child_gender, options_for_select([["Male", 1], ["Female", 2]]), class: "ui fluid dropdown"%>
+      </div>
+    <% end %>
+  <% end %>
 
 <!-- Child Passengers Information -->
 
 <!-- Infant Passengers Information -->
-  <h4 class="ui dividing header">Infant Passenger 1 Information</h4>
+  <% if $no_of_infants > 0 %>
+    <% $no_of_infants.times do |index| %>
+      <h4 class="ui dividing header">Infant Passenger <%= index+1 %> Information</h4>
+      <div class="two fields">
+        <div class="field">
+          <%= label_tag :infant_first_name, "First Name" %>
+          <%= text_field_tag :infant_first_name, nil, placeholder: "E.g John" %>
+        </div>
 
-  <div class="two fields">
-    <div class="field">
-      <%= label_tag :infant_first_name, "First Name" %>
-      <%= text_field_tag :infant_first_name, nil, placeholder: "E.g John" %>
-    </div>
+        <div class="field">
+          <%= label_tag :infant_last_name, "Last Name" %>
+          <%= text_field_tag :child_last_name, nil, placeholder: "E.g Doe" %>
+        </div>
+      </div>
 
-    <div class="field">
-      <%= label_tag :infant_last_name, "Last Name" %>
-      <%= text_field_tag :child_last_name, nil, placeholder: "E.g Doe" %>
-    </div>
-  </div>
-
-  <div class="four wide field">
-    <%= label_tag :infant_gender, "Gender" %>
-    <%= select_tag :infant_gender, options_for_select([["Male", 1], ["Female", 2]]), class: "ui fluid dropdown"%>
-  </div>
+      <div class="four wide field">
+        <%= label_tag :infant_gender, "Gender" %>
+        <%= select_tag :infant_gender, options_for_select([["Male", 1], ["Female", 2]]), class: "ui fluid dropdown"%>
+      </div>
+    <% end %>
+  <% end %>
 
 <!-- Infant Passengers Information -->
 

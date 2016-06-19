@@ -5,6 +5,4 @@ $(document).on('page:load', function(){
         .closest('.message')
         .transition('fade');
     });
-
-
 })

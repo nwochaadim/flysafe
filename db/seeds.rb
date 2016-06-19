@@ -4,6 +4,19 @@ require "faker"
 Airport.destroy_all
 Route.destroy_all
 
+
+
+aircrafts = %w(Airbus\ A300
+  Airbus\ A318
+  Baade\ 152
+  Boeing\ 707
+  Boeing\ 717
+  Boeing\ 737
+  Comac\ C919
+  Convair\ 880
+  McDonnell\ Douglas\ MD-90
+)
+
 def create?(data)
   country_name = data["country"].to_sym
   allowed_country = allowed_countries[country_name]
@@ -21,7 +34,7 @@ def retrieve_arriving_airport(state)
   airport_length = DepartingAirport.all.count
   arriving_airport = nil
   loop do
-    index = Faker::Number.between(1, airport_length)
+    index = rand(1..airport_length)
     arriving_airport = DepartingAirport.find(index).attributes
     break unless arriving_airport[:state] == state
   end
@@ -33,11 +46,11 @@ end
 def create_routes
   DepartingAirport.all.each do |departing_airport|
 
-    terminating_index = Faker::Number.between(2, 5)
+    terminating_index = rand(2..5)
     arriving_airports = []
     (1..terminating_index).each do
-      flight_date = Faker::Date.between_except(1.days.from_now, 1.month.from_now, Date.today)
-      route = departing_airport.routes.create( date: flight_date )
+      
+      route = departing_airport.routes.create
       
 
       loop do
@@ -55,15 +68,25 @@ def create_routes
   end
 end
 
-
-jsonFile = File.read(Rails.root.to_s+"/public/airports.json")
-
-jsonData = JSON.parse(jsonFile)
-
-jsonData.each_with_index do |data, index|
-  if create?(data)
-    create_airport(data, index)   
+def create_airports_from_file
+  jsonFile = File.read(Rails.root.to_s+"/app/assets/airports.json")
+  jsonData = JSON.parse(jsonFile)
+  jsonData.each_with_index do |data, index|
+    if create?(data)
+      create_airport(data, index)   
+    end
   end
 end
+create_airports_from_file
 create_routes
+
+Route.all.each do |route|
+  flight_date = Faker::Date.between_except(1.days.from_now, 1.month.from_now, Date.today)
+  plane_name = aircrafts[rand(9)]
+  seats_available = rand(100..150)
+  route.create_flight(stops: 1, plane_name: plane_name, seats_available: seats_available, date: flight_date)
+end
+
+
+
 
