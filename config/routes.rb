@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   post "/search_flights" => "flights#search", as: :search_flights
 
   get "/book" => "bookings#book", as: :book
+
+  post "/confirm" => "bookings#confirm", as: :confirm_book
   
   resources :passengers
   resources :bookings

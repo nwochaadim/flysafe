@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(version: 20160613144243) do
 
   create_table "bookings", force: :cascade do |t|
     t.string   "reference_number", null: false
-    t.integer  "user_id"
     t.integer  "flight_id"
+    t.integer  "user_id"
     t.string   "class_level"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
@@ -88,11 +88,8 @@ ActiveRecord::Schema.define(version: 20160613144243) do
     t.string   "password_digest"
     t.string   "gender"
     t.string   "type"
-    t.integer  "booking_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
-
-  add_index "users", ["booking_id"], name: "index_users_on_booking_id"
 
 end

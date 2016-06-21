@@ -6,6 +6,7 @@
       <th>Departure</th>
       <th>Arrival</th>
       <th>Stops</th>
+      <th>Date</th>
       <th>Flight</th>
     </tr>
   </thead>
@@ -20,6 +21,7 @@
         <td><%= flight.route.departing_airport.name %></td>
         <td><%= flight.route.arriving_airport.name %></td>
         <td><%= flight.stops %></td>
+        <td><%= flight.date.strftime("%B %d, %Y") %></td>
         <td><%= flight.plane_name %></td>
       </tr>
     <% end %>
@@ -35,6 +37,7 @@
         </button>
 
         <%= link_to book_path, class: "ui right floated small primary button", remote: true do %>
+          Book Now
           <i class="right arrow icon"></i>
         <% end %>
       </th>

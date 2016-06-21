@@ -1,5 +1,6 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
+  attr_accessor :token
 
   # GET /bookings
   # GET /bookings.json
@@ -15,6 +16,13 @@ class BookingsController < ApplicationController
   # GET /bookings/new
   def new
 
+  end
+
+  def confirm
+    $booking_params = booking_params
+    respond_to do |format|
+      format.js
+    end
   end
 
   def book
@@ -68,13 +76,21 @@ class BookingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    def generate_token
+      loop do
+        @token = SecureRandom::hex(6);
+        bookings = Booking.where(reference_number: @token)
+        break if bookings.empty?
+      end
+    end
+
     def set_booking
       @booking = Booking.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def booking_params
-      params.require(:booking).permit(:reference_number)
+      passenger_fields = ["gender", "first-name", "last-name"]
+      params.permit(:first_name, :last_name, :email, adult: passenger_fields, child: passenger_fields, infant: passenger_fields)
     end
 end

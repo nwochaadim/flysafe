@@ -1,0 +1,36 @@
+<div class="ui container">
+  <h2 class="ui dividing header">Your Information</h2>
+  <p>Name: <span><%= $booking_params["first-name"] +  $booking_params["last-name"]%></span></p>
+  <p>Email: <span>$booking_params["email"]</span></p>
+  <p></p>
+
+  <a class="ui blue ribbon label">Edit Information</a> 
+
+  <% $booking_params["adult"].each.with_index(1) do |adult, index|  %>
+    <h2 class="ui dividing header">Adult Passenger <%= index %>Information</h2>
+    <p>Name: <span> <%= adult["first-name"] + adult["last-name"] %> </span></p>
+    <p>Email: <span><%= adult["email"] %></span></p>
+
+  <% end %>
+
+  <% $booking_params["child"].each.with_index(1) do |child, index|  %>
+    <h2 class="ui dividing header">Child Passenger <%= index %>Information</h2>
+    <p>Name: <span> <%= child["first-name"] + child["last-name"] %> </span></p>
+    <p>Email: <span><%= child["email"] %></span></p>
+
+  <% end %>
+
+
+  <% $booking_params["infant"].each.with_index(1) do |child, index|  %>
+    <h2 class="ui dividing header">Child Passenger <%= index %>Information</h2>
+    <p>Name: <span> <%= infant["first-name"] + infant["last-name"] %> </span></p>
+    <p>Email: <span><%= infant["email"] %></span></p>
+
+  <% end %>
+
+
+  <div class="ui centered grid">
+    <button class="ui teal button">Ok, I am ready to make payment</button>
+  </div>
+
+</div>

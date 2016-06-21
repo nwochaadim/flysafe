@@ -12,7 +12,7 @@
        <div class="ui buttons">
           <%= link_to "Learn More", about_path, class: "ui button" %>
           <div class="or"></div>
-          <%= link_to "Book Now", root_path, class: "ui positive button", anchor: "booking" %>
+          <%= link_to "Book Now", root_path(anchor: "booking"), class: "ui positive button"%>
       </div>
     </div>
    
@@ -59,11 +59,10 @@
       </div>
 
     </div>
-
+ 
     <div class="ui raised segment" id="progress-container">
-      <%= render partial: 'forms/search_flight' %>
+      <%= render partial: "forms/search_flight" %>
     </div>
-
   </div>
 </section>
 <%= render 'footer' %>
