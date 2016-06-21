@@ -1,36 +1,42 @@
-<div class="ui container">
+<div class="ui form">
+  <a class="ui blue ribbon label">Edit Information</a>
   <h2 class="ui dividing header">Your Information</h2>
-  <p>Name: <span><%= $booking_params["first-name"] +  $booking_params["last-name"]%></span></p>
-  <p>Email: <span>$booking_params["email"]</span></p>
+  <p>Name: <span><%= $booking_params["first_name"] + " "+ $booking_params["last_name"]%></span></p>
+  <p>Email: <span><%= $booking_params["email"] %></span></p>
+  <p>Fee: <span><%= adult_fare %></span></p>
   <p></p>
 
-  <a class="ui blue ribbon label">Edit Information</a> 
+   
+  <% if $booking_params["adult"] %>
+    <% $booking_params["adult"].each.with_index(1) do |adult, index|  %>
+      <h3 class="ui dividing header">Adult Passenger <%= index %> Information</h2>
+      <p>Name: <span> <%= adult["first-name"] + " " + adult["last-name"] %> </span></p>
+      <p>Fee: <span><%= adult_fare %></span></p>
 
-  <% $booking_params["adult"].each.with_index(1) do |adult, index|  %>
-    <h2 class="ui dividing header">Adult Passenger <%= index %>Information</h2>
-    <p>Name: <span> <%= adult["first-name"] + adult["last-name"] %> </span></p>
-    <p>Email: <span><%= adult["email"] %></span></p>
-
+    <% end %>
   <% end %>
 
-  <% $booking_params["child"].each.with_index(1) do |child, index|  %>
-    <h2 class="ui dividing header">Child Passenger <%= index %>Information</h2>
-    <p>Name: <span> <%= child["first-name"] + child["last-name"] %> </span></p>
-    <p>Email: <span><%= child["email"] %></span></p>
-
-  <% end %>
-
-
-  <% $booking_params["infant"].each.with_index(1) do |child, index|  %>
-    <h2 class="ui dividing header">Child Passenger <%= index %>Information</h2>
-    <p>Name: <span> <%= infant["first-name"] + infant["last-name"] %> </span></p>
-    <p>Email: <span><%= infant["email"] %></span></p>
-
+  <% if $booking_params["child"] %>
+    <% $booking_params["child"].each.with_index(1) do |child, index|  %>
+      <h3 class="ui dividing header">Child Passenger <%= index %> Information</h2>
+      <p>Name: <span> <%= child["first-name"] + " " + child["last-name"] %> </span></p>
+      <p>Fee: <span><%= child_fare %></span></p>
+    <% end %>
   <% end %>
 
 
-  <div class="ui centered grid">
+  <% if $booking_params["infant"] %>
+    <% $booking_params["infant"].each.with_index(1) do |infant, index|  %>
+      <h3 class="ui dividing header">Child Passenger <%= index %> Information</h2>
+      <p>Name: <span> <%= infant["first-name"] + " " + infant["last-name"] %> </span></p>
+      <p>Fee: <span><%= infant_fare %></span></p>
+    <% end %>
+  <% end %>
+
+  <h2 class="ui dividing header">Flight Fare</h2>
+  <p>Total Cost: <span><%= "$#{calculate_flight_fare($booking_params)}" %></span></p>
+
+  <div class="ui center aligned grid">
     <button class="ui teal button">Ok, I am ready to make payment</button>
   </div>
-
 </div>

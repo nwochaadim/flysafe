@@ -1,5 +1,7 @@
 $(document).ready(function(){
-  $("#progress-container").html("<%= escape_javascript(render partial: 'confirm_booking') %>")
-  $(".step").removeClass("active")
-  $("#confirm-flight").addClass("active")
+  $("#progress-container").html("<%= escape_javascript(render partial: 'confirm_booking') %>");
+  $(".progress-container").removeClass("centered grid");
+  $(".progress-container").addClass("container");
+  $(".step").removeClass("active");
+  $("#confirm-flight").addClass("active");
 })
