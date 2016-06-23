@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   post "/confirm" => "bookings#confirm", as: :confirm_book
 
   get "/payment/:flight_id" => "bookings#validate_payment", as: :validate_payment
+
+  get "/users/:user_id/bookings" => "users#past_bookings", as: :past_bookings
   
   resources :passengers
   resources :bookings

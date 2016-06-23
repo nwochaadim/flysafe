@@ -67,7 +67,6 @@ class BookingsController < ApplicationController
   end
 
   def validate_payment
-    binding.pry
   end
 
   def create_booking(flight)

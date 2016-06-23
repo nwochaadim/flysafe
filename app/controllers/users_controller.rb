@@ -34,6 +34,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def past_bookings
+    @bookings = User.find(params[:user_id]).bookings
+  end
+
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
