@@ -1,7 +1,10 @@
 <% if current_user %>
   <div class="item">
-    <%= current_user.first_name+" "+current_user.last_name %>
+    <%= "Welcome, "+current_user.first_name+" "+current_user.last_name %>
   </div>
+  <%= link_to logout_path, 'data-no-turbolink': true, class: 'item' do %>
+    <div class="ui primary button">Manage Bookings</div>
+  <% end %>
   <%= link_to logout_path, 'data-no-turbolink': true, class: 'item' do %>
     <div class="ui primary button">Logout</div>
   <% end %>

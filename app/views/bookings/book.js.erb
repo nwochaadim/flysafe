@@ -1,7 +1,5 @@
 $(document).ready(function(){
-    console.log($("input[type='radio']:checked").val())
   $("#progress-container").html("<%= escape_javascript(render partial: 'forms/book_flight') %>")
   $(".step").removeClass("active")
   $("#book-flight").addClass("active")
-  
 })

@@ -1,14 +1,14 @@
 <div class="ui form">
   <a class="ui blue ribbon label">Edit Information</a>
   <h2 class="ui dividing header">Your Information</h2>
-  <p>Name: <span><%= $booking_params["first_name"] + " "+ $booking_params["last_name"]%></span></p>
-  <p>Email: <span><%= $booking_params["email"] %></span></p>
+  <p>Name: <span><%= @booking_params["first_name"] + " "+ @booking_params["last_name"]%></span></p>
+  <p>Email: <span><%= @booking_params["email"] %></span></p>
   <p>Fee: <span><%= adult_fare %></span></p>
   <p></p>
 
    
-  <% if $booking_params["adult"] %>
-    <% $booking_params["adult"].each.with_index(1) do |adult, index|  %>
+  <% if @booking_params["adult"] %>
+    <% @booking_params["adult"].each.with_index(1) do |adult, index|  %>
       <h3 class="ui dividing header">Adult Passenger <%= index %> Information</h2>
       <p>Name: <span> <%= adult["first-name"] + " " + adult["last-name"] %> </span></p>
       <p>Fee: <span><%= adult_fare %></span></p>
@@ -16,8 +16,8 @@
     <% end %>
   <% end %>
 
-  <% if $booking_params["child"] %>
-    <% $booking_params["child"].each.with_index(1) do |child, index|  %>
+  <% if @booking_params["child"] %>
+    <% @booking_params["child"].each.with_index(1) do |child, index|  %>
       <h3 class="ui dividing header">Child Passenger <%= index %> Information</h2>
       <p>Name: <span> <%= child["first-name"] + " " + child["last-name"] %> </span></p>
       <p>Fee: <span><%= child_fare %></span></p>
@@ -25,8 +25,8 @@
   <% end %>
 
 
-  <% if $booking_params["infant"] %>
-    <% $booking_params["infant"].each.with_index(1) do |infant, index|  %>
+  <% if @booking_params["infant"] %>
+    <% @booking_params["infant"].each.with_index(1) do |infant, index|  %>
       <h3 class="ui dividing header">Child Passenger <%= index %> Information</h2>
       <p>Name: <span> <%= infant["first-name"] + " " + infant["last-name"] %> </span></p>
       <p>Fee: <span><%= infant_fare %></span></p>
@@ -34,7 +34,7 @@
   <% end %>
 
   <h2 class="ui dividing header">Flight Fare</h2>
-  <p>Total Cost: <span><%= "$#{calculate_flight_fare($booking_params)}" %></span></p>
+  <p>Total Cost: <span><%= "$#{calculate_flight_fare(@booking_params)}" %></span></p>
 
   <%= link_to payment_path do %>
     <div class="ui center aligned grid">

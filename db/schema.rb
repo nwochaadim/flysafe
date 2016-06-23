@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160613144243) do
+ActiveRecord::Schema.define(version: 20160623104422) do
 
   create_table "airports", force: :cascade do |t|
     t.string   "name"
@@ -27,15 +27,17 @@ ActiveRecord::Schema.define(version: 20160613144243) do
   add_index "airports", ["route_id"], name: "index_airports_on_route_id"
 
   create_table "bookings", force: :cascade do |t|
-    t.string   "reference_number", null: false
+    t.string   "reference_number",     null: false
     t.integer  "flight_id"
     t.integer  "user_id"
+    t.integer  "unregistered_user_id"
     t.string   "class_level"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   add_index "bookings", ["flight_id"], name: "index_bookings_on_flight_id"
+  add_index "bookings", ["unregistered_user_id"], name: "index_bookings_on_unregistered_user_id"
   add_index "bookings", ["user_id"], name: "index_bookings_on_user_id"
 
   create_table "bookings_users", force: :cascade do |t|
@@ -65,12 +67,12 @@ ActiveRecord::Schema.define(version: 20160613144243) do
     t.string   "last_name",  null: false
     t.string   "gender"
     t.string   "age_grade",  null: false
-    t.integer  "user_id"
+    t.integer  "booking_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "passengers", ["user_id"], name: "index_passengers_on_user_id"
+  add_index "passengers", ["booking_id"], name: "index_passengers_on_booking_id"
 
   create_table "routes", force: :cascade do |t|
     t.integer  "departing_airport_id"
@@ -79,6 +81,14 @@ ActiveRecord::Schema.define(version: 20160613144243) do
   end
 
   add_index "routes", ["departing_airport_id"], name: "index_routes_on_departing_airport_id"
+
+  create_table "unregistered_users", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name",      null: false
