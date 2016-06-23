@@ -91,7 +91,6 @@ class BookingsController < ApplicationController
   end
 
   def addPassengers(booking, booking_param)
-
     if booking_param["adult"]
       createAdultPassengers(booking, booking_param["adult"])
     elsif booking_param["child"]
