@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   get "/bookings/search" => "bookings#search", as: :search_booking
 
-  get "/bookings/:reference_number" => "bookings#retrieve", as: :retrieve_bookings
+  post "/bookings" => "bookings#retrieve", as: :retrieve_booking
 
   get "/payment" => "bookings#payment", as: :payment
 

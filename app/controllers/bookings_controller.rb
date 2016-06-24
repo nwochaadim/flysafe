@@ -70,6 +70,14 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:booking_id])
   end
 
+  def retrieve
+    reference_number = params[:reference_number]
+    @booking = Booking.where(reference_number: reference_number).first
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def create_booking(flight)
     retrieved_booking_params = session[:booking_params]
     if current_user.nil?

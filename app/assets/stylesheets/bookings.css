@@ -7,3 +7,21 @@
   padding: 0px !important;
   width: 700px;
 }
+
+h3.ui.top.attached.header {
+  background-color: rgba(89, 152, 152, 0.51);
+}
+
+.ui.attached.segment h4{
+  display: inline;
+}
+
+.custom-button {
+  background: none!important;
+  border: none; 
+  padding: 0!important;
+  font: inherit;
+  border-bottom: 1px solid #ff9d00; 
+  cursor: pointer;
+  color: #ff9d00;
+}

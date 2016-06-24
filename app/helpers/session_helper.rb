@@ -1,3 +1,2 @@
 module SessionHelper
-
 end
