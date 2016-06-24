@@ -32,6 +32,8 @@ gem 'pry-rails'
 
 gem 'paypal-express'
 
+gem 'semantic-ui-sass', '~> 2.1', '>= 2.1.8.0'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
