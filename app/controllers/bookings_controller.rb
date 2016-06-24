@@ -59,7 +59,7 @@ class BookingsController < ApplicationController
     )
     response = request.setup(
       payment_request,
-      validate_payment_url(selected_flight),
+      validate_payment_url(selected_flight, @booking),
       contact_url,
       paypal_options  # Optional
     )
@@ -67,25 +67,26 @@ class BookingsController < ApplicationController
   end
 
   def validate_payment
+    @booking = Booking.find(params[:booking_id])
   end
 
   def create_booking(flight)
+    retrieved_booking_params = session[:booking_params]
     if current_user.nil?
-      retrieved_booking_params = session[:booking_params]
       user = UnregisteredUser.create(
         first_name: retrieved_booking_params[:first_name],
         last_name: retrieved_booking_params[:last_name],
         email: retrieved_booking_params[:email]
         )
-      booking = user.bookings.create(reference_number: generate_token)
-      booking.update(flight: flight)
+      @booking = user.bookings.create(reference_number: generate_token)
+      @booking.update(flight: flight)
       seats_available = flight.seats_available - session[:total_passengers]
       flight.update(seats_available: seats_available)
-      addPassengers(booking, retrieved_booking_params)
+      addPassengers(@booking, retrieved_booking_params)
     else
-      booking = current_user.bookings.create(reference_number: generate_token)
-      booking.update(flight: flight)
-      addPassengers(booking, retrieved_booking_params)
+      @booking = current_user.bookings.create(reference_number: generate_token)
+      @booking.update(flight: flight)
+      addPassengers(@booking, retrieved_booking_params)
     end 
   end
 
@@ -133,6 +134,8 @@ class BookingsController < ApplicationController
   def edit
   end
 
+  def search
+  end
   # POST /bookings
   # POST /bookings.json
   def create

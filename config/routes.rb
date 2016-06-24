@@ -19,13 +19,18 @@ Rails.application.routes.draw do
 
   post "/book" => "bookings#book", as: :book
 
+  get "/bookings/search" => "bookings#search", as: :search_booking
+
+  get "/bookings/:reference_number" => "bookings#retrieve", as: :retrieve_bookings
+
   get "/payment" => "bookings#payment", as: :payment
 
   post "/confirm" => "bookings#confirm", as: :confirm_book
 
-  get "/payment/:flight_id" => "bookings#validate_payment", as: :validate_payment
-
   get "/users/:user_id/bookings" => "users#past_bookings", as: :past_bookings
+
+  get "/payment/:flight_id/:booking_id" => "bookings#validate_payment", as: :validate_payment
+  
   
   resources :passengers
   resources :bookings

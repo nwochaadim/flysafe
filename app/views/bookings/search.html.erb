@@ -1,0 +1,12 @@
+<%= render partial: "header" %>
+  <div class="ui container">
+     <h1 class="ui horizontal divider header">
+      <i class="tag icon"></i>
+      Search Bookings
+    </h1>
+    <div class="ui fluid action input">
+      <input type="text" placeholder="Search Bookings via reference number...">
+      <%= link_to "Search", retrieve_bookings_path({reference_number: 1}), class: "ui button" %>
+    </div>
+  </div>
+<%= render partial: "footer" %>

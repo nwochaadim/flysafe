@@ -1,3 +1,28 @@
-<%= render 'header' %>
-  validate_payment.html.erb
+<%= render "header" %>
+  <div class="ui middle aligned centered grid">
+    <div class="ui container">
+      <div class="ui icon message">
+        <i class="gift icon"></i>
+        <div class="content">
+          <div class="header">
+            Congratulations!!!
+          </div>
+          <p> Your Flight from <%= @booking.flight.route.departing_airport.name %> to  <%= @booking.flight.route.arriving_airport.name %> has been successfully  booked.</p>
+          <p>Your Booking reference number is <strong> <%= @booking.reference_number %> </strong> </p>
+
+          <%= link_to root_path, class: "ui teal basic button" do %>
+            <i class="home icon"></i>
+            Return Home
+          <% end %>
+
+           <%= link_to past_bookings_path(current_user), class: "ui blue basic button" do %>
+            <i class="suitcase icon"></i>
+            View Bookings
+          <% end %>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
 <%= render 'footer' %>
