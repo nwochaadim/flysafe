@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 
   get "/users/:user_id/bookings" => "users#past_bookings", as: :past_bookings
 
-  get "/payment/:flight_id/:booking_id" => "bookings#validate_payment", as: :validate_payment
+  get "/payment/:flight_id" => "bookings#validate_payment", as: :validate_payment
   
   
   resources :passengers
