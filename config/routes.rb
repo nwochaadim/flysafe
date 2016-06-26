@@ -7,15 +7,22 @@ Rails.application.routes.draw do
 
   get "/contact" => "landing#contact_us", as: :contact
 
+
+
   get "/login" => "session#new", as: :login
 
   get "/logout" => "session#destroy", as: :logout
 
-  get "/signup" => "users#new", as: :signup
-
   post "/session" => "session#create", as: :session
+
+
+  get "/signup" => "users#new", as: :signup
+  get "/users/:user_id/bookings" => "users#past_bookings", as: :past_bookings
+
   
-  get "/search_flights" => "flights#search", as: :search_flights
+  
+  get "/flights/search" => "flights#search", as: :search_flights
+
 
   post "/book" => "bookings#book", as: :book
 
@@ -26,9 +33,7 @@ Rails.application.routes.draw do
   get "/payment" => "bookings#payment", as: :payment
 
   post "/confirm" => "bookings#confirm", as: :confirm_book
-
-  get "/users/:user_id/bookings" => "users#past_bookings", as: :past_bookings
-
+  
   get "/payment/:flight_id" => "bookings#validate_payment", as: :validate_payment
   
   

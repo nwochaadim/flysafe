@@ -24,6 +24,7 @@ class FlightsController < ApplicationController
 
   def search
     sql_query = "date >= ? and seats_available > ?"
+    binding.pry
     flights = Flight.where(sql_query, search_date, total_passengers)
     @retrieved_flights = flights.uniq(&:date).select do |flight|
       flight.route.departing_airport.name == flight_params[:departs][0..-7] &&

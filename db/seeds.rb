@@ -1,7 +1,7 @@
 require "json"
 require "faker"
 
-Airport.destroy_all
+flightAirport.destroy_all
 Route.destroy_all
 
 
