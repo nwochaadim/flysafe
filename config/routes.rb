@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   post "/session" => "session#create", as: :session
   
-  post "/search_flights" => "flights#search", as: :search_flights
+  get "/search_flights" => "flights#search", as: :search_flights
 
   post "/book" => "bookings#book", as: :book
 

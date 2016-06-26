@@ -14,7 +14,7 @@ RSpec.describe BookingsController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #index" do
-    it "assigns all bookings as @bookings" do
+    xit "assigns all bookings as @bookings" do
       booking = Booking.create! valid_attributes
       get :index, {}, valid_session
       expect(assigns(:bookings)).to eq([booking])
@@ -22,7 +22,7 @@ RSpec.describe BookingsController, type: :controller do
   end
 
   describe "GET #show" do
-    it "assigns the requested booking as @booking" do
+    xit "assigns the requested booking as @booking" do
       booking = Booking.create! valid_attributes
       get :show, {:id => booking.to_param}, valid_session
       expect(assigns(:booking)).to eq(booking)
@@ -30,7 +30,7 @@ RSpec.describe BookingsController, type: :controller do
   end
 
   describe "GET #new" do
-    it "assigns a new booking as @booking" do
+    xit "assigns a new booking as @booking" do
       get :new, {}, valid_session
       expect(assigns(:booking)).to be_a_new(Booking)
     end

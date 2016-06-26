@@ -1,4 +1,5 @@
 class FlightsController < ApplicationController
+  protect_from_forgery except: :search
   #before_action :set_flight, only: [:show, :edit, :update, :destroy]
 
   # GET /flights
