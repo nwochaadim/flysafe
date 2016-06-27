@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :route, aliases: [:routing] do
-    departs
+  factory :route do
+    departing_airport
   end
 end

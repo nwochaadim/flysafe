@@ -12,7 +12,7 @@ RSpec.describe SessionController, type: :controller do
       expect(response).to render_template(:new)
     end
   end
-
+  
   describe "POST #create" do
     let(:user){ create(:user) }
 
@@ -33,6 +33,7 @@ RSpec.describe SessionController, type: :controller do
         post :create, {email: "", password: ""}
         expect(flash[:alert]).to eq("Invalid email or password")
       end
+
     end
   end
 

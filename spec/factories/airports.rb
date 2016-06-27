@@ -7,16 +7,17 @@ FactoryGirl.define do
   end
 
   factory :departing_airport, aliases: [:departs] do
-    name "Murtala Mohammed Airport"
-    country Faker::Address.country
-    state Faker::Address.state
-    airport_code Faker::Address.country_code
+    name "Benin Airport"
+    country "Nigeria"
+    state "Benin"
+    airport_code "BNI"
   end
 
-  factory :arrving_airport do
-    name "Murtala Mohammed Airport"
-    country Faker::Address.country
-    state Faker::Address.state
-    airport_code Faker::Address.country_code
+  factory :arriving_airport, aliases: [:arrives] do
+    name "Lagos Murtala Muhammed Airport"
+    country "Nigeria"
+    state "Lagos"
+    airport_code "LOS"
+    route
   end
 end

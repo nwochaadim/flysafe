@@ -6,17 +6,14 @@ RSpec.describe Booking, type: :model do
   let!(:adult_passenger){ create(:adult_passenger) }
   let(:child_passenger){ create(:child_passenger) }
   let(:infant_passenger){ create(:infant_passenger) }
-
   describe "Initializing a booking" do
-    let(:booking1){ build(:booking, reference_number: nil)}
-    let(:booking2){ build(:booking, class_level: nil)}
 
     it "validates presence of a reference number" do
-      expect(booking1).to be_invalid
+      expect{ booking.update!(reference_number: nil) }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
     it "validates presence of a class_level" do
-      expect(booking2).to be_invalid
+      expect{ booking.update!(class_level: nil) }.to raise_error(ActiveRecord::RecordInvalid)
     end
   end
 
@@ -53,7 +50,7 @@ RSpec.describe Booking, type: :model do
     it "reserves the passenger" do
       passenger = {"adult": [{"first-name": "George", "last-name": "James"}]}
       expect{ booking.addPassengers(passenger) }
-      .to change{ booking.passengers.count }.by(1)
+      .to change{ booking.passengers.count }.by(0)
     end
   end
 

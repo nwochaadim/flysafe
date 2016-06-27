@@ -14,6 +14,8 @@ RSpec.describe FlightsController, type: :controller do
   }
 
   describe "GET #search" do
+    before{ @flight = create(:flight) }
+
     it "renders search template" do
       valid_attributes.merge!(format: :js)
       get :search, valid_attributes

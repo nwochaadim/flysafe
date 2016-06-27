@@ -4,12 +4,8 @@ RSpec.describe "", type: :feature do
   before{ @user = create(:user) }
 
   feature "Signing in", js: true do
-    self.use_transactional_fixtures = false
     scenario "with correct credentials" do
-      visit login_path
-      fill_in 'email', with: @user.email
-      fill_in 'password', with: "secret_key"
-      click_button 'Login'
+      login_user(@user)
       expect(page).to have_content(@user.first_name)
     end
 
@@ -22,5 +18,4 @@ RSpec.describe "", type: :feature do
     end
   end
 
-  
 end

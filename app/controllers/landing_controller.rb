@@ -1,8 +1,9 @@
 class LandingController < ApplicationController
   def index
-    @airport_names = DepartingAirport.all.map do |departing_airport|
-        departing_airport.name + " (#{departing_airport.airport_code})"
-    end
+    @airport_names = Airport.pluck(:name, :airport_code)
+      .uniq.map do |airport|
+        airport[0] + " (#{airport[1]})"
+      end
   end
 
   def about

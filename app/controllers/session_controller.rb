@@ -21,11 +21,13 @@ class SessionController < ApplicationController
     session[:user_id] = nil
     redirect_to login_path, notice: "Log out successful!"
   end
+  
+  private
 
-  def validate_session
-    if session[:user_id]
-      redirect_to root_path
+    def validate_session
+      if session[:user_id]
+        redirect_to root_path
+      end
     end
-  end
-
+  
 end

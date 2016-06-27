@@ -10,15 +10,12 @@ Rails.application.routes.draw do
 
 
   get "/login" => "session#new", as: :login
-
   get "/logout" => "session#destroy", as: :logout
-
   post "/session" => "session#create", as: :session
 
 
   get "/signup" => "users#new", as: :signup
   get "/users/:user_id/bookings" => "users#past_bookings", as: :past_bookings
-
   
   
   get "/flights/search" => "flights#search", as: :search_flights
@@ -34,7 +31,7 @@ Rails.application.routes.draw do
 
   post "/confirm" => "bookings#confirm", as: :confirm_book
   
-  get "/payment/:flight_id" => "bookings#validate_payment", as: :validate_payment
+  get "/payment/:flight_id/:token" => "bookings#validate_payment", as: :validate_payment
   
   
   resources :passengers
