@@ -2,8 +2,8 @@ module BookingsHelper
   def calculate_flight_fare(booking_params)
     no_of_adults = booking_params["adult"] ? booking_params["adult"].count + 1 : 1
     no_of_children = booking_params["child"] ? booking_params["child"].count : 0
-    no_of_infants = booking_params["child"] ? booking_params["infant"].count  : 0
-    $total_cost = no_of_adults * (AdultPassenger::ECONOMY_FLIGHT_FARE) + 
+    no_of_infants = booking_params["infant"] ? booking_params["infant"].count  : 0
+    session[:total_cost] = no_of_adults * (AdultPassenger::ECONOMY_FLIGHT_FARE) + 
                   no_of_children * (ChildPassenger::ECONOMY_FLIGHT_FARE) +
                   no_of_infants * (InfantPassenger::ECONOMY_FLIGHT_FARE)
   end
@@ -18,6 +18,16 @@ module BookingsHelper
 
   def infant_fare
     "$#{InfantPassenger::ECONOMY_FLIGHT_FARE}"
+  end
+
+  def estimate_flight_fare(passengers)
+    total_cost = 1000
+    passengers.each do |passenger|
+      unless passenger.age_grade == "Infant"
+        total_cost += 1000
+      end
+    end
+    total_cost
   end
 
 end

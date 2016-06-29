@@ -1,5 +1,7 @@
- <% @booking.passengers.each.with_index(1) do |passenger, index| %>
-  <div class="item">
-    <%= "#{index}. #{passenger.first_name} #{passenger.last_name} (#{passenger.age_grade})" %>
-  </div>
+<% if @booking %>
+  <% @booking.passengers.each.with_index(1) do |passenger, index| %>
+    <div class="item">
+      <%= "#{index}. #{passenger.first_name} #{passenger.last_name} (#{passenger.age_grade})" %>
+    </div>
+  <% end %>
 <% end %>

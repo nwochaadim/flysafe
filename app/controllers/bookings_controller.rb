@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController  
   attr_accessor :token
-  protect_from_forgery except: :retrieve
+  protect_from_forgery except: [:retrieve, :destroy]
 
   def confirm
     session[:booking_params] = booking_params
@@ -35,8 +35,13 @@ class BookingsController < ApplicationController
   end
 
   def retrieve
-    reference_number = params[:reference_number]
-    @booking = Booking.where(reference_number: reference_number).first
+    @reference_number = params[:reference_number]
+    bookings = Booking.where(reference_number: @reference_number)
+    if bookings.empty?
+      @booking = nil
+    else
+      @booking = bookings.first
+    end
     respond_to do |format|
       format.js
     end
@@ -53,23 +58,30 @@ class BookingsController < ApplicationController
   # PATCH/PUT /bookings/1
   # PATCH/PUT /bookings/1.json
   def update
+    @booking = Booking.find(params[:id])
+    user = @booking.user || @booking.unregistered_user
+    user.update(first_name: booking_params[:first_name], 
+      last_name: booking_params[:last_name], 
+      email: booking_params[:email] )
+    @booking.passengers.destroy_all
+    @booking.addPassengers(booking_params)
     respond_to do |format|
-      if @booking.update(booking_params)
-        format.html { redirect_to @booking, notice: 'Booking was successfully updated.' }
-        format.json { render :show, status: :ok, location: @booking }
-      else
-        format.html { render :edit }
-        format.json { render json: @booking.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to search_booking_path, notice: 'Booking was successfully updated.' }
     end
   end
 
   # DELETE /bookings/1
   # DELETE /bookings/1.json
   def destroy
+    
+    bookings = Booking.where(reference_number: params[:id])
+    unless bookings.empty?
+      @booking = bookings.first
+    end
+    @user = @booking.user || @booking.unregistered_user
+    UserMailer.delete_reservation(@user, @booking.id).deliver_now
     @booking.destroy
     respond_to do |format|
-      format.html { redirect_to bookings_url, notice: 'Booking was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -104,7 +116,7 @@ class BookingsController < ApplicationController
       {
         description: "Book Your Flight while you are alive",
         quantity: 1,
-        amount: $total_cost,
+        amount: session[:total_cost],
         custom_fields: {
           CARTBORDERCOLOR: "C00000",
           LOGOIMG: "http://clipartbest.com//cliparts/McL/oaR/McLoaRqca.svg"
@@ -123,7 +135,7 @@ class BookingsController < ApplicationController
 
     def create_booking(flight)
       retrieved_booking_params = session[:booking_params]
-      user = !current_user.nil? || create_unregistered_user(retrieved_booking_params)
+      user = current_user || create_unregistered_user(retrieved_booking_params)
       @booking = user.bookings.create(reference_number: generate_token, class_level: "Economy")
       @booking.addPassengers(retrieved_booking_params)
       @booking.allocate_flight(flight)
@@ -131,9 +143,9 @@ class BookingsController < ApplicationController
 
     def create_unregistered_user(retrieved_booking_params)
       UnregisteredUser.create(
-        first_name: retrieved_booking_params[:first_name],
-        last_name: retrieved_booking_params[:last_name],
-        email: retrieved_booking_params[:email]
+        first_name: retrieved_booking_params["first_name"],
+        last_name: retrieved_booking_params["last_name"],
+        email: retrieved_booking_params["email"]
       )
     end
 

@@ -1,7 +1,17 @@
-<tr>
+<tr id="<%= booking.reference_number %>">
+  <td><%= booking.reference_number %></td>
   <td><%= booking.flight.route.departing_airport.name %></td>
   <td><%= booking.flight.route.arriving_airport.name %></td>
   <td><%= booking.passengers.count %></td>
   <td><%= booking.flight.plane_name %></td>
   <td><%= booking.flight.date.strftime("%B %d, %Y") %></td>
+  <% if booking.flight.date > Time.now %>
+    <td>
+      <button class="circular ui red basic icon button" onclick="deleteConfirmDialog('<%= booking.reference_number %>')"><i class="delete calendar icon"></i></button>
+    </td>
+  <% else %>
+    <td>
+      <button class="ui red basic button" disabled><i class="delete calendar icon"></i></button> 
+    </td>
+  <% end %>
 </tr>
