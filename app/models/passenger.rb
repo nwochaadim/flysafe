@@ -1,3 +1,4 @@
+
 class Passenger < ActiveRecord::Base
   belongs_to :booking
   validates :first_name, presence: true

@@ -11,8 +11,8 @@ RSpec.describe "", type: :feature do
 
     scenario "with incorrect details" do
       visit login_path
-      fill_in 'email', with: " "
-      fill_in 'password', with: " "
+      fill_in 'email', with: "invalid email"
+      fill_in 'password', with: "invalid email"
       click_button 'Login'
       expect(page).to have_content('Invalid email or password')
     end

@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20160623104422) do
     t.integer  "flight_id"
     t.integer  "user_id"
     t.integer  "unregistered_user_id"
-    t.string   "class_level"
+    t.string   "class_level",          null: false
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end

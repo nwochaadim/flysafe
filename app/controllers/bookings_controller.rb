@@ -11,7 +11,8 @@ class BookingsController < ApplicationController
   end
 
   def book
-    session[:flight_id] = params[:selected_flight]
+    session[:flight_id] ||= params[:selected_flight]
+    retrieve_passengers_from_session
     respond_to do |format|
       format.js
     end
@@ -136,7 +137,8 @@ class BookingsController < ApplicationController
     def create_booking(flight)
       retrieved_booking_params = session[:booking_params]
       user = current_user || create_unregistered_user(retrieved_booking_params)
-      @booking = user.bookings.create(reference_number: generate_token, class_level: "Economy")
+      class_level = session[:passengers]["class_level"]
+      @booking = user.bookings.create(reference_number: generate_token, class_level: class_level)
       @booking.addPassengers(retrieved_booking_params)
       @booking.allocate_flight(flight)
     end
@@ -147,6 +149,13 @@ class BookingsController < ApplicationController
         last_name: retrieved_booking_params["last_name"],
         email: retrieved_booking_params["email"]
       )
+    end
+
+    def retrieve_passengers_from_session
+      @no_of_children = session[:passengers]["total_adults"]
+      @no_of_adults = session[:passengers]["total_infants"]
+      @no_of_infants = session[:passengers]["total_children"]
+      @no_of_children + @no_of_adults + @no_of_infants
     end
 
     def booking_params

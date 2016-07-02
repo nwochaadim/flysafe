@@ -19,10 +19,22 @@ class FlightsController < ApplicationController
     end
 
     def total_passengers
-      $no_of_children = flight_params[:children].to_i
-      $no_of_adults = flight_params[:adults].to_i
-      $no_of_infants = flight_params[:infants].to_i
-      session[:total_passengers] = $no_of_children + $no_of_adults + 1
+      total_children = flight_params[:children].to_i
+      total_adults = flight_params[:adults].to_i
+      total_infants = flight_params[:infants].to_i
+      store_passengers_info(total_adults, total_children, total_infants)
+      total_children + total_adults + total_infants + 1
+    end
+
+
+
+    def store_passengers_info(total_adults, total_children, total_infants)
+      session[:passengers] = {
+        total_adults: total_adults,
+        total_children: total_children,
+        total_infants: total_infants,
+        class_level: params[:grade]
+      }
     end
 
     def search_date

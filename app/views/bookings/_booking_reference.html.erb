@@ -14,7 +14,7 @@
     <div class="ui center aligned grid">
 
     <div class="ui buttons">
-      <button class="ui basic red button" id="cancel-reservation" onclick="deleteConfirmDialog('<%= @booking.reference_number %>')">Cancel Reservation</button>
+      <button class="ui basic red button" id="cancel-reservation" onclick="deleteBookingReservation('<%= @booking.reference_number %>')">Cancel Reservation</button>
       <div class="or"></div>
       <button class="ui positive button" onclick="editReservation()">Edit Reservation</button>
     </div>

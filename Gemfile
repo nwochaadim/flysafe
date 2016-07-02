@@ -34,6 +34,10 @@ gem 'paypal-express'
 
 gem 'semantic-ui-sass', '~> 2.1', '>= 2.1.8.0'
 
+gem 'toastr-rails'
+
+gem 'active_link_to'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

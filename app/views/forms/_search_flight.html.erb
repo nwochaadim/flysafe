@@ -1,4 +1,4 @@
-<%= form_tag search_flights_path,  method: "get", class: "ui form", remote: true do %>
+<%= form_tag search_flights_path,  method: "post", class: "ui form", remote: true do %>
   <h4 class="ui dividing header">Search Flights</h4>
   <div class="three fields">
     <div class="field">
@@ -8,12 +8,12 @@
 
     <div class="field">
       <%= label_tag :date, "Date" %>
-      <%= date_field_tag "date" %>
+      <%= date_field_tag "date", nil, required: true%>
     </div>
 
     <div class="field">
       <%= label_tag :grade, "Class" %>
-      <%= select_tag :grade, options_for_select([["Economy", "economy"], ["Business", "business"]]), class: "ui search fluid dropdown" %>
+      <%= select_tag :grade, options_for_select([["Economy", "Economy"], ["Business", "Business"]]), class: "ui search fluid dropdown" %>
     </div>
   </div>
 
@@ -40,7 +40,7 @@
       <%= select_tag :infants, options_for_select(0..2), class: "ui fluid dropdown" %>
     </div>
   </div>
-  <%= submit_tag "Search", class: "ui basic blue button" do %>
+  <%= submit_tag "Search", class: "ui basic blue button", onclick: "validateFields(event)" do %>
     <i class="search icon"></i>
   <% end %>
 

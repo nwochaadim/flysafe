@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   root 'landing#index'
 
   get "/about" => "landing#about", as: :about
-
   get "/contact" => "landing#contact_us", as: :contact
 
 
@@ -18,7 +17,7 @@ Rails.application.routes.draw do
   get "/users/:user_id/bookings" => "users#past_bookings", as: :past_bookings
   
   
-  get "/flights/search" => "flights#search", as: :search_flights
+  post "/flights/search" => "flights#search", as: :search_flights
 
 
   post "/book" => "bookings#book", as: :book

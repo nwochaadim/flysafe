@@ -8,12 +8,8 @@ function showPassenger(){
   $('#passengers-modal').modal('show')
 }
 
-function deleteConfirmDialog(reference_number){
-  $('.ui.basic.modal').modal('show');
-  document.reference_number = reference_number;
-}
 
-function deleteReservation(){
+function deleteBookingReservation(reference_number){
   $('.ui.basic.modal').modal('hide');
   
   $.ajax({
@@ -65,8 +61,22 @@ function passengerFormString(type){
   ].join('')
 }
 
+function retrieveBookingInfo(){
+  console.log("Retrieved!")
+   $.ajax({
+    url: "/book",
+    type: "POST",
+    success: function(){
+      console.log("Successful!")
+    },
+    error: function(){
+      console.log("Failed to delete booking")
+    }
+  });
+}
+
 String.prototype.ucfirst = function()
 {
-    return this.charAt(0).toUpperCase() + this.substr(1);
+  return this.charAt(0).toUpperCase() + this.substr(1);
 }
 

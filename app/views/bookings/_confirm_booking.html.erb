@@ -1,5 +1,5 @@
 <div class="ui form">
-  <a class="ui blue ribbon label">Edit Information</a>
+  <a class="ui blue ribbon label" onclick="retrieveBookingInfo()">Edit Information</a>
   <h2 class="ui dividing header">Your Information</h2>
   <p>Name: <span><%= @booking_params["first_name"] + " "+ @booking_params["last_name"]%></span></p>
   <p>Email: <span><%= @booking_params["email"] %></span></p>

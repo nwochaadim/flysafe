@@ -4,22 +4,24 @@
     Past Booking Reservations
   </h1>
   <div class="ui container">
-    <table class="ui celled table">
-      <thead>
-        <tr>
-          <th>Booking Reference Number</th>
-          <th>Departing Airport</th>
-          <th>Arriving Airport</th>
-          <th>Number of Passengers</th>
-          <th>Plane Name</th>
-          <th>Flight Date</th>
-          <th>Cancel</th>
-        </tr>
-      </thead>
-      <tbody>
-        <%= render partial: "past_booking", collection: @bookings, as: "booking" %>
-      </tbody>
-    </table>
+
+      <table class="ui celled table">
+        <thead>
+          <tr>
+            <th>Booking Reference Number</th>
+            <th>Departing Airport</th>
+            <th>Arriving Airport</th>
+            <th>Number of Passengers</th>
+            <th>Plane Name</th>
+            <th>Flight Date</th>
+            <th>Cancel</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render partial: "past_booking", locals: {bookings: @bookings} %>
+        </tbody>
+      </table>
   </div>
+
   <%= render partial: 'modals/confirm_delete_modal' %>
 <%= render partial: "footer" %>

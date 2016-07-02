@@ -24,6 +24,7 @@ RSpec.describe BookingsController, type: :controller do
   describe "POST #book" do
     it "renders booking page" do
       params = { selected_flight: @booking.flight.id, format: "js" }
+      session[:passengers] = { total_adults: 2, total_children: 1, total_infants: 0 }
       post :book, params
       expect(response).to render_template(:book)
     end
@@ -42,7 +43,9 @@ RSpec.describe BookingsController, type: :controller do
       session[:booking_params] = valid_attributes
       session[:token] = SecureRandom::hex(6)
       session[:flight_id] = @booking.flight.id
-      params = { token: session[:token] }
+      session[:passengers] = {}
+      session[:passengers]["class_level"] = "Economy"
+      params = { token: session[:token], flight_id: @booking.flight.id }
       get :validate_payment, params
       expect(response).to render_template(:validate_payment)
     end
