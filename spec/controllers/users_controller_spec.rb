@@ -14,9 +14,9 @@ RSpec.describe UsersController, type: :controller do
 
   describe "POST #create" do
     context "when user's account is created" do
-      it "redirect to login path" do
+      it "redirect to home page" do
         post :create, valid_attributes
-        expect(response).to redirect_to(login_path)
+        expect(response).to redirect_to(root_path)
       end
     end
 

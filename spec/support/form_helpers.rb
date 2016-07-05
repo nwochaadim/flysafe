@@ -3,7 +3,7 @@ module FormHelper
     select("Benin Airport (BNI)", from: 'departs')
     select("Lagos Murtala Muhammed Airport (LOS)", from: 'arrives')
     select('Economy', from: :grade)
-    fill_in 'date', with: "2016-06-26"
+    fill_in 'date', with: "07-06-2016"
     select('1', from: :adults)
     select('1', from: :infants)
     select('1', from: :children)
@@ -14,12 +14,12 @@ module FormHelper
     fill_in :first_name, with: Faker::Name.name
     fill_in :last_name, with: Faker::Name.name
     fill_in :email, with: Faker::Internet.email
-    fill_in "adult__first-name", with: Faker::Name.name
-    fill_in "adult__last-name", with: Faker::Name.name
-    fill_in "child__first-name", with: Faker::Name.name
-    fill_in "child__last-name", with: Faker::Name.name
-    fill_in "infant__first-name", with: Faker::Name.name
-    fill_in "infant__last-name", with: Faker::Name.name
+    fill_in "adult__first_name", with: Faker::Name.name
+    fill_in "adult__last_name", with: Faker::Name.name
+    fill_in "child__first_name", with: Faker::Name.name
+    fill_in "child__last_name", with: Faker::Name.name
+    fill_in "infant__first_name", with: Faker::Name.name
+    fill_in "infant__last_name", with: Faker::Name.name
     page.execute_script("$('.ui.basic.blue.button').click()")
   end
 

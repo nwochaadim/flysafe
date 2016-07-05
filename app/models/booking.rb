@@ -16,8 +16,8 @@ class Booking < ActiveRecord::Base
   def createAdultPassengers(adults)
     adults.each do |adult|
       self.passengers.create(
-        first_name: adult["first-name"], 
-        last_name: adult["last-name"],
+        first_name: adult["first_name"], 
+        last_name: adult["last_name"],
         age_grade: "Adult"
         )
     end
@@ -26,8 +26,8 @@ class Booking < ActiveRecord::Base
   def createChildPassengers(children)
     children.each do |child|
       self.passengers.create(
-        first_name: child["first-name"], 
-        last_name: child["last-name"],
+        first_name: child["first_name"], 
+        last_name: child["last_name"],
         age_grade: "Child"
         )
     end
@@ -36,8 +36,8 @@ class Booking < ActiveRecord::Base
   def createInfantPassengers(infants)
     infants.each do |infant|
       self.passengers.create(
-        first_name: infant["first-name"], 
-        last_name: infant["last-name"],
+        first_name: infant["first_name"], 
+        last_name: infant["last_name"],
         age_grade: "Infant"
         )
     end

@@ -122,7 +122,7 @@ class BookingsController < ApplicationController
   end
 
   def create_booking(flight)
-    retrieved_booking_params = session[:booking_params]
+    retrieved_booking_params = session[:booking_params].stringify_keys
     user = current_user || create_unregistered_user(retrieved_booking_params)
     class_level = session[:passengers]["class_level"]
     @booking = user.bookings.create(reference_number: generate_token, class_level: class_level)
@@ -139,6 +139,7 @@ class BookingsController < ApplicationController
   end
 
   def retrieve_passengers_from_session
+    session[:passengers] = session[:passengers].stringify_keys
     @no_of_children = session[:passengers]["total_adults"]
     @no_of_adults = session[:passengers]["total_infants"]
     @no_of_infants = session[:passengers]["total_children"]
@@ -146,7 +147,7 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    passenger_fields = ["gender", "first-name", "last-name"]
+    passenger_fields = ["gender", "first_name", "last_name"]
     param = params.permit(:first_name, :last_name, :email, adult: passenger_fields, child: passenger_fields, infant: passenger_fields)
   end
 end

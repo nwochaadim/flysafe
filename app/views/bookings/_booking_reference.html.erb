@@ -9,7 +9,7 @@
     <p><h4>Arriving Airport: </h4><%= @booking.flight.route.arriving_airport.name %></p>
     <p><h4>Number of passengers: </h4><%= @booking.passengers.count %> <button class="custom-button" onclick="showPassenger()">View</button></p>
     <p><h4>Departure Date: </h4> <%= @booking.flight.date.strftime("%B %d, %Y") %> </p>
-    <p><h4>Total Flight Fare: </h4> $<%= estimate_flight_fare(@booking.passengers) %></p>
+    <p><h4>Total Flight Fare: </h4> $<%= estimate_flight_fare(@booking.passengers, @booking.class_level) %></p>
     <div class="ui center aligned grid">
 
     <div class="ui buttons">

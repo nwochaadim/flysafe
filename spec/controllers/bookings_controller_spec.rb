@@ -6,7 +6,7 @@ RSpec.describe BookingsController, type: :controller do
   let(:valid_attributes) {
     { first_name: Faker::Name.name,
       last_name: Faker::Name.name,
-      format: "js",
+      format: :js,
       email: Faker::Internet.email,
       adult: [{gender: "1", "first-name": "John", "last-name": "Travolta"}],
       child: [{"first-name": "Mercy", "last-name": "Johnson"}],
@@ -25,14 +25,6 @@ RSpec.describe BookingsController, type: :controller do
     it "renders booking page" do
       params = { selected_flight: @booking.flight.id, format: "js" }
       session[:passengers] = { total_adults: 2, total_children: 1, total_infants: 0 }
-      post :book, params
-      expect(response).to render_template(:book)
-    end
-  end
-
-  describe "POST #book" do
-    xit "renders booking page" do
-      params = { selected_flight: @booking.flight.id, format: "js" }
       post :book, params
       expect(response).to render_template(:book)
     end

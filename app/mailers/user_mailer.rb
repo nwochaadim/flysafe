@@ -14,7 +14,6 @@ class UserMailer < ApplicationMailer
     @user = User.find(user_id)
     @booking = Booking.find(booking_id)
     @new_cost = new_cost(@booking.passengers, @booking.class_level.to_sym)
-    binding.pry
     mail(to: @user.email, subject: "Fly Safe. Booking Reservation Updated!")
   end
 
