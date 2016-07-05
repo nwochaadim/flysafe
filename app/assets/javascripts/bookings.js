@@ -2,6 +2,7 @@ $(document).on('ready page:load', function(){
   $('.ui.red.basic.inverted.button').click(function(){
     $('.ui.basic.modal').modal('hide');
   })
+
 })
 
 function showPassenger(){
@@ -16,7 +17,7 @@ function deleteBookingReservation(reference_number){
     url: "/bookings/"+document.reference_number,
     type: 'DELETE',
     success: function(){
-      $('#search-result-container').html("");
+      $('#search-result-container').empty();
     },
     error: function(){
       console.log("Failed to delete booking");
@@ -29,40 +30,58 @@ function editReservation(){
 }
 
 function addPassengerForm(type){
-  $('#passenger-form').append(passengerFormString(type))
-  $('.ui.long.modal.mform').modal('refresh')
+  var no_of_passengers = $('.custom-form').length + 1
+    
+  $.when(isFlightBookable()).then(function(res){
+    if (res.seats_available >= no_of_passengers){
+      $('#passenger-form').append(passengerFormString(type))
+      $('.ui.long.modal.mform').modal('refresh')
+    }
+    else{
+      toastr.info("Sorry! The flight cannot contain this passenger", "Flight Occupied!");
+    }
+
+  }, function(res){
+    toastr.error("An Error occured while trying to retreive the flight information", "Error!");
+  })
+  
 }
 
 function removePassengerForm(ele){
-  var parentElement = $(ele).prev('div.two.fields')
-  var siblingElement = parentElement.prev()
-  parentElement.remove()
-  siblingElement.remove()
-  ele.remove()
-  $('.ui.long.modal.mform').modal('refresh')
+  var parentElement = $(ele).parent()
+  parentElement.remove();
+  $('.ui.long.modal.mform').modal('refresh');
 }
 
 function passengerFormString(type){
   return [
-    '<h4 class="ui dividing header"> '+type.ucfirst()+ ' Passenger Information</h4>',
-      '<div class="two fields">',
-        '<div class="field">',
-          '<label for="first_name">First Name</label>',
-          '<input type="text" name="'+type+"[][first-name]"+'" placeholder: "E.g John" required = true />',
-        '</div>',
+    '<div class="custom-form">',
+      '<h4 class="ui dividing header"> '+type.ucfirst()+ ' Passenger Information</h4>',
+        '<div class="two fields">',
+          '<div class="field">',
+            '<label for="first_name">First Name</label>',
+            '<input type="text" name="'+type+"[][first-name]"+'" placeholder: "E.g John" required = true />',
+          '</div>',
 
-        '<div class="field">',
-          '<label for="last_name">Last Name</label>',
-          '<input type="text" name="'+type+"[][last-name]"+'" placeholder: "E.g Doe" required = true />',
+          '<div class="field">',
+            '<label for="last-name">Last Name</label>',
+            '<input type="text" name="'+type+"[][last-name]"+'" placeholder: "E.g Doe" required = true />',
+          '</div>',
         '</div>',
-      '</div>',
-      '<button class="ui basic button" onclick="removePassengerForm(this)">Remove Passenger</button>',
-      '<br/><br/>'
+        '<div class="four wide field">',
+          '<label for="gender">Gender</label>',
+          '<select name="'+type+"[][gender]"+'" class="ui fluid dropdown">',
+            '<option value="Male">Male</option>',
+            '<option value="Female">Female</option>',
+          '</select>',
+        '</div>',
+        '<button class="ui basic button" onclick="removePassengerForm(this)">Remove Passenger</button>',
+        '<br/><br/>',
+      '</div>'
   ].join('')
 }
 
 function retrieveBookingInfo(){
-  console.log("Retrieved!")
    $.ajax({
     url: "/book",
     type: "POST",
@@ -74,6 +93,22 @@ function retrieveBookingInfo(){
     }
   });
 }
+
+function isFlightBookable(){
+  var deferred = jQuery.Deferred();
+  $.ajax({
+    url: "/flights/seats_available",
+    type: 'GET',
+    success: function(res){
+       deferred.resolve(res);
+    },
+    error: function(res){
+      deferred.reject(res);
+    }
+  });
+  return deferred.promise();
+}
+
 
 String.prototype.ucfirst = function()
 {

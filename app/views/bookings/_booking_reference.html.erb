@@ -1,8 +1,7 @@
 <% if @booking %>
   <% user = @booking.user|| @booking.unregistered_user %>
-  <%= render partial: "modals/edit_reservation_modal", locals: {booking: @booking} %>
+  <%= render partial: "modals/edit_reservation_modal", locals: { booking: @booking } %>
   <h3 class="ui top attached header">
-
     Booking #<%= "#{@booking.reference_number} -#{user.first_name} #{user.last_name}" %>
   </h3>
   <div class="ui attached segment">
@@ -14,7 +13,7 @@
     <div class="ui center aligned grid">
 
     <div class="ui buttons">
-      <button class="ui basic red button" id="cancel-reservation" onclick="deleteBookingReservation('<%= @booking.reference_number %>')">Cancel Reservation</button>
+      <button class="ui basic red button" id="cancel-reservation" onclick="deleteConfirmDialog('<%= @booking.reference_number %>')">Cancel Reservation</button>
       <div class="or"></div>
       <button class="ui positive button" onclick="editReservation()">Edit Reservation</button>
     </div>

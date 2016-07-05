@@ -24,10 +24,10 @@ class SessionController < ApplicationController
   
   private
 
-    def validate_session
-      if session[:user_id]
-        redirect_to root_path
-      end
+  def validate_session
+    if session[:user_id]
+      redirect_to root_path
     end
+  end
   
 end

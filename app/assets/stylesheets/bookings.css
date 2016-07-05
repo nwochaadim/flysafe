@@ -1,3 +1,7 @@
+.ui.small.inverted.menu {
+  margin-top: 0px;
+}
+
 .ui.center.aligned.grid {
   margin-bottom: 20px;
   margin-top: 10px;
@@ -24,4 +28,9 @@ h3.ui.top.attached.header {
   border-bottom: 1px solid #ff9d00; 
   cursor: pointer;
   color: #ff9d00;
+}
+
+.custom-form{
+  margin-top: 15px;
+  margin-bottom: 15px
 }

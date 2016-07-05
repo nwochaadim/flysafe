@@ -1,0 +1,18 @@
+<div>
+  <p>Hi, <%= "#{@user.first_name} #{@user.last_name}" %></p>
+  <p>Your Flight Booking to <%= "#{@booking.flight.route.arriving_airport.name} from #{@booking.flight.route.departing_airport.name} on #{@booking.flight.date.strftime('%B %d, %Y')} has been successfully updated. Below are the new flight details" %></p>
+  
+  <% if @booking.passengers.any? %>
+    <h3>Passengers</h3>
+    <hr/>
+    <ol>
+      <% @booking.passengers.each do |passenger| %>
+        <li><%= "#{passenger.first_name} #{passenger.last_name}" %></li>
+      <% end %>
+    </ol><br/>
+  <% end %>
+
+  <p><b>Total Fare: </b> <%= @new_cost %> </p>
+
+
+</div>

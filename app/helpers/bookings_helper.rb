@@ -24,11 +24,12 @@ module BookingsHelper
     infant_fares[booking_grade]
   end
 
-  def estimate_flight_fare(passengers)
-    total_cost = adult_fares[booking_grade]
+  def estimate_flight_fare(passengers, grade=nil)
+    class_level = grade || booking_grade
+    total_cost = adult_fares[class_level]
     passengers.each do |passenger|
       unless passenger.age_grade == "Infant"
-        total_cost += adult_fares[booking_grade]
+        total_cost += adult_fares[class_level]
       end
     end
     total_cost
