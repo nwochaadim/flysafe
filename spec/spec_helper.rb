@@ -1,9 +1,10 @@
-require 'simplecov'
 require 'coveralls'
+Coveralls.wear!('rails')
 
+require 'simplecov'
 SimpleCov.start 'rails'
 
-Coveralls.wear!
+
 
 require 'support/factory_girl'
 require 'support/database_cleaner'
