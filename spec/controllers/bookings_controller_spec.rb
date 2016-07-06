@@ -1,16 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe BookingsController, type: :controller do
-  before(:each){ @booking = create(:booking) }
+  before(:each) do
+    @booking = create(:booking) 
+    @booking.flight.route.update(arriving_airport: create(:arriving_airport))
+  end
 
   let(:valid_attributes) {
     { first_name: Faker::Name.name,
       last_name: Faker::Name.name,
       format: :js,
       email: Faker::Internet.email,
-      adult: [{gender: "1", "first-name": "John", "last-name": "Travolta"}],
-      child: [{"first-name": "Mercy", "last-name": "Johnson"}],
-      infant: [{"first-name": "Michelle", "last-name": "Obama"}] 
+      adult: [{"first_name": "John", "last_name": "Travolta"}],
+      child: [{"first_name": "Mercy", "last_name": "Johnson"}],
+      infant: [{"first_name": "Michelle", "last_name": "Obama"}] 
     }
   }
 
@@ -55,6 +58,21 @@ RSpec.describe BookingsController, type: :controller do
     it "renders booking search page" do
       get :search
       expect(response).to render_template(:search)
+    end
+  end
+
+  describe "PUT #update" do
+    it "updates the booking reservation" do
+      attributes = valid_attributes.merge(id: @booking.id)
+      put :update, attributes
+      expect(@booking.passengers.count).to eql(3)
+    end
+  end
+
+  describe "DELETE #destroy" do
+    it "renders booking search page" do
+      delete :destroy, { id: @booking.reference_number }
+      expect(Booking.all).to_not include(@booking)
     end
   end
 

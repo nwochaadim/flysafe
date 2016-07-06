@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use sqlite3 as the database for Active Record
@@ -38,6 +37,9 @@ gem 'toastr-rails'
 
 gem 'active_link_to'
 
+gem 'rubocop'
+
+gem 'coveralls', require: false
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -45,17 +47,15 @@ gem 'active_link_to'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-  gem "factory_girl_rails"
-  gem "capybara"
-  gem "selenium-webdriver"
-  gem "chromedriver-helper", "1.0.0"
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'chromedriver-helper', '1.0.0'
   gem 'database_cleaner'
-  gem "simplecov"
+  gem 'simplecov'
 end
 
 group :development do
@@ -67,8 +67,7 @@ group :development do
 
   gem 'sqlite3'
 
-  gem "letter_opener"
-
+  gem 'letter_opener'
 end
 
 group :production do
@@ -77,4 +76,4 @@ group :production do
   gem 'puma'
 end
 
-gem "rspec-rails", :group => [:development, :test]
+gem 'rspec-rails', group: [:development, :test]

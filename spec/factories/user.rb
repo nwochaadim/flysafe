@@ -4,7 +4,7 @@ FactoryGirl.define do
     last_name Faker::Name.name
     email Faker::Internet.email
     phone Faker::PhoneNumber.phone_number
-    password "secret_key"
-    password_confirmation "secret_key"
+    password 'secret_key'
+    password_confirmation 'secret_key'
   end
 end

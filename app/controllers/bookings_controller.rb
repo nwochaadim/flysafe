@@ -1,4 +1,4 @@
-class BookingsController < ApplicationController  
+class BookingsController < ApplicationController
   attr_accessor :token
   protect_from_forgery except: [:retrieve, :destroy]
 
@@ -18,10 +18,11 @@ class BookingsController < ApplicationController
     selected_flight = Flight.find(session[:flight_id])
     request = Paypal::Express::Request.new(paypal_request_params)
     payment_request = Paypal::Payment::Request.new(payment_request_params)
+    binding.pry
     response = request_paypal_payment(request, payment_request, selected_flight)
     session[:token] = response.token
-    @paypal_uri = response.redirect_uri
-    redirect_to @paypal_uri
+    paypal_uri = response.redirect_uri
+    redirect_to paypal_uri
   end
 
   def validate_payment
@@ -34,28 +35,26 @@ class BookingsController < ApplicationController
   def retrieve
     @reference_number = params[:reference_number]
     bookings = Booking.where(reference_number: @reference_number)
-    if bookings.empty?
-      @booking = nil
-    else
-      @booking = bookings.first
-    end
+    @booking = if bookings.empty?
+                 nil
+               else
+                 bookings.first
+               end
     render format: :js
   end
 
-  
   # def edit
   # end
 
   def search
   end
 
-
   def update
     @booking = Booking.find(params[:id])
     user = @booking.user || @booking.unregistered_user
-    user.update(first_name: booking_params[:first_name], 
-      last_name: booking_params[:last_name], 
-      email: booking_params[:email] )
+    user.update(first_name: booking_params[:first_name],
+                last_name: booking_params[:last_name],
+                email: booking_params[:email])
     @booking.passengers.destroy_all
     @booking.addPassengers(booking_params)
     UserMailer.update_reservation(user.id, @booking.id).deliver_now
@@ -64,29 +63,27 @@ class BookingsController < ApplicationController
 
   def destroy
     bookings = Booking.where(reference_number: params[:id])
-    unless bookings.empty?
-      @booking = bookings.first
-    end
+    @booking = bookings.first unless bookings.empty?
     @user = @booking.user || @booking.unregistered_user
     UserMailer.delete_reservation(@user.id, @booking.id).deliver_now
     @booking.destroy
-    render json: {head: no_content}
+    render json: { head: "" }
   end
 
   private
-  
+
   def generate_token
     loop do
-      @token = SecureRandom::hex(6)
+      @token = SecureRandom.hex(6)
       bookings = Booking.where(reference_number: @token)
       break if bookings.empty?
     end
     @token
   end
 
-  def paypal_options 
+  def paypal_options
     {
-      no_shipping: true, 
+      no_shipping: true,
       allow_note: false,
       pay_on_paypal: true
     }
@@ -94,20 +91,20 @@ class BookingsController < ApplicationController
 
   def paypal_request_params
     {
-      username: "nwocha.adim-facilitator_api1.gmail.com",
-      password: "65KMEBVFE3V5MQVF",
-      signature: "AiPC9BjkCyDFQXbSkoZcgqH3hpacAWHLrfN1pZw2YLyitsE1A89vwHDf"
+      username: 'nwocha.adim-facilitator_api1.gmail.com',
+      password: '65KMEBVFE3V5MQVF',
+      signature: 'AiPC9BjkCyDFQXbSkoZcgqH3hpacAWHLrfN1pZw2YLyitsE1A89vwHDf'
     }
   end
 
   def payment_request_params
     {
-      description: "Book Your Flight while you are alive",
+      description: 'Book Your Flight while you are alive',
       quantity: 1,
       amount: session[:total_cost],
       custom_fields: {
-        CARTBORDERCOLOR: "C00000",
-        LOGOIMG: "http://clipartbest.com//cliparts/McL/oaR/McLoaRqca.svg"
+        CARTBORDERCOLOR: 'C00000',
+        LOGOIMG: 'http://clipartbest.com//cliparts/McL/oaR/McLoaRqca.svg'
       }
     }
   end
@@ -118,13 +115,13 @@ class BookingsController < ApplicationController
       validate_payment_url(selected_flight),
       contact_url,
       paypal_options
-    ) 
+    )
   end
 
   def create_booking(flight)
     retrieved_booking_params = session[:booking_params].stringify_keys
     user = current_user || create_unregistered_user(retrieved_booking_params)
-    class_level = session[:passengers]["class_level"]
+    class_level = session[:passengers]['class_level']
     @booking = user.bookings.create(reference_number: generate_token, class_level: class_level)
     @booking.addPassengers(retrieved_booking_params)
     @booking.allocate_flight(flight)
@@ -132,22 +129,22 @@ class BookingsController < ApplicationController
 
   def create_unregistered_user(retrieved_booking_params)
     UnregisteredUser.create(
-      first_name: retrieved_booking_params["first_name"],
-      last_name: retrieved_booking_params["last_name"],
-      email: retrieved_booking_params["email"]
+      first_name: retrieved_booking_params['first_name'],
+      last_name: retrieved_booking_params['last_name'],
+      email: retrieved_booking_params['email']
     )
   end
 
   def retrieve_passengers_from_session
     session[:passengers] = session[:passengers].stringify_keys
-    @no_of_children = session[:passengers]["total_adults"]
-    @no_of_adults = session[:passengers]["total_infants"]
-    @no_of_infants = session[:passengers]["total_children"]
+    @no_of_children = session[:passengers]['total_adults']
+    @no_of_adults = session[:passengers]['total_infants']
+    @no_of_infants = session[:passengers]['total_children']
     @no_of_children + @no_of_adults + @no_of_infants
   end
 
   def booking_params
-    passenger_fields = ["gender", "first_name", "last_name"]
+    passenger_fields = %w(gender first_name last_name)
     param = params.permit(:first_name, :last_name, :email, adult: passenger_fields, child: passenger_fields, infant: passenger_fields)
   end
 end

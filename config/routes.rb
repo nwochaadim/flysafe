@@ -1,40 +1,32 @@
 Rails.application.routes.draw do
-
-
   root 'landing#index'
 
-  get "/about" => "landing#about", as: :about
-  get "/contact" => "landing#contact_us", as: :contact
+  get '/about' => 'landing#about', as: :about
+  get '/contact' => 'landing#contact_us', as: :contact
 
+  get '/login' => 'session#new', as: :login
+  get '/logout' => 'session#destroy', as: :logout
+  post '/session' => 'session#create', as: :session
 
+  get '/signup' => 'users#new', as: :signup
+  get '/users/:user_id/bookings' => 'users#past_bookings', as: :past_bookings
 
-  get "/login" => "session#new", as: :login
-  get "/logout" => "session#destroy", as: :logout
-  post "/session" => "session#create", as: :session
+  post '/flights/search' => 'flights#search', as: :search_flights
 
+  get '/flights/seats_available' => 'flights#seats_available'
 
-  get "/signup" => "users#new", as: :signup
-  get "/users/:user_id/bookings" => "users#past_bookings", as: :past_bookings
-  
-  
-  post "/flights/search" => "flights#search", as: :search_flights
+  post '/book' => 'bookings#book', as: :book
 
-  get "/flights/seats_available" => "flights#seats_available"
+  get '/bookings/search' => 'bookings#search', as: :search_booking
 
+  post '/bookings' => 'bookings#retrieve', as: :retrieve_booking
 
-  post "/book" => "bookings#book", as: :book
+  get '/payment' => 'bookings#payment', as: :payment
 
-  get "/bookings/search" => "bookings#search", as: :search_booking
+  post '/confirm' => 'bookings#confirm', as: :confirm_book
 
-  post "/bookings" => "bookings#retrieve", as: :retrieve_booking
+  get '/payment/:flight_id' => 'bookings#validate_payment', as: :validate_payment
 
-  get "/payment" => "bookings#payment", as: :payment
-
-  post "/confirm" => "bookings#confirm", as: :confirm_book
-  
-  get "/payment/:flight_id" => "bookings#validate_payment", as: :validate_payment
-  
-  
   resources :passengers
   resources :bookings
   resources :users

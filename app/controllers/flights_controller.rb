@@ -1,13 +1,13 @@
 class FlightsController < ApplicationController
   protect_from_forgery except: [:search, :seats_available]
-  
+
   def search
-    sql_query = "date >= ? and seats_available > ?"
+    sql_query = 'date >= ? and seats_available > ?'
     flights = Flight.where(sql_query, search_date, total_passengers)
 
     @retrieved_flights = flights.uniq(&:date).select do |flight|
       flight.route.departing_airport.name == flight_params[:departs][0..-7] &&
-      flight.route.arriving_airport.name == flight_params[:arrives][0..-7]
+        flight.route.arriving_airport.name == flight_params[:arrives][0..-7]
     end
     render format: :js
   end
@@ -18,11 +18,12 @@ class FlightsController < ApplicationController
     if flight.any?
       render json: flight.first.to_json(only: [:seats_available])
     else
-      render json: {error: true}
+      render json: { error: true }
     end
   end
 
   private
+
   def flight_params
     params.permit(:departs, :arrives, :grade, :adults, :children, :infants, :date)
   end
@@ -36,7 +37,6 @@ class FlightsController < ApplicationController
   end
 
 
-
   def store_passengers_info(total_adults, total_children, total_infants)
     session[:passengers] = {
       total_adults: total_adults,
@@ -47,7 +47,7 @@ class FlightsController < ApplicationController
   end
 
   def search_date
-    date = flight_params[:date].split("-").map(&:to_i)
-    datetime = DateTime.new(date[0],date[1],date[2])
+    date = flight_params[:date].split('-').map(&:to_i)
+    datetime = DateTime.new(date[0], date[1], date[2])
   end
 end
