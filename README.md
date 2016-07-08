@@ -1,5 +1,5 @@
 ## Fly Safe [![Coverage Status](https://coveralls.io/repos/github/andela-anwocha/flysafe/badge.svg?branch=ft-booking-page-management-121376557)](https://coveralls.io/github/andela-anwocha/flysafe?branch=ft-booking-page-management-121376557) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/andela-anwocha/flysafe/badges/quality-score.png?b=ft-booking-page-management-121376557)](https://scrutinizer-ci.com/g/andela-anwocha/flysafe/?branch=ft-booking-page-management-121376557)
-A simple flight booking application that enables users book and pay for flights online. It can be viewed via [flysafe](https://flysafe.herokuapp.com)
+A simple flight booking application that enables users book and pay for flights online. It can be viewed via [flysafe](https://fly-safe.herokuapp.com)
 
 ## Getting Started
 1. Clone the repository:
