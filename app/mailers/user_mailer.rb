@@ -4,17 +4,17 @@ class UserMailer < ApplicationMailer
     mail(to: @user.email, subject: 'Welcome to FlySafe')
   end
 
-  def delete_reservation(user_id, booking_id)
-    @user = User.find(user_id)
+  def delete_reservation(user, booking_id)
+    @user = user
     @booking = Booking.find(booking_id)
     mail(to: @user.email, subject: 'Fly Safe. Booking Reservation Cancelled!')
   end
 
-  def update_reservation(user_id, booking_id)
-    @user = User.find(user_id)
+  def update_reservation(user, booking_id)
+    @user = user
     @booking = Booking.find(booking_id)
     @new_cost = new_cost(@booking.passengers, @booking.class_level.to_sym)
-    mail(to: @user.email, subject: 'Fly Safe. Booking Reservation Updated!')
+    mail(to: user.email, subject: 'Fly Safe. Booking Reservation Updated!')
   end
 
   private

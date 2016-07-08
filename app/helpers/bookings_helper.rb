@@ -1,16 +1,10 @@
 module BookingsHelper
   def calculate_flight_fare(booking_params)
-    booking_params = booking_params.stringify_keys
+    params = booking_params.stringify_keys
     passengers = []
-    booking_params['adult'].each { |adult| build_passengers(passengers, adult, 'Adult') }
-    booking_params['child'].each { |child| build_passengers(passengers, child, 'Child') }
-    booking_params['infant'].each { |infant| build_passengers(passengers, infant, 'Infant') }
+    allowed_passengers = ['adult', 'child', 'infant']
+    iterate_passengers(passengers, params, allowed_passengers)
     session[:total_cost] = estimate_flight_fare(passengers, booking_grade)
-  end
-
-  def build_passengers(passengers, params, type)
-    params = params.merge(age_grade: type)
-    passengers << Passenger.new(params)
   end
 
   def booking_grade
@@ -30,7 +24,7 @@ module BookingsHelper
   end
 
   def estimate_flight_fare(passengers, grade = nil)
-    class_level = grade || booking_grade
+    class_level = grade.to_sym || booking_grade
     total_cost = adult_fares[class_level]
     passengers.each do |passenger|
       unless passenger.age_grade == 'Infant'
@@ -38,6 +32,21 @@ module BookingsHelper
       end
     end
     total_cost
+  end
+
+  def iterate_passengers(passengers, params, allowed_passengers)
+    allowed_passengers.each do |allowed_passenger|
+      if params[allowed_passenger]
+        params[allowed_passenger].each do |passenger|
+          build_passengers(passengers, passenger, allowed_passenger.capitalize)
+        end
+      end
+    end
+  end
+
+  def build_passengers(passengers, params, type)
+    params = params.merge(age_grade: type)
+    passengers << Passenger.new(params)
   end
 
   def adult_fares

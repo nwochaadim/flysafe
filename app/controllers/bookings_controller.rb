@@ -18,7 +18,6 @@ class BookingsController < ApplicationController
     selected_flight = Flight.find(session[:flight_id])
     request = Paypal::Express::Request.new(paypal_request_params)
     payment_request = Paypal::Payment::Request.new(payment_request_params)
-    binding.pry
     response = request_paypal_payment(request, payment_request, selected_flight)
     session[:token] = response.token
     paypal_uri = response.redirect_uri
@@ -57,7 +56,7 @@ class BookingsController < ApplicationController
                 email: booking_params[:email])
     @booking.passengers.destroy_all
     @booking.addPassengers(booking_params)
-    UserMailer.update_reservation(user.id, @booking.id).deliver_now
+    UserMailer.update_reservation(user, @booking.id).deliver_now
     redirect_to search_booking_path, notice: 'Booking was successfully updated.'
   end
 
@@ -65,7 +64,7 @@ class BookingsController < ApplicationController
     bookings = Booking.where(reference_number: params[:id])
     @booking = bookings.first unless bookings.empty?
     @user = @booking.user || @booking.unregistered_user
-    UserMailer.delete_reservation(@user.id, @booking.id).deliver_now
+    UserMailer.delete_reservation(@user, @booking.id).deliver_now
     @booking.destroy
     render json: { head: "" }
   end

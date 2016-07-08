@@ -34,3 +34,8 @@ h3.ui.top.attached.header {
   margin-top: 15px;
   margin-bottom: 15px
 }
+
+.ui.long.modal.mform > .ui.container{
+  background-color: white;
+  padding: 20px;
+}

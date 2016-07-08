@@ -23,7 +23,7 @@ RSpec.describe UserMailer, type: :mailer do
       @booking.flight.route.update(arriving_airport: create(:arriving_airport))
     end
 
-    let(:mail) { UserMailer.update_reservation(@booking.user.id, @booking.id) }
+    let(:mail) { UserMailer.update_reservation(@booking.user, @booking.id) }
     it 'renders the subject' do
       expect(mail.subject).to eq 'Fly Safe. Booking Reservation Updated!'
     end
@@ -43,7 +43,7 @@ RSpec.describe UserMailer, type: :mailer do
       @booking.flight.route.update(arriving_airport: create(:arriving_airport))
     end
 
-    let(:mail) { UserMailer.delete_reservation(@booking.user.id, @booking.id) }
+    let(:mail) { UserMailer.delete_reservation(@booking.user, @booking.id) }
     it 'renders the subject' do
       expect(mail.subject).to eq 'Fly Safe. Booking Reservation Cancelled!'
     end

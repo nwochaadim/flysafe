@@ -30,6 +30,7 @@ function editReservation(){
 }
 
 function addPassengerForm(type){
+
   var no_of_passengers = $('.custom-form').length + 1
     
   $.when(isFlightBookable()).then(function(res){
@@ -60,12 +61,12 @@ function passengerFormString(type){
         '<div class="two fields">',
           '<div class="field">',
             '<label for="first_name">First Name</label>',
-            '<input type="text" name="'+type+"[][first-name]"+'" placeholder: "E.g John" required = true />',
+            '<input type="text" name="'+type+"[][first_name]"+'" placeholder: "E.g John" required = true />',
           '</div>',
 
           '<div class="field">',
-            '<label for="last-name">Last Name</label>',
-            '<input type="text" name="'+type+"[][last-name]"+'" placeholder: "E.g Doe" required = true />',
+            '<label for="last_name">Last Name</label>',
+            '<input type="text" name="'+type+"[][last_name]"+'" placeholder: "E.g Doe" required = true />',
           '</div>',
         '</div>',
         '<div class="four wide field">',
@@ -89,7 +90,7 @@ function retrieveBookingInfo(){
       console.log("Successful!")
     },
     error: function(){
-      console.log("Failed to delete booking")
+      alert("Failed to delete booking")
     }
   });
 }

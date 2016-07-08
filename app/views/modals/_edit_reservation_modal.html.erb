@@ -1,5 +1,5 @@
 <div class="ui long modal mform">
-  <div class="ui container" style="background-color: white; padding: 20px;">
+  <div class="ui container">
     <%= form_tag url_for(action: "update", controller: "bookings", id: booking.id), method: "put", class: "ui form" do %>
       <h4 class="ui dividing header">Please provide your information</h4>
       <div class="two fields">
@@ -28,14 +28,13 @@
       <div class="ui center aligned grid">
         <%= submit_tag "Submit", class: "ui basic blue button" %>
       </div><br/>
-      <div class="ui center aligned grid">
-         <div class="ui buttons">
-          <button class="ui basic blue button" onclick="addPassengerForm('adult')">Add Adult Passenger</button>
-          <button class="ui basic teal button" onclick="addPassengerForm('child')">Add Child Passenger</button>
-          <button class="ui basic red button" onclick="addPassengerForm('infant')">Add Infant Passenger</button>
-        </div>
-      </div>
-      
     <% end %>
+    <div class="ui center aligned grid">
+       <div class="ui buttons">
+        <button class="ui basic blue button" onclick="addPassengerForm('adult')">Add Adult Passenger</button>
+        <button class="ui basic teal button" onclick="addPassengerForm('child')">Add Child Passenger</button>
+        <button class="ui basic red button" onclick="addPassengerForm('infant')">Add Infant Passenger</button>
+      </div>
+    </div>
   </div>
 </div>
