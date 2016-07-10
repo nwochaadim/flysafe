@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20160613144243) do
   end
 
   create_table "bookings", force: :cascade do |t|
-    t.string   "reference_number"
+    t.string   "reference_number", null: false
     t.integer  "user_id"
     t.integer  "flight_id"
     t.datetime "created_at",       null: false
@@ -51,10 +51,10 @@ ActiveRecord::Schema.define(version: 20160613144243) do
   end
 
   create_table "passengers", force: :cascade do |t|
-    t.string   "name"
-    t.string   "sex"
-    t.integer  "age"
-    t.string   "type"
+    t.string   "first_name", null: false
+    t.string   "last_name",  null: false
+    t.string   "gender"
+    t.string   "age_grade",  null: false
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -74,13 +74,16 @@ ActiveRecord::Schema.define(version: 20160613144243) do
   add_index "routes", ["flight_id"], name: "index_routes_on_flight_id"
 
   create_table "users", force: :cascade do |t|
-    t.string   "name"
-    t.string   "email"
+    t.string   "first_name",      null: false
+    t.string   "last_name",       null: false
+    t.string   "email",           null: false
+    t.string   "phone"
+    t.string   "password_digest"
+    t.string   "gender"
     t.string   "type"
-    t.integer  "age"
     t.integer  "booking_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   add_index "users", ["booking_id"], name: "index_users_on_booking_id"

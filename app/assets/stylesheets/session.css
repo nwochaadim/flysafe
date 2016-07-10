@@ -1,0 +1,29 @@
+.ui.fluid.container {
+  background-color: #042833;
+  height: 100%;
+  width: 100%;
+}
+
+.ui.fluid.container > .grid {
+  height: 100%;
+  margin: 0;
+}
+
+.ui.fluid.container .image {
+  margin-top: -100px;
+}
+
+.ui.fluid.container .column {
+  max-width: 450px;
+}
+
+.ui.nag {
+  display: block;
+  background-color: #00B5AD;
+}
+
+.ui.nag:hover{
+  background-color: #00B5AD;
+  color: white;
+}
+

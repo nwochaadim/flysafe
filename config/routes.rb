@@ -6,6 +6,14 @@ Rails.application.routes.draw do
   get "/about" => "landing#about", as: :about
 
   get "/contact" => "landing#contact_us", as: :contact
+
+  get "/login" => "session#new", as: :login
+
+  get "/logout" => "session#destroy", as: :logout
+
+  get "/signup" => "users#new", as: :signup
+
+  post "/session" => "session#create", as: :session
   
   resources :passengers
   resources :bookings

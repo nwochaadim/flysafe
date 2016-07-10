@@ -1,5 +1,16 @@
-<h1>New User</h1>
+<%= render partial: 'header'%>
 
-<%= render 'form' %>
+<h1 class="ui horizontal divider header compact">
+  <i class="tag icon"></i>
+  Sign Up
+</h1>
 
-<%= link_to 'Back', users_path %>
+<div class="ui centered grid">
+  <div class="centered row">
+    <div class="ui segment">
+      <%= render partial: 'forms/sign_up' %>
+    </div>
+  </div>
+</div>
+
+<%= render partial: 'footer' %>
