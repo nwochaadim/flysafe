@@ -1,4 +1,4 @@
 class Flight < ActiveRecord::Base
-  has_many :routes
+  belongs_to :route
   has_many :bookings
 end

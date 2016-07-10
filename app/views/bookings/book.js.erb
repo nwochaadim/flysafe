@@ -1,0 +1,5 @@
+$(document).ready(function(){
+  $("#progress-container").html("<%= escape_javascript(render partial: 'forms/book_flight') %>")
+  $(".step").removeClass("active")
+  $("#book-flight").addClass("active")
+})

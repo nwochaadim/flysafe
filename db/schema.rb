@@ -15,15 +15,22 @@ ActiveRecord::Schema.define(version: 20160613144243) do
 
   create_table "airports", force: :cascade do |t|
     t.string   "name"
-    t.string   "location"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "country"
+    t.string   "state"
+    t.string   "airport_code"
+    t.string   "type"
+    t.integer  "route_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
+
+  add_index "airports", ["route_id"], name: "index_airports_on_route_id"
 
   create_table "bookings", force: :cascade do |t|
     t.string   "reference_number", null: false
     t.integer  "user_id"
     t.integer  "flight_id"
+    t.string   "class_level"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end
@@ -44,11 +51,14 @@ ActiveRecord::Schema.define(version: 20160613144243) do
   create_table "flights", force: :cascade do |t|
     t.integer  "stops"
     t.string   "plane_name"
-    t.integer  "seats"
-    t.string   "class_level"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "seats_available"
+    t.datetime "date"
+    t.integer  "route_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
+
+  add_index "flights", ["route_id"], name: "index_flights_on_route_id"
 
   create_table "passengers", force: :cascade do |t|
     t.string   "first_name", null: false
@@ -63,15 +73,12 @@ ActiveRecord::Schema.define(version: 20160613144243) do
   add_index "passengers", ["user_id"], name: "index_passengers_on_user_id"
 
   create_table "routes", force: :cascade do |t|
-    t.string   "departs"
-    t.string   "arrives"
-    t.datetime "date"
-    t.integer  "flight_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "departing_airport_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
-  add_index "routes", ["flight_id"], name: "index_routes_on_flight_id"
+  add_index "routes", ["departing_airport_id"], name: "index_routes_on_departing_airport_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name",      null: false

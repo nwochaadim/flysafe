@@ -1,0 +1,5 @@
+$(document).ready(function(){
+  $("#progress-container").html("<%= escape_javascript(render partial: 'retrieved_flights') %>")
+  $(".step").removeClass("active")
+  $("#select-flight").addClass("active")
+})

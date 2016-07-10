@@ -1,9 +1,9 @@
-<%= form_tag "/users",  method: "post", class: "ui form" do %>
+<%= form_tag search_flights_path,  method: "post", class: "ui form", remote: true do %>
   <h4 class="ui dividing header">Search Flights</h4>
   <div class="three fields">
     <div class="field">
-      <%= label_tag :name, "First Name" %>
-      <%= text_field_tag :name, nil, placeholder: "Departure" %>
+      <%= label_tag :departs, "Departs" %>
+      <%= select_tag :departs, options_for_select(@airport_names), class: "ui search fluid dropdown" %>
     </div>
 
     <div class="field">
@@ -13,14 +13,17 @@
 
     <div class="field">
       <%= label_tag :grade, "Class" %>
-      <%= select_tag :grade, options_for_select([["Economy", "economy"], ["Business", "business"]]), class: "ui fluid dropdown" %>
+      <%= select_tag :grade, options_for_select([["Economy", "economy"], ["Business", "business"]]), class: "ui search fluid dropdown" %>
     </div>
   </div>
 
-  <div class="field">
-    <%= label_tag :arrival, "Arrival" %>
-    <%= text_field_tag :arrival, nil, placeholder: "Arrival" %>
+  
+  <div class="six wide field">
+    <%= label_tag :arrives, "Arrives" %>
+    <%= select_tag :arrives, options_for_select(@airport_names), class: "ui search fluid dropdown" %>
   </div>
+  
+  
 
   <h4 class="ui dividing header">Passengers</h4>
   <div class="three fields">
@@ -30,16 +33,16 @@
     </div>
 
     <div class="field">
-      <%= label_tag :children, "Children (age 2-11)" %>
+      <%= label_tag :children, "Number of Children (age 2-11)" %>
       <%= select_tag :children, options_for_select(1..6), class: "ui fluid dropdown" %>
     </div>
 
     <div class="field">
-      <%= label_tag :infants, "Infants (age 2-11)" %>
+      <%= label_tag :infants, "Number of Infants (age 2-11)" %>
       <%= select_tag :infants, options_for_select(1..6), class: "ui fluid dropdown" %>
     </div>
   </div>
-  <%= submit_tag "Submit", class: "ui basic blue button" do %>
+  <%= submit_tag "Search", class: "ui basic blue button" do %>
     <i class="search icon"></i>
   <% end %>
 

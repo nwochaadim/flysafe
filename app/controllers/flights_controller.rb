@@ -1,5 +1,5 @@
 class FlightsController < ApplicationController
-  before_action :set_flight, only: [:show, :edit, :update, :destroy]
+  #before_action :set_flight, only: [:show, :edit, :update, :destroy]
 
   # GET /flights
   # GET /flights.json
@@ -21,6 +21,29 @@ class FlightsController < ApplicationController
   def edit
   end
 
+  def search
+    sql_query = "date = ? and seats_available > ?"
+    flights = Flight.where(sql_query, search_date, $total_passengers)
+    @retrieved_flights = flights.select do |flight|
+      flight.route.departing_airport.name == flight_params[:departs][0..-7] &&
+      flight.route.arriving_airport.name == flight_params[:arrives][0..-7]
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def total_passengers
+    $no_of_children = flight_params[:children].to_i
+    $no_of_adults = flight_params[:adults].to_i
+    $no_of_infants = flight_params[:infants].to_i
+    $total_passengers = $no_of_infants + $no_of_children + $no_of_adults + 1
+  end
+
+  def search_date
+    date = flight_params[:date].split("-").map(&:to_i)
+    datetime = DateTime.new(date[0],date[1],date[2])
+  end
   # POST /flights
   # POST /flights.json
   def create
@@ -69,6 +92,6 @@ class FlightsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def flight_params
-      params.require(:flight).permit(:route, :stops, :plane_name, :seats)
+      params.permit(:departs, :arrives, :grade, :adults, :children, :infants, :date)
     end
 end

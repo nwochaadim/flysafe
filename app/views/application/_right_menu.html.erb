@@ -2,7 +2,7 @@
   <div class="item">
     <%= current_user.first_name+" "+current_user.last_name %>
   </div>
-  <%= link_to logout_path, class: 'item' do %>
+  <%= link_to logout_path, 'data-no-turbolink': true, class: 'item' do %>
     <div class="ui primary button">Logout</div>
   <% end %>
 <% else %>
