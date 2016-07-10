@@ -7,7 +7,7 @@ class FlightsController < ApplicationController
 
     @retrieved_flights = flights.uniq(&:date).select do |flight|
       flight.route.departing_airport.name == flight_params[:departs][0..-7] &&
-        flight.route.arriving_airport.name == flight_params[:arrives][0..-7]
+      flight.route.arriving_airport.name == flight_params[:arrives][0..-7]
     end
     render format: :js
   end

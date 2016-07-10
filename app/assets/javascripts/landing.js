@@ -28,5 +28,6 @@ function validateFields(evt){
     return false;
   }
   
-  $(".ui.form").submit()
+  $(".ui.form").submit();
+  $("#progress-container").addClass("loading");
 }

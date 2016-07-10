@@ -18,7 +18,7 @@
       </h1>
       <%= form_tag retrieve_booking_path, method: "post", remote: true do %>
         <div class="ui fluid icon input">
-          <%= text_field_tag :reference_number, nil, placeholder: "Search Bookings via reference number..." %>
+          <%= text_field_tag :reference_number, nil, placeholder: "Search Bookings via reference number...", required: true %>
           <i class="search icon"></i>
         </div><br/>
         <%= submit_tag "Search Bookings", class: "ui teal button" %>
