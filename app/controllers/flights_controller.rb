@@ -37,7 +37,7 @@ class FlightsController < ApplicationController
     $no_of_children = flight_params[:children].to_i
     $no_of_adults = flight_params[:adults].to_i
     $no_of_infants = flight_params[:infants].to_i
-    $total_passengers = $no_of_infants + $no_of_children + $no_of_adults + 1
+    session[:total_passengers] = $no_of_children + $no_of_adults + 1
   end
 
   def search_date

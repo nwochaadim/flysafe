@@ -19,20 +19,24 @@ class BookingsController < ApplicationController
   end
 
   def confirm
-    $booking_params = booking_params
+    session[:booking_params] = booking_params
+    @booking_params = booking_params
     respond_to do |format|
       format.js
     end
   end
 
   def book
-    $selected_flight = Flight.find(params[:selected_flight])
+    session[:flight_id] = params[:selected_flight]
     respond_to do |format|
       format.js
     end
   end
 
   def payment
+    selected_flight = Flight.find(session[:flight_id])
+    create_booking(selected_flight)
+
     paypal_options = {
       no_shipping: true, # if you want to disable shipping information
       allow_note: false, # if you want to disable notes
@@ -55,26 +59,74 @@ class BookingsController < ApplicationController
     )
     response = request.setup(
       payment_request,
-      validate_payment_url($selected_flight),
+      validate_payment_url(selected_flight, @booking),
       contact_url,
       paypal_options  # Optional
     )
     redirect_to response.redirect_uri
   end
 
-
   def validate_payment
-    binding.pry
-    flight = Flight.find(params[:flight_id])
-    create_booking(flight)
+    @booking = Booking.find(params[:booking_id])
   end
 
   def create_booking(flight)
+    retrieved_booking_params = session[:booking_params]
     if current_user.nil?
-      booking = flight.bookings.create(reference_number: generate_token)
+      user = UnregisteredUser.create(
+        first_name: retrieved_booking_params[:first_name],
+        last_name: retrieved_booking_params[:last_name],
+        email: retrieved_booking_params[:email]
+        )
+      @booking = user.bookings.create(reference_number: generate_token)
+      @booking.update(flight: flight)
+      seats_available = flight.seats_available - session[:total_passengers]
+      flight.update(seats_available: seats_available)
+      addPassengers(@booking, retrieved_booking_params)
     else
-      booking = current_user.bookings.create(reference_number: generate_token)
-      booking.flight = flight
+      @booking = current_user.bookings.create(reference_number: generate_token)
+      @booking.update(flight: flight)
+      addPassengers(@booking, retrieved_booking_params)
+    end 
+  end
+
+  def addPassengers(booking, booking_param)
+    if booking_param["adult"]
+      createAdultPassengers(booking, booking_param["adult"])
+    elsif booking_param["child"]
+      createChildPassengers(booking, booking_param["child"])
+    elsif booking_param["infant"]
+      createInfantPassengers(booking, booking_param["infant"])
+    end
+  end
+
+  def createAdultPassengers(booking, adults)
+    adults.each do |adult|
+      booking.passengers.create(
+        first_name: adult["first-name"], 
+        last_name: adult["last-name"],
+        age_grade: "Adult"
+        )
+    end
+  end
+
+  def createChildPassengers(booking, children)
+    children.each do |child|
+      booking.passengers.create(
+        first_name: child["first-name"], 
+        last_name: child["last-name"],
+        age_grade: "Child"
+        )
+    end
+  end
+
+  def createInfantPassengers(booking, infants)
+    infants.each do |infant|
+      booking.passengers.create(
+        first_name: infant["first-name"], 
+        last_name: infant["last-name"],
+        age_grade: "Infant"
+        )
     end
   end
 

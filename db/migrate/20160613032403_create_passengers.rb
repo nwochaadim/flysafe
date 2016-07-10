@@ -5,7 +5,7 @@ class CreatePassengers < ActiveRecord::Migration
       t.string :last_name, null: false
       t.string :gender
       t.string :age_grade, null: false
-      t.references :user, index: true, foreign_key: true
+      t.references :booking, index: true, foreign_key: true
 
       t.timestamps null: false
     end

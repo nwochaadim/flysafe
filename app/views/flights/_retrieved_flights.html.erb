@@ -16,7 +16,7 @@
       <tr>
         <td class="collapsing">
           <div class="ui fitted slider checkbox">
-            <%= radio_button_tag "selected_flight", flight.id %> <%= label_tag %>
+            <%= radio_button_tag "selected_flight", flight.id, required: true %> <%= label_tag %>
           </div>
         </td>
         <td><%= flight.route.departing_airport.name %></td>
