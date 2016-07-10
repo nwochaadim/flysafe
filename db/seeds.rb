@@ -23,7 +23,11 @@ def create?(data)
 end
 
 def create_airport(data, index)
-  DepartingAirport.create(name: data["name"], country: data["country"], state: data["state"], airport_code: data["code"])
+  DepartingAirport.create(
+    name: data["name"],
+    country: data["country"],
+    state: data["state"],
+    airport_code: data["code"])
 end
 
 def allowed_countries
@@ -46,23 +50,13 @@ end
 def create_routes
   DepartingAirport.all.each do |departing_airport|
 
-    terminating_index = rand(2..5)
+    terminating_index = rand(20..50)
     arriving_airports = []
     (1..terminating_index).each do
       
       route = departing_airport.routes.create
-      
-
-      loop do
-        arriving_airport = retrieve_arriving_airport(departing_airport.state)
-        if arriving_airports.include?(arriving_airport)
-          next
-        else
-          arriving_airports << arriving_airport
-          route.create_arriving_airport(arriving_airport)
-          break
-        end
-      end
+      arriving_airport = retrieve_arriving_airport(departing_airport.state)
+      route.create_arriving_airport(arriving_airport)
 
     end
   end

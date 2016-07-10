@@ -1,4 +1,4 @@
-<%= form_tag "/search", method: "post", class: "ui form" do %>
+<%= form_tag confirm_book_path, method: "post", class: "ui form", remote: true do %>
   <h4 class="ui dividing header">Please provide your information</h4>
   <div class="two fields">
     <div class="field">
@@ -14,7 +14,7 @@
 
   <div class="eight wide field">
     <%= label_tag :email, "Email" %>
-    <%= text_field_tag :last_name, nil, placeholder: "E.g Doe" %>
+    <%= text_field_tag :email, nil, placeholder: "E.g johndoe@gmail.com" %>
   </div>
 
   <div class="four wide field">
@@ -22,24 +22,25 @@
     <%= select_tag :gender, options_for_select([["Male", 1], ["Female", 2]]), class: "ui fluid dropdown"%>
   </div>
 <!-- Adult Passengers Information -->
+
   <% if $no_of_adults > 0 %>
     <% $no_of_adults.times do |index| %>
       <h4 class="ui dividing header">Adult Passenger <%= index+1 %> Information</h4>
       <div class="two fields">
         <div class="field">
           <%= label_tag :adult_first_name, "First Name" %>
-          <%= text_field_tag :adult_first_name, nil, placeholder: "E.g John" %>
+          <%= text_field_tag "adult[][first-name]", nil, placeholder: "E.g John" %>
         </div>
 
         <div class="field">
           <%= label_tag :adult_last_name, "Last Name" %>
-          <%= text_field_tag :adult_last_name, nil, placeholder: "E.g Doe" %>
+          <%= text_field_tag "adult[][last-name]", nil, placeholder: "E.g Doe" %>
         </div>
       </div>
 
        <div class="four wide field">
         <%= label_tag :adult_gender, "Gender" %>
-        <%= select_tag :adult_gender, options_for_select([["Male", 1], ["Female", 2]]), class: "ui fluid dropdown"%>
+        <%= select_tag "adult[][gender]", options_for_select([["Male", 1], ["Female", 2]]), class: "ui fluid dropdown"%>
       </div>
     <% end %>
   <% end %>
@@ -53,18 +54,18 @@
       <div class="two fields">
         <div class="field">
           <%= label_tag :child_first_name, "First Name" %>
-          <%= text_field_tag :child_first_name, nil, placeholder: "E.g John" %>
+          <%= text_field_tag "child[][first-name]", nil, placeholder: "E.g John" %>
         </div>
 
         <div class="field">
           <%= label_tag :child_last_name, "Last Name" %>
-          <%= text_field_tag :child_last_name, nil, placeholder: "E.g Doe" %>
+          <%= text_field_tag  "child[][last-name]", nil, placeholder: "E.g Doe" %>
         </div>
       </div>
 
       <div class="four wide field">
         <%= label_tag :child_gender, "Gender" %>
-        <%= select_tag :child_gender, options_for_select([["Male", 1], ["Female", 2]]), class: "ui fluid dropdown"%>
+        <%= select_tag "child[]['gender']", options_for_select([["Male", 1], ["Female", 2]]), class: "ui fluid dropdown"%>
       </div>
     <% end %>
   <% end %>
@@ -78,18 +79,18 @@
       <div class="two fields">
         <div class="field">
           <%= label_tag :infant_first_name, "First Name" %>
-          <%= text_field_tag :infant_first_name, nil, placeholder: "E.g John" %>
+          <%= text_field_tag "infant[][first-name]", nil, placeholder: "E.g John" %>
         </div>
 
         <div class="field">
           <%= label_tag :infant_last_name, "Last Name" %>
-          <%= text_field_tag :child_last_name, nil, placeholder: "E.g Doe" %>
+          <%= text_field_tag "infant[][last-name]", nil, placeholder: "E.g Doe" %>
         </div>
       </div>
 
       <div class="four wide field">
         <%= label_tag :infant_gender, "Gender" %>
-        <%= select_tag :infant_gender, options_for_select([["Male", 1], ["Female", 2]]), class: "ui fluid dropdown"%>
+        <%= select_tag "infant[]['gender']", options_for_select([["Male", 1], ["Female", 2]]), class: "ui fluid dropdown"%>
       </div>
     <% end %>
   <% end %>

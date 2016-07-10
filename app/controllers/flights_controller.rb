@@ -22,9 +22,9 @@ class FlightsController < ApplicationController
   end
 
   def search
-    sql_query = "date = ? and seats_available > ?"
-    flights = Flight.where(sql_query, search_date, $total_passengers)
-    @retrieved_flights = flights.select do |flight|
+    sql_query = "date >= ? and seats_available > ?"
+    flights = Flight.where(sql_query, search_date, total_passengers)
+    @retrieved_flights = flights.uniq(&:date).select do |flight|
       flight.route.departing_airport.name == flight_params[:departs][0..-7] &&
       flight.route.arriving_airport.name == flight_params[:arrives][0..-7]
     end

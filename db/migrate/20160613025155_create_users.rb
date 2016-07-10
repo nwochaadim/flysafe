@@ -8,7 +8,6 @@ class CreateUsers < ActiveRecord::Migration
       t.string :password_digest
       t.string :gender
       t.string :type
-      t.references :booking, index: true, foreign_key: true
       
       t.timestamps null: false
     end
