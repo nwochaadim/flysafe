@@ -1,0 +1,67 @@
+<section>
+   <%= image_tag("airplane1.jpg", class: 'ui fluid image') %>
+    <h1 class="ui center aligned icon header">
+      <i class="circular plane icon"></i>
+      <div class="content">
+        Fly Safe. The true way to travel...
+        <div class="sub header" >At Fly Safe, We ensure your travel is smooth and stress free</div>
+      </div>
+    </h1>
+    <div class="ui centered grid">
+       <div class="ui buttons">
+          <button class="ui button">Learn More</button>
+          <div class="or"></div>
+          <a class="ui positive button" href="#booking">Book Now</a>
+      </div>
+    </div>
+   
+</section>
+
+<section id="booking">
+  <h2 class="ui horizontal divider header">
+    <i class="tag icon"></i>
+       Book a Flight Now
+  </h2>
+  <div class="ui centered grid">
+    <div class="ui steps">
+      <div class="step">
+        <i class="search icon"></i>
+        <div class="content">
+          <div class="title">Search Flights</div>
+          <div class="description">Search For Available Flights</div>
+        </div>
+      </div>
+      <div class="active step">
+        <i class="calendar icon"></i>
+        <div class="content">
+          <div class="title">Booking</div>
+          <div class="description">Make a Reservation</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <i class="pin icon"></i>
+        <div class="content">
+          <div class="title">Confirmation</div>
+          <div class="description">Confirm Reservation</div>
+        </div>
+      </div>
+
+      <div class="disabled step">
+        <i class="payment icon"></i>
+        <div class="content">
+          <div class="title">Payment</div>
+          <div class="description">Make Payments</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="ui raised segment">
+      <%= render partial: 'forms/search_flight' %>
+    </div>
+
+  </div>
+</section>
+  
+  
