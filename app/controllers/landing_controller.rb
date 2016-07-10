@@ -16,7 +16,7 @@ class LandingController < ApplicationController
   def create_feedback
     @contact = Contact.new(feedback_params)
     if @contact.save
-      redirect_to :root_path, notice: "Your Enquiry received succesfully"
+      redirect_to :root, notice: "Your Enquiry received succesfully"
     else
       render :contact_us, notice: "Some fields are missing"
     end
