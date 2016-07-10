@@ -26,8 +26,55 @@ class BookingsController < ApplicationController
   end
 
   def book
+    $selected_flight = Flight.find(params[:selected_flight])
     respond_to do |format|
       format.js
+    end
+  end
+
+  def payment
+    paypal_options = {
+      no_shipping: true, # if you want to disable shipping information
+      allow_note: false, # if you want to disable notes
+      pay_on_paypal: true # if you don't plan on showing your own confirmation step
+    }
+
+    request = Paypal::Express::Request.new(
+      :username   => "nwocha.adim-facilitator_api1.gmail.com",
+      :password   => "65KMEBVFE3V5MQVF",
+      :signature  => "AiPC9BjkCyDFQXbSkoZcgqH3hpacAWHLrfN1pZw2YLyitsE1A89vwHDf"
+    )
+    payment_request = Paypal::Payment::Request.new(
+      :description   => "Book Your Flight while you are alive",
+      :quantity      => 1,
+      :amount        => $total_cost,
+      :custom_fields => {
+        CARTBORDERCOLOR: "C00000",
+        LOGOIMG: "http://clipartbest.com//cliparts/McL/oaR/McLoaRqca.svg"
+      }
+    )
+    response = request.setup(
+      payment_request,
+      validate_payment_url($selected_flight),
+      contact_url,
+      paypal_options  # Optional
+    )
+    redirect_to response.redirect_uri
+  end
+
+
+  def validate_payment
+    binding.pry
+    flight = Flight.find(params[:flight_id])
+    create_booking(flight)
+  end
+
+  def create_booking(flight)
+    if current_user.nil?
+      booking = flight.bookings.create(reference_number: generate_token)
+    else
+      booking = current_user.bookings.create(reference_number: generate_token)
+      booking.flight = flight
     end
   end
 
@@ -82,6 +129,7 @@ class BookingsController < ApplicationController
         bookings = Booking.where(reference_number: @token)
         break if bookings.empty?
       end
+      @token
     end
 
     def set_booking

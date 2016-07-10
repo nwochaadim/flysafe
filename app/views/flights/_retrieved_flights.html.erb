@@ -1,4 +1,5 @@
 <h3 class="ui header"> Flights Available (Move Slider to Select Flight) </h3>
+<%= form_tag book_path, method: "post", class: "ui form", remote: true do %>
 <table class="ui celled padded stripped definition table">
   <thead>
     <tr>
@@ -15,7 +16,7 @@
       <tr>
         <td class="collapsing">
           <div class="ui fitted slider checkbox">
-            <input type="radio" name="selected_flight" value="<%= index %>"> <label></label>
+            <%= radio_button_tag "selected_flight", flight.id %> <%= label_tag %>
           </div>
         </td>
         <td><%= flight.route.departing_airport.name %></td>
@@ -35,12 +36,11 @@
           <i class="left arrow icon"></i>
           Go Back
         </button>
-
-        <%= link_to book_path, class: "ui right floated small primary button", remote: true do %>
-          Book Now
+        <%= submit_tag "Book Now", class: "ui right floated small primary button" do %>
           <i class="right arrow icon"></i>
         <% end %>
       </th>
     </tr>
   </tfoot>
 </table>
+<% end %>

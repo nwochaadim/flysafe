@@ -36,7 +36,9 @@
   <h2 class="ui dividing header">Flight Fare</h2>
   <p>Total Cost: <span><%= "$#{calculate_flight_fare($booking_params)}" %></span></p>
 
-  <div class="ui center aligned grid">
-    <button class="ui teal button">Ok, I am ready to make payment</button>
-  </div>
+  <%= link_to payment_path do %>
+    <div class="ui center aligned grid">
+      <button class="ui teal button">Ok, I am ready to make payment</button>
+    </div>
+  <% end %>
 </div>

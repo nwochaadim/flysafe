@@ -17,9 +17,13 @@ Rails.application.routes.draw do
   
   post "/search_flights" => "flights#search", as: :search_flights
 
-  get "/book" => "bookings#book", as: :book
+  post "/book" => "bookings#book", as: :book
+
+  get "/payment" => "bookings#payment", as: :payment
 
   post "/confirm" => "bookings#confirm", as: :confirm_book
+
+  get "/payment/:flight_id" => "bookings#validate_payment", as: :validate_payment
   
   resources :passengers
   resources :bookings
