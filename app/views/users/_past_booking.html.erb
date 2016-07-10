@@ -1,0 +1,7 @@
+<tr>
+  <td><%= booking.flight.route.departing_airport.name %></td>
+  <td><%= booking.flight.route.arriving_airport.name %></td>
+  <td><%= booking.passengers.count %></td>
+  <td><%= booking.flight.plane_name %></td>
+  <td><%= booking.flight.date.strftime("%B %d, %Y") %></td>
+</tr>

@@ -27,7 +27,7 @@
 
   <% if @booking_params["infant"] %>
     <% @booking_params["infant"].each.with_index(1) do |infant, index|  %>
-      <h3 class="ui dividing header">Child Passenger <%= index %> Information</h2>
+      <h3 class="ui dividing header">Infant Passenger <%= index %> Information</h2>
       <p>Name: <span> <%= infant["first-name"] + " " + infant["last-name"] %> </span></p>
       <p>Fee: <span><%= infant_fare %></span></p>
     <% end %>

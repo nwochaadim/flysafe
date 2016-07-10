@@ -134,6 +134,8 @@ class BookingsController < ApplicationController
   def edit
   end
 
+  def search
+  end
   # POST /bookings
   # POST /bookings.json
   def create

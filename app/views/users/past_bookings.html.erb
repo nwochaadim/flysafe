@@ -1,0 +1,22 @@
+<%= render partial: "header" %>
+  <h1 class="ui horizontal divider header">
+    <i class="tag icon"></i>
+    Past Bookings
+  </h1>
+  <div class="ui container">
+    <table class="ui celled table">
+      <thead>
+        <tr>
+          <th>Departing Airport</th>
+          <th>Arriving Airport</th>
+          <th>Number of Passengers</th>
+          <th>Plane Name</th>
+          <th>Flight Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: "past_booking", collection: @bookings, as: "booking" %>
+      </tbody>
+    </table>
+  </div>
+<%= render partial: "footer" %>
