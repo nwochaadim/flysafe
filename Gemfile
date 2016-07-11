@@ -1,10 +1,9 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -32,17 +31,31 @@ gem 'pry-rails'
 
 gem 'paypal-express'
 
+gem 'semantic-ui-sass', '~> 2.1', '>= 2.1.8.0'
+
+gem 'toastr-rails'
+
+gem 'active_link_to'
+
+gem 'rubocop'
+
+gem 'coveralls', require: false
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem "letter_opener", group: :development
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'chromedriver-helper', '1.0.0'
+  gem 'database_cleaner'
+  gem 'simplecov'
 end
 
 group :development do
@@ -52,12 +65,15 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 
+  gem 'sqlite3'
+
+  gem 'letter_opener'
 end
 
 group :production do
-#  gem 'rails_12factor'
-#  gem 'pg'
-#  gem 'puma'
+  gem 'rails_12factor'
+  gem 'pg'
+  gem 'puma'
 end
 
-gem "rspec-rails", :group => [:development, :test]
+gem 'rspec-rails', group: [:development, :test]

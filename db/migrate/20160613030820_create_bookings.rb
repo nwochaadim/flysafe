@@ -5,7 +5,7 @@ class CreateBookings < ActiveRecord::Migration
       t.references :flight, index: true, foreign_key: true
       t.references :user, index: true, foreign_key: true
       t.references :unregistered_user, index: true, foreign_key: true
-      t.string :class_level
+      t.string :class_level, null: false
 
       t.timestamps null: false
     end

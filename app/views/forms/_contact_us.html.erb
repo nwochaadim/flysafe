@@ -1,4 +1,4 @@
-<%= form_tag "/", method: "post", class: "ui form" do %>
+<%= form_tag feedback_path, method: "post", class: "ui form" do %>
   <h4 class="ui dividing header">Please provide your information</h4>
   <div class="two fields">
     <div class="field">
@@ -15,7 +15,7 @@
   <div class="two fields">
     <div class="eight wide field">
       <%= label_tag :email, "Email" %>
-      <%= text_field_tag :last_name, nil, placeholder: "E.g Doe" %>
+      <%= text_field_tag :email, nil, placeholder: "E.g Doe", required: true %>
     </div>
 
     <div class="eight wide field">
@@ -26,7 +26,7 @@
 
   <div class="twelve wide field">
     <%= label_tag :comment, "Drop Your Comment" %>
-    <%= text_area_tag :comment %>
+    <%= text_area_tag :comment, nil, required: true %>
   </div>
  
   <%= submit_tag "Submit", class: "ui basic blue button" %>

@@ -1,46 +1,60 @@
-<h3 class="ui header"> Flights Available (Move Slider to Select Flight) </h3>
-<%= form_tag book_path, method: "post", class: "ui form", remote: true do %>
-<table class="ui celled padded stripped definition table">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Departure</th>
-      <th>Arrival</th>
-      <th>Stops</th>
-      <th>Date</th>
-      <th>Flight</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @retrieved_flights.each_with_index do |flight, index| %>
-      <tr>
-        <td class="collapsing">
-          <div class="ui fitted slider checkbox">
-            <%= radio_button_tag "selected_flight", flight.id, required: true %> <%= label_tag %>
-          </div>
-        </td>
-        <td><%= flight.route.departing_airport.name %></td>
-        <td><%= flight.route.arriving_airport.name %></td>
-        <td><%= flight.stops %></td>
-        <td><%= flight.date.strftime("%B %d, %Y") %></td>
-        <td><%= flight.plane_name %></td>
-      </tr>
+<% if @retrieved_flights.empty? %>
+  <div class="ui message">
+    <div class="header">
+      No Flight Found
+    </div>
+    <p>Sorry, No flight was found with your search criteria</p>
+  </div>
+  <div class="ui center aligned grid">
+    <%= link_to root_path, class: "ui left floated small teal button" do %>
+      <i class="left arrow icon"></i>
+      Go Back
     <% end %>
-    
-  </tbody>
-  <tfoot class="full-width">
-    <tr>
-      <th></th>
-      <th colspan="4">
-        <button class="ui left floated small teal button">
-          <i class="left arrow icon"></i>
-          Go Back
-        </button>
-        <%= submit_tag "Book Now", class: "ui right floated small primary button" do %>
-          <i class="right arrow icon"></i>
+  </div>
+<% else %>
+  <h3 class="ui header"> Flights Available (Move Slider to Select Flight) </h3>
+  <%= form_tag book_path, method: "post", class: "ui form", remote: true do %>
+    <table class="ui celled padded stripped definition table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Departure</th>
+          <th>Arrival</th>
+          <th>Stops</th>
+          <th>Date</th>
+          <th>Flight</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @retrieved_flights.each_with_index do |flight, index| %>
+          <tr>
+            <td class="collapsing">
+              <div class="ui fitted slider checkbox">
+                <%= radio_button_tag "selected_flight", flight.id, required: true %> <%= label_tag %>
+              </div>
+            </td>
+            <td><%= flight.route.departing_airport.name %></td>
+            <td><%= flight.route.arriving_airport.name %></td>
+            <td><%= flight.stops %></td>
+            <td><%= flight.date.strftime("%B %d, %Y") %></td>
+            <td><%= flight.plane_name %></td>
+          </tr>
         <% end %>
-      </th>
-    </tr>
-  </tfoot>
-</table>
+      </tbody>
+      <tfoot class="full-width">
+        <tr>
+          <th></th>
+          <th colspan="4">
+            <%= link_to root_path, class: "ui left floated small teal button" do %>
+              <i class="left arrow icon"></i>
+              Go Back
+            <% end %>
+            <%= submit_tag "Book Now", class: "ui right floated small primary button" do %>
+              <i class="right arrow icon"></i>
+            <% end %>
+          </th>
+        </tr>
+      </tfoot>
+    </table>
+  <% end %>
 <% end %>

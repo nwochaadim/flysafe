@@ -1,39 +1,29 @@
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe BookingsController, type: :routing do
-  describe "routing" do
-
-    it "routes to #index" do
-      expect(:get => "/bookings").to route_to("bookings#index")
+  describe 'routing' do
+    it 'routes to #search' do
+      expect(get: '/bookings/search').to route_to('bookings#search')
     end
 
-    it "routes to #new" do
-      expect(:get => "/bookings/new").to route_to("bookings#new")
+    it 'routes to #book' do
+      expect(post: '/bookings/book').to route_to('bookings#book')
     end
 
-    it "routes to #show" do
-      expect(:get => "/bookings/1").to route_to("bookings#show", :id => "1")
+    it 'routes to #retrieve' do
+      expect(post: '/bookings').to route_to('bookings#retrieve')
     end
 
-    it "routes to #edit" do
-      expect(:get => "/bookings/1/edit").to route_to("bookings#edit", :id => "1")
+    it 'routes to #payment' do
+      expect(get: '/bookings/payment').to route_to('bookings#payment')
     end
 
-    it "routes to #create" do
-      expect(:post => "/bookings").to route_to("bookings#create")
+    it 'routes to #confirm' do
+      expect(post: '/bookings/confirm').to route_to('bookings#confirm')
     end
 
-    it "routes to #update via PUT" do
-      expect(:put => "/bookings/1").to route_to("bookings#update", :id => "1")
+    it 'routes to #validate_payment' do
+      expect(get: 'bookings/payment/1').to route_to('bookings#validate_payment', flight_id: '1')
     end
-
-    it "routes to #update via PATCH" do
-      expect(:patch => "/bookings/1").to route_to("bookings#update", :id => "1")
-    end
-
-    it "routes to #destroy" do
-      expect(:delete => "/bookings/1").to route_to("bookings#destroy", :id => "1")
-    end
-
   end
 end

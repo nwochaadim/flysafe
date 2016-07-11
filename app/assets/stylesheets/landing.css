@@ -17,6 +17,7 @@ section#booking{
 
 .ui.centered.grid{
   margin-bottom: 100px;
+  margin-top: 0px !important;
 }
 
 h1.ui.center.aligned.icon.header{

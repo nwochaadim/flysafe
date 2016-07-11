@@ -2,4 +2,25 @@ $(document).ready(function(){
   $("#progress-container").html("<%= escape_javascript(render partial: 'forms/book_flight') %>")
   $(".step").removeClass("active")
   $("#book-flight").addClass("active")
+
+  $('.ui.floating.dropdown').dropdown({on: 'hover', direction: 'upward'});
+
+  $('#dropDown').click(function(){
+    var no_of_passengers = $('.custom-form').length + 1
+    
+    $.when(isFlightBookable()).then(function(res){
+      if (res.seats_available >= no_of_passengers){
+        var type = $('.ui.floating.dropdown').dropdown('get value');
+        $('#form-holder').append(passengerFormString(type))
+      }
+      else{
+        toastr.info("Sorry! The flight cannot contain this passenger", "Flight Occupied!");
+      }
+
+    }, function(res){
+      toastr.error("An Error occured while trying to retrieve the flight information", "Error!");
+    })
+  })
+
+
 })

@@ -49,15 +49,12 @@ end
 
 def create_routes
   DepartingAirport.all.each do |departing_airport|
-
     terminating_index = rand(20..50)
     arriving_airports = []
     (1..terminating_index).each do
-      
       route = departing_airport.routes.create
       arriving_airport = retrieve_arriving_airport(departing_airport.state)
       route.create_arriving_airport(arriving_airport)
-
     end
   end
 end

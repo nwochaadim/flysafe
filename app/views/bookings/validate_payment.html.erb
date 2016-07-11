@@ -15,10 +15,7 @@
             Return Home
           <% end %>
 
-           <%= link_to past_bookings_path(current_user), class: "ui blue basic button" do %>
-            <i class="suitcase icon"></i>
-            View Bookings
-          <% end %>
+          <%= render partial: 'past_bookings_link' %>
         </div>
       </div>
 

@@ -1,3 +1,7 @@
+.ui.small.inverted.menu {
+  margin-top: 0px;
+}
+
 .ui.center.aligned.grid {
   margin-bottom: 20px;
   margin-top: 10px;
@@ -6,4 +10,32 @@
 .ui.progress-container.container {
   padding: 0px !important;
   width: 700px;
+}
+
+h3.ui.top.attached.header {
+  background-color: rgba(89, 152, 152, 0.51);
+}
+
+.ui.attached.segment h4{
+  display: inline;
+}
+
+.custom-button {
+  background: none!important;
+  border: none; 
+  padding: 0!important;
+  font: inherit;
+  border-bottom: 1px solid #ff9d00; 
+  cursor: pointer;
+  color: #ff9d00;
+}
+
+.custom-form{
+  margin-top: 15px;
+  margin-bottom: 15px
+}
+
+.ui.long.modal.mform > .ui.container{
+  background-color: white;
+  padding: 20px;
 }

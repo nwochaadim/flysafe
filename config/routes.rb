@@ -1,95 +1,38 @@
 Rails.application.routes.draw do
-
-
   root 'landing#index'
 
-  get "/about" => "landing#about", as: :about
+  scope controller: :landing do
+    get '/about' => :about, as: :about
+    get '/contact' => :contact_us, as: :contact
+    post '/feedback' => :create_feedback, as: :feedback
+  end
 
-  get "/contact" => "landing#contact_us", as: :contact
+  scope controller: :session do
+    get '/login' => :new, as: :login
+    get '/logout' => :destroy, as: :logout
+    post '/session' => :create, as: :session
+  end
 
-  get "/login" => "session#new", as: :login
+  scope '/users', controller: :users do
+    get '/signup' => :new, as: :signup
+    get '/:user_id/bookings' => :past_bookings, as: :past_bookings
+    post '/' => :create
+  end
 
-  get "/logout" => "session#destroy", as: :logout
+  scope '/flights', controller: :flights do
+    post '/search' => :search, as: :search_flights
+    get '/seats_available' => :seats_available
+  end
 
-  get "/signup" => "users#new", as: :signup
+  scope '/bookings', controller: :bookings do
+    post '/book' => :book, as: :book
+    get '/search' => :search, as: :search_booking
+    post '/' => :retrieve, as: :retrieve_booking
+    get '/payment' => :payment, as: :payment
+    post '/confirm' => :confirm, as: :confirm_book
+    put '/:id' => :update
+    delete '/:id' => :destroy
+    get '/payment/:flight_id' => :validate_payment, as: :validate_payment
+  end
 
-  post "/session" => "session#create", as: :session
-  
-  post "/search_flights" => "flights#search", as: :search_flights
-
-  post "/book" => "bookings#book", as: :book
-
-  get "/bookings/search" => "bookings#search", as: :search_booking
-
-  get "/bookings/:reference_number" => "bookings#retrieve", as: :retrieve_bookings
-
-  get "/payment" => "bookings#payment", as: :payment
-
-  post "/confirm" => "bookings#confirm", as: :confirm_book
-
-  get "/users/:user_id/bookings" => "users#past_bookings", as: :past_bookings
-
-  get "/payment/:flight_id/:booking_id" => "bookings#validate_payment", as: :validate_payment
-  
-  
-  resources :passengers
-  resources :bookings
-  resources :users
-  resources :flights
-  resources :routes
-  resources :airports
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
-
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
 end
