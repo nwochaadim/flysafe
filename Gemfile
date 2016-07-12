@@ -1,5 +1,5 @@
 source "https://rubygems.org"
-
+ruby "2.3.0"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "4.2.6"
 # Use sqlite3 as the database for Active Record
@@ -40,6 +40,7 @@ gem "active_link_to"
 gem "rubocop"
 
 gem "coveralls", require: false
+
 
 # Use Unicorn as the app server
 # gem 'unicorn'
