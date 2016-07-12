@@ -13,7 +13,7 @@ RSpec.describe UserMailer, type: :mailer do
     end
 
     it "renders sender's email address" do
-      expect(mail.from).to eq ["noreply@flysafe.com"]
+      expect(mail.from).to eq ["noreply@fly-safe.herokuapp.com"]
     end
   end
 
@@ -33,7 +33,7 @@ RSpec.describe UserMailer, type: :mailer do
     end
 
     it "renders sender's email address" do
-      expect(mail.from).to eq ["noreply@flysafe.com"]
+      expect(mail.from).to eq ["noreply@fly-safe.herokuapp.com"]
     end
   end
 
@@ -53,7 +53,7 @@ RSpec.describe UserMailer, type: :mailer do
     end
 
     it "renders sender's email address" do
-      expect(mail.from).to eq ["noreply@flysafe.com"]
+      expect(mail.from).to eq ["noreply@fly-safe.herokuapp.com"]
     end
   end
 end
