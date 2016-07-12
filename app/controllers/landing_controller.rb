@@ -1,13 +1,13 @@
 class LandingController < ApplicationController
   def index
-    @airport_names = Airport.pluck(:name, :airport_code)
-      .uniq.map do |airport|
-        airport[0] + " (#{airport[1]})"
-      end
+    @airport_names = Airport.pluck(:name, :airport_code).
+                     uniq.map do |airport|
+      airport[0] + " (#{airport[1]})"
+    end
   end
 
   def about
-    @about_content = Faker::Lorem.paragraphs(3).join(' ')
+    @about_content = Faker::Lorem.paragraphs(3).join(" ")
   end
 
   def contact_us
@@ -16,9 +16,9 @@ class LandingController < ApplicationController
   def create_feedback
     @contact = Contact.new(feedback_params)
     if @contact.save
-      redirect_to :root, notice: "Your Enquiry received succesfully"
+      redirect_to :root, notice: feedback_success
     else
-      render :contact_us, notice: "Some fields are missing"
+      render :contact_us, notice: feedback_error
     end
   end
 

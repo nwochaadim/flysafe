@@ -3,6 +3,6 @@ FactoryGirl.define do
     reference_number SecureRandom.hex(6)
     flight
     user
-    class_level 'Economy'
+    class_level "Economy"
   end
 end

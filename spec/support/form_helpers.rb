@@ -1,13 +1,13 @@
 module FormHelper
   def fill_form_for_flight_search
     time = Time.now + 1.day
-    select('Benin Airport (BNI)', from: 'departs')
-    select('Lagos Murtala Muhammed Airport (LOS)', from: 'arrives')
-    select('Economy', from: :grade)
-    fill_in 'date', with: time.strftime("%m-%d-%Y")
-    select('1', from: :adults)
-    select('1', from: :infants)
-    select('1', from: :children)
+    select("Benin Airport (BNI)", from: "departs")
+    select("Lagos Murtala Muhammed Airport (LOS)", from: "arrives")
+    select("Economy", from: :grade)
+    fill_in "date", with: time.strftime("%m-%d-%Y")
+    select("1", from: :adults)
+    select("1", from: :infants)
+    select("1", from: :children)
     page.execute_script("$('.ui.basic.blue.button').click()")
   end
 
@@ -15,12 +15,12 @@ module FormHelper
     fill_in :first_name, with: Faker::Name.name
     fill_in :last_name, with: Faker::Name.name
     fill_in :email, with: Faker::Internet.email
-    fill_in 'adult__first_name', with: Faker::Name.name
-    fill_in 'adult__last_name', with: Faker::Name.name
-    fill_in 'child__first_name', with: Faker::Name.name
-    fill_in 'child__last_name', with: Faker::Name.name
-    fill_in 'infant__first_name', with: Faker::Name.name
-    fill_in 'infant__last_name', with: Faker::Name.name
+    fill_in "adult__first_name", with: Faker::Name.name
+    fill_in "adult__last_name", with: Faker::Name.name
+    fill_in "child__first_name", with: Faker::Name.name
+    fill_in "child__last_name", with: Faker::Name.name
+    fill_in "infant__first_name", with: Faker::Name.name
+    fill_in "infant__last_name", with: Faker::Name.name
     page.execute_script("$('.ui.basic.blue.button').click()")
   end
 

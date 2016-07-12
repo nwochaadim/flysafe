@@ -1,4 +1,4 @@
-require 'securerandom'
+require "securerandom"
 class Booking < ActiveRecord::Base
   belongs_to :user
   has_many :passengers
@@ -8,17 +8,17 @@ class Booking < ActiveRecord::Base
   validates :class_level, presence: true
 
   def addPassengers(passengers)
-    createAdultPassengers(passengers['adult']) if passengers['adult']
-    createChildPassengers(passengers['child']) if passengers['child']
-    createInfantPassengers(passengers['infant']) if passengers['infant']
+    createAdultPassengers(passengers["adult"]) if passengers["adult"]
+    createChildPassengers(passengers["child"]) if passengers["child"]
+    createInfantPassengers(passengers["infant"]) if passengers["infant"]
   end
 
   def createAdultPassengers(adults)
     adults.each do |adult|
       passengers.create(
-        first_name: adult['first_name'],
-        last_name: adult['last_name'],
-        age_grade: 'Adult'
+        first_name: adult["first_name"],
+        last_name: adult["last_name"],
+        age_grade: "Adult"
       )
     end
   end
@@ -26,9 +26,9 @@ class Booking < ActiveRecord::Base
   def createChildPassengers(children)
     children.each do |child|
       passengers.create(
-        first_name: child['first_name'],
-        last_name: child['last_name'],
-        age_grade: 'Child'
+        first_name: child["first_name"],
+        last_name: child["last_name"],
+        age_grade: "Child"
       )
     end
   end
@@ -36,9 +36,9 @@ class Booking < ActiveRecord::Base
   def createInfantPassengers(infants)
     infants.each do |infant|
       passengers.create(
-        first_name: infant['first_name'],
-        last_name: infant['last_name'],
-        age_grade: 'Infant'
+        first_name: infant["first_name"],
+        last_name: infant["last_name"],
+        age_grade: "Infant"
       )
     end
   end
