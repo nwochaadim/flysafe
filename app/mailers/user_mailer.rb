@@ -4,6 +4,13 @@ class UserMailer < ApplicationMailer
     mail(to: @user.email, subject: "Welcome to FlySafe")
   end
 
+  def booking_success(booking)
+    @user = booking.user || booking.unregistered_user
+    @booking = booking
+    @new_cost = new_cost(@booking.passengers, @booking.class_level.to_sym)
+    mail(to: @user.email, subject: "Booking was successful")
+  end
+
   def delete_reservation(user, booking_id)
     @user = user
     @booking = Booking.find(booking_id)

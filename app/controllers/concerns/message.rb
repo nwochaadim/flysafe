@@ -4,7 +4,7 @@ module Message
   end
 
   def flysafe_description
-    "Book Your Flight while you are alive"
+    "Fly Safe ensures optimum safety in your travels"
   end
 
   def feedback_success
@@ -29,5 +29,9 @@ module Message
 
   def account_created
     "Account Created!"
+  end
+
+  def invalid_payment
+    "Error, Your payment is invalid."
   end
 end

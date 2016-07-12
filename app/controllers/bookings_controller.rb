@@ -28,6 +28,8 @@ class BookingsController < ApplicationController
     if params[:token] == session[:token]
       selected_flight = Flight.find(session[:flight_id])
       create_booking(selected_flight)
+    else
+      flash[:notice] = invalid_payment
     end
   end
 
@@ -63,7 +65,7 @@ class BookingsController < ApplicationController
     @user = @booking.user || @booking.unregistered_user
     UserMailer.delete_reservation(@user, @booking.id).deliver_now
     @booking.destroy
-    render json: { head: "" }
+    render json: { success: true }
   end
 
   private
@@ -118,9 +120,11 @@ class BookingsController < ApplicationController
     retrieved_booking_params = session[:booking_params].stringify_keys
     user = current_user || create_unregistered_user(retrieved_booking_params)
     class_level = session[:passengers]["class_level"]
-    @booking = user.bookings.create(reference_number: generate_token, class_level: class_level)
+    @booking = user.bookings.create(reference_number: generate_token,
+                                    class_level: class_level)
     @booking.addPassengers(retrieved_booking_params)
     @booking.allocate_flight(flight)
+    UserMailer.booking_success(@booking).deliver_now
   end
 
   def create_unregistered_user(retrieved_booking_params)
