@@ -7,8 +7,8 @@
     </div>
 
     <div class="field">
-      <%= label_tag :date, "Date" %>
-      <%= date_field_tag "date", nil, required: true%>
+      <%= label_tag :arrives, "Arrives" %>
+      <%= select_tag :arrives, options_for_select(@airport_names), class: "ui search fluid dropdown" %>
     </div>
 
     <div class="field">
@@ -17,10 +17,9 @@
     </div>
   </div>
 
-  
   <div class="six wide field">
-    <%= label_tag :arrives, "Arrives" %>
-    <%= select_tag :arrives, options_for_select(@airport_names), class: "ui search fluid dropdown" %>
+    <%= label_tag :date, "Date" %>
+    <%= date_field_tag "date", nil, required: true%>
   </div>
   
   <h4 class="ui dividing header">Passengers</h4>
