@@ -2,6 +2,10 @@ AllCops:
   Exclude:
     - "vendor/**/*"
     - "db/schema.rb"
+    - "bin/*"
+    - "Gemfile"
+    - "config/*"
+    - "Rakefile"
   UseCache: false
 Style/CollectionMethods:
   Description: Preferred collection methods.
