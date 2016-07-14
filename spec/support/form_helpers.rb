@@ -1,10 +1,9 @@
 module FormHelper
   def fill_form_for_flight_search
-    time = Time.now + 1.day
     select("Benin Airport (BNI)", from: "departs")
     select("Lagos Murtala Muhammed Airport (LOS)", from: "arrives")
     select("Economy", from: :grade)
-    fill_in "date", with: time.strftime("%m-%d-%Y")
+    fill_in "date", with: "07-15-2016"
     select("1", from: :adults)
     select("1", from: :infants)
     select("1", from: :children)
