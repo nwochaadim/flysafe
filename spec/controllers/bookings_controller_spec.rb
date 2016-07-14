@@ -1,21 +1,20 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe BookingsController, type: :controller do
   before(:each) do
-    @booking = create(:booking) 
+    @booking = create(:booking)
     @booking.flight.route.update(arriving_airport: create(:arriving_airport))
   end
 
-  let(:valid_attributes) {
+  let(:valid_attributes) do
     { first_name: Faker::Name.name,
       last_name: Faker::Name.name,
       format: :js,
       email: Faker::Internet.email,
-      adult: [{"first_name": "John", "last_name": "Travolta"}],
-      child: [{"first_name": "Mercy", "last_name": "Johnson"}],
-      infant: [{"first_name": "Michelle", "last_name": "Obama"}] 
-    }
-  }
+      adult: [{ first_name: "John", last_name: "Travolta" }],
+      child: [{ first_name: "Mercy", last_name: "Johnson" }],
+      infant: [{ first_name: "Michelle", last_name: "Obama" }] }
+  end
 
   describe "POST #confirm" do
     it "renders booking confirmation page having all details" do
@@ -36,9 +35,9 @@ RSpec.describe BookingsController, type: :controller do
   describe "GET #validate_payment" do
     it "validates payment token and updates booking records" do
       session[:booking_params] = valid_attributes
-      session[:token] = SecureRandom::hex(6)
+      session[:token] = SecureRandom.hex(6)
       session[:flight_id] = @booking.flight.id
-      session[:passengers] = {class_level: "Economy"}.stringify_keys
+      session[:passengers] = { class_level: "Economy" }.stringify_keys
       params = { token: session[:token], flight_id: @booking.flight.id }
       get :validate_payment, params
       expect(response).to render_template(:validate_payment)
@@ -70,9 +69,8 @@ RSpec.describe BookingsController, type: :controller do
 
   describe "DELETE #destroy" do
     it "renders booking search page" do
-      delete :destroy, { id: @booking.reference_number }
+      delete :destroy, id: @booking.reference_number
       expect(Booking.all).to_not include(@booking)
     end
   end
-
 end

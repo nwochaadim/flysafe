@@ -7,15 +7,15 @@ class Booking < ActiveRecord::Base
   validates :reference_number, presence: true, uniqueness: true
   validates :class_level, presence: true
 
-  def addPassengers(passenger_params)
-    ["adult", "child", "infant"].each do |type|
-      createPassengers(passenger_params[type], type) if passenger_params[type]
+  def add_passengers(passenger_params)
+    %w(adult child infant).each do |type|
+      create_passengers(passenger_params[type], type) if passenger_params[type]
     end
   end
 
-  def createPassengers(passenger_param, type)
+  def create_passengers(passenger_param, type)
     passenger_param.each do |passenger|
-      passengers.create(passenger.merge({age_grade: type.capitalize}))
+      passengers.create(passenger.merge(age_grade: type.capitalize))
     end
   end
 

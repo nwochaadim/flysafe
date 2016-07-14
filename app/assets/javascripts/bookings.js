@@ -10,21 +10,6 @@ function showPassenger(){
 }
 
 
-function deleteBookingReservation(reference_number){
-  $('.ui.basic.modal').modal('hide');
-  
-  $.ajax({
-    url: "/bookings/"+document.reference_number,
-    type: 'DELETE',
-    success: function(){
-      $('#search-result-container').empty();
-    },
-    error: function(){
-      console.log("Failed to delete booking");
-    }
-  });
-}
-
 function editReservation(){
   $('.ui.long.modal.mform').modal('show')
 }

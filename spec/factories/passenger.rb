@@ -6,14 +6,14 @@ FactoryGirl.define do
   end
 
   factory :adult_passenger, parent: :passenger do
-    age_grade 'Adult'
+    age_grade "Adult"
   end
 
   factory :child_passenger, parent: :passenger do
-    age_grade 'Child'
+    age_grade "Child"
   end
 
   factory :infant_passenger, parent: :passenger do
-    age_grade 'Infant'
+    age_grade "Infant"
   end
 end

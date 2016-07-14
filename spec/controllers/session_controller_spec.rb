@@ -3,10 +3,6 @@ require "rails_helper"
 RSpec.describe SessionController, type: :controller do
   describe 'GET #new' do
     before { get :new }
-    it "assigns login style to view" do
-      expect(assigns(:login_style)).to eq("ui large form")
-    end
-
     it "renders new template" do
       expect(response).to render_template(:new)
     end
@@ -29,7 +25,7 @@ RSpec.describe SessionController, type: :controller do
       end
 
       it "notifies the user of an invalid email or password" do
-        expect(flash[:alert]).to eq("Invalid email or password")
+        expect(flash[:errors]).to eq("Invalid email or password")
       end
     end
   end

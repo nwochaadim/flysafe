@@ -54,7 +54,7 @@ class BookingsController < ApplicationController
                 last_name: booking_params[:last_name],
                 email: booking_params[:email])
     @booking.passengers.destroy_all
-    @booking.addPassengers(booking_params)
+    @booking.add_passengers(booking_params)
     UserMailer.update_reservation(user, @booking.id).deliver_now
     redirect_to search_booking_path, notice: booking_success
   end
@@ -112,7 +112,7 @@ class BookingsController < ApplicationController
     user = current_user || create_unregistered_user(retrieved_booking_params)
     class_level = session[:passengers]["class_level"]
     @booking = user.bookings.create(reference_number: reference, class_level: class_level)
-    @booking.addPassengers(retrieved_booking_params)
+    @booking.add_passengers(retrieved_booking_params)
     @booking.allocate_flight(flight)
     UserMailer.booking_success(@booking).deliver_now
   end
@@ -126,10 +126,10 @@ class BookingsController < ApplicationController
   end
 
   def retrieve_passengers_from_session
-    session[:passengers] = session[:passengers].stringify_keys
-    @no_of_children = session[:passengers]["total_adults"]
-    @no_of_adults = session[:passengers]["total_infants"]
-    @no_of_infants = session[:passengers]["total_children"]
+    passengers = session[:passengers].stringify_keys
+    @no_of_children = passengers["total_children"]
+    @no_of_adults = passengers["total_adults"]
+    @no_of_infants = passengers["total_infants"]
     @no_of_children + @no_of_adults + @no_of_infants
   end
 
