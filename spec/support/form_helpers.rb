@@ -3,7 +3,7 @@ module FormHelper
     select("Benin Airport (BNI)", from: "departs")
     select("Lagos Murtala Muhammed Airport (LOS)", from: "arrives")
     select("Economy", from: :grade)
-    fill_in "date", with: "07-15-2016"
+    fill_in "date", with: "07/15/2016"
     select("1", from: :adults)
     select("1", from: :infants)
     select("1", from: :children)

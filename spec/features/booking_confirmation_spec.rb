@@ -15,6 +15,7 @@ RSpec.describe "Booking Confirmation", type: :feature do
       fill_form_for_flight_search
       sleep 3
       find(:xpath, '//*[@id="progress-container"]/form/table/tfoot/tr/th[2]/input').click
+      sleep 2
       fill_form_for_booking
       expect(page).to have_content("Your Information")
     end
