@@ -1,0 +1,13 @@
+<% if flash[:errors] %>
+  <div class="ui error message">
+    <i class="close icon"></i>
+    <div class="header">
+      There were some errors with your submission
+    </div>
+    <ul class="list">
+      <% flash[:errors].each do |error| %>
+        <li><%= error %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

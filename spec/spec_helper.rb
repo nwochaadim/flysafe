@@ -1,15 +1,13 @@
-require 'coveralls'
-Coveralls.wear!('rails')
+require "coveralls"
+Coveralls.wear!("rails")
 
-require 'simplecov'
-SimpleCov.start 'rails'
+require "simplecov"
+SimpleCov.start "rails"
 
-
-
-require 'support/factory_girl'
-require 'support/database_cleaner'
-require 'support/login_helper'
-require 'support/form_helpers'
+require "support/factory_girl"
+require "support/database_cleaner"
+require "support/login_helper"
+require "support/form_helpers"
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|

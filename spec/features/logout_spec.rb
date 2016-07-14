@@ -1,12 +1,12 @@
-require 'rails_helper'
+require "rails_helper"
 
-RSpec.describe '', type: :feature do
+RSpec.describe "Logout process", type: :feature do
   before { @user = create(:user) }
 
-  feature 'Logging out user', js: true do
-    scenario 'with correct credentials' do
+  feature "when user signs out", js: true do
+    scenario "deletes user session" do
       login_user(@user)
-      click_on('Logout')
+      click_on("Logout")
       visit root_path
       expect(page).to_not have_content(@user.first_name)
     end

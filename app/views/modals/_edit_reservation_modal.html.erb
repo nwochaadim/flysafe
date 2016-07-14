@@ -5,23 +5,23 @@
       <div class="two fields">
         <div class="field">
           <%= label_tag :first_name, "First Name" %>
-          <%= text_field_tag :first_name, nil, placeholder: "E.g John", required: true %>
+          <%= first_name %>
         </div>
 
         <div class="field">
           <%= label_tag :last_name, "Last Name" %>
-          <%= text_field_tag :last_name, nil, placeholder: "E.g Doe", required: true %>
+          <%= last_name %>
         </div>
       </div>
 
       <div class="eight wide field">
         <%= label_tag :email, "Email" %>
-        <%= text_field_tag :email, nil, placeholder: "E.g johndoe@gmail.com", required: true %>
+        <%= email %>
       </div>
 
       <div class="four wide field">
         <%= label_tag :gender, "Gender" %>
-        <%= select_tag :gender, options_for_select([["Male", 1], ["Female", 2]]), class: "ui fluid dropdown"%>
+        <%= gender %>
       </div>
 
       <div id="passenger-form"></div>

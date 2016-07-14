@@ -7,9 +7,9 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       UserMailer.welcome(@user.id).deliver_now
-      flash[:notice] = 'Account Created!'
-      redirect_to root_path
+      redirect_to root_path, notice: account_created
     else
+      flash[:errors] = @user.errors.full_messages
       render :new
     end
   end
