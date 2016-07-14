@@ -31,7 +31,7 @@ def create_airport(data, index)
 end
 
 def allowed_countries
-  { "Nigeria": true }
+  { Nigeria: true }
 end
 
 def retrieve_arriving_airport(state)

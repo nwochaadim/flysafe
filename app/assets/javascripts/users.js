@@ -6,6 +6,7 @@ function deleteConfirmDialog(reference_number){
 function deleteReservation(){
   $('.ui.basic.modal').modal('hide');
   $('#search-result-container').empty();
+  toastr.info("Booking has been succesfully deleted", "Info")
   $.ajax({
     url: "/bookings/"+document.reference_number,
     type: 'DELETE',

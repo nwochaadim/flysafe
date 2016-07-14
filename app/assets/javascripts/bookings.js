@@ -69,13 +69,13 @@ function passengerFormString(type){
 
 function retrieveBookingInfo(){
    $.ajax({
-    url: "/book",
+    url: "/bookings/book",
     type: "POST",
     success: function(){
       console.log("Successful!")
     },
     error: function(){
-      alert("Failed to delete booking")
+      alert("Failed to retrieve booking")
     }
   });
 }
