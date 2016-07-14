@@ -8,6 +8,7 @@ require "support/factory_girl"
 require "support/database_cleaner"
 require "support/login_helper"
 require "support/form_helpers"
+require "support/wait_for_ajax"
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
@@ -20,4 +21,5 @@ RSpec.configure do |config|
 
   config.include LoginHelper, type: :feature
   config.include FormHelper, type: :feature
+  config.include WaitForAjax, type: :feature
 end

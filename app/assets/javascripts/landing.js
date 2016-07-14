@@ -10,11 +10,8 @@ $(document).on('page:load', function(){
 function validateFields(evt){
   evt.preventDefault();
   var suppliedDate = $('#date').val();
-  if (suppliedDate==""){
-    toastr.error("You did not enter a date", "Error!");
-    return false;
-  }
-  else{
+  
+  if (suppliedDate){
     suppliedTimeStamp = new Date(suppliedDate).getTime();
     presentTimeStamp = Date.now()
     if(suppliedTimeStamp < presentTimeStamp){
