@@ -27,7 +27,7 @@ class BookingsController < ApplicationController
   def validate_payment
     if params[:token] == session[:token]
       selected_flight = Flight.find(session[:flight_id])
-      create_booking(selected_flight)
+      create_booking(selected_flight, params[:token])
     else
       flash[:notice] = invalid_payment
     end
@@ -70,15 +70,6 @@ class BookingsController < ApplicationController
 
   private
 
-  def generate_token
-    loop do
-      @token = SecureRandom.hex(6)
-      bookings = Booking.where(reference_number: @token)
-      break if bookings.empty?
-    end
-    @token
-  end
-
   def paypal_options
     {
       no_shipping: true,
@@ -116,12 +107,11 @@ class BookingsController < ApplicationController
     )
   end
 
-  def create_booking(flight)
+  def create_booking(flight, reference)
     retrieved_booking_params = session[:booking_params].stringify_keys
     user = current_user || create_unregistered_user(retrieved_booking_params)
     class_level = session[:passengers]["class_level"]
-    @booking = user.bookings.create(reference_number: generate_token,
-                                    class_level: class_level)
+    @booking = user.bookings.create(reference_number: reference, class_level: class_level)
     @booking.addPassengers(retrieved_booking_params)
     @booking.allocate_flight(flight)
     UserMailer.booking_success(@booking).deliver_now

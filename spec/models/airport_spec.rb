@@ -24,13 +24,6 @@ RSpec.describe Airport, type: :model do
     it "validates presence of airport_code" do
       expect(airport4).to be_invalid
     end
-
-    it "overrides attributes method" do
-      expect(@airport.attributes).to eql(name: @airport.name,
-                                         country: @airport.country,
-                                         state: @airport.state,
-                                         airport_code: @airport.airport_code)
-    end
   end
 
   describe "Instance Methods" do

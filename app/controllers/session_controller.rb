@@ -2,7 +2,6 @@ class SessionController < ApplicationController
   before_action :validate_session, except: [:destroy]
 
   def new
-    @login_style = "ui large form"
   end
 
   def create
@@ -11,8 +10,7 @@ class SessionController < ApplicationController
       session[:user_id] = user.id
       redirect_to root_path, notice: login_success
     else
-      flash.now.alert = login_failed
-      @login_style = "ui large form error"
+      flash[:errors] = login_failed
       render "new"
     end
   end

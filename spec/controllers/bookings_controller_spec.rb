@@ -38,8 +38,7 @@ RSpec.describe BookingsController, type: :controller do
       session[:booking_params] = valid_attributes
       session[:token] = SecureRandom::hex(6)
       session[:flight_id] = @booking.flight.id
-      session[:passengers] = {}
-      session[:passengers]["class_level"] = "Economy"
+      session[:passengers] = {class_level: "Economy"}.stringify_keys
       params = { token: session[:token], flight_id: @booking.flight.id }
       get :validate_payment, params
       expect(response).to render_template(:validate_payment)

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "", type: :feature do
+RSpec.describe "Booking Confirmation", type: :feature do
   before do
     @flight = create(:flight)
     @arriving_airport = create(:arriving_airport)
@@ -9,8 +9,8 @@ RSpec.describe "", type: :feature do
     @route.update(arriving_airport: @arriving_airport)
   end
 
-  feature "Booking Confirmation" do
-    scenario "when all details are filled on booking form", js: true do
+  feature "when the user fills required details" do
+    scenario "displays booking information", js: true do
       visit root_path(anchor: "booking")
       fill_form_for_flight_search
       sleep 3

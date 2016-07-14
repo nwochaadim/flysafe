@@ -1,9 +1,9 @@
 require "rails_helper"
 
-RSpec.describe "", type: :feature do
+RSpec.describe "Signing in Process", type: :feature do
   before { @user = create(:user) }
 
-  feature "Signing in", js: true do
+  feature "user login", js: true do
     scenario "with correct credentials" do
       login_user(@user)
       expect(page).to have_content(@user.first_name)
