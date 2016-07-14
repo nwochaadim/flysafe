@@ -6,7 +6,7 @@ require "spec_helper"
 require "rspec/rails"
 require "capybara/rails"
 require "capybara/rspec"
-require "selenium-webdriver"
+require "selenium-webdriver"g
 
 ActiveRecord::Migration.maintain_test_schema!
 
