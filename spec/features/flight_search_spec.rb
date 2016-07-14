@@ -13,6 +13,7 @@ RSpec.describe "Flight Search", type: :feature do
     scenario "displays flights available", js: true do
       visit root_path(anchor: "booking")
       fill_form_for_flight_search
+      wait_for_ajax
       expect(page).to have_content("Flights Available")
     end
   end
