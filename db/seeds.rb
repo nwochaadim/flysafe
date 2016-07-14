@@ -60,14 +60,15 @@ def create_routes
 end
 
 def create_airports_from_file
-  jsonFile = File.read(Rails.root.to_s+"/app/assets/airports.json")
-  jsonData = JSON.parse(jsonFile)
-  jsonData.each_with_index do |data, index|
+  json_file = File.read(Rails.root.to_s+"/app/assets/airports.json")
+  json_data = JSON.parse(json_file)
+  json_data.each_with_index do |data, index|
     if create?(data)
       create_airport(data, index)   
     end
   end
 end
+
 create_airports_from_file
 create_routes
 
@@ -77,7 +78,5 @@ Route.all.each do |route|
   seats_available = rand(100..150)
   route.create_flight(stops: 1, plane_name: plane_name, seats_available: seats_available, date: flight_date)
 end
-
-
 
 
