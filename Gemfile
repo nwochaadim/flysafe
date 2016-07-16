@@ -43,6 +43,8 @@ gem "coveralls", require: false
 
 gem "draper"
 
+gem "figaro"
+
 
 # Use Unicorn as the app server
 # gem 'unicorn'

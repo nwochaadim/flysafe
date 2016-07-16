@@ -73,7 +73,7 @@ class BookingsController < ApplicationController
   def instantiate_payment_service
     selected_flight = Flight.find(session[:flight_id])
     validate_url = validate_payment_url(selected_flight)
-    PaymentService.new(selected_flight, validate_url, contact_url)
+    PaymentService.new(selected_flight, validate_url, contact_url, self)
   end
 
   def booking_params

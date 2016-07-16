@@ -23,9 +23,9 @@ class PaymentService
 
     def paypal_request_params
       {
-        username: "nwocha.adim-facilitator_api1.gmail.com",
-        password: "65KMEBVFE3V5MQVF",
-        signature: "AiPC9BjkCyDFQXbSkoZcgqH3hpacAWHLrfN1pZw2YLyitsE1A89vwHDf"
+        username: ENV["paypal_user_name"],
+        password: ENV["paypal_password"],
+        signature: ENV["paypal_signature"]
       }
     end
 
