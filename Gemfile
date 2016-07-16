@@ -41,6 +41,8 @@ gem "rubocop"
 
 gem "coveralls", require: false
 
+gem "draper"
+
 
 # Use Unicorn as the app server
 # gem 'unicorn'

@@ -25,10 +25,10 @@ module BookingsHelper
 
   def estimate_flight_fare(passengers, grade = nil)
     class_level = grade.to_sym || booking_grade
-    total_cost = adult_fares[class_level]
+    total_cost = fares[class_level]
     passengers.each do |passenger|
       unless passenger.age_grade == "Infant"
-        total_cost += adult_fares[class_level]
+        total_cost += fares[class_level]
       end
     end
     total_cost
@@ -48,24 +48,10 @@ module BookingsHelper
     passengers << Passenger.new(params)
   end
 
-  def adult_fares
+  def fares
     {
       Economy: 1000,
       Business: 5000
-    }
-  end
-
-  def child_fares
-    {
-      Economy: 1000,
-      Business: 5000
-    }
-  end
-
-  def infant_fares
-    {
-      Economy: 0,
-      Business: 0
     }
   end
 end
