@@ -1,4 +1,5 @@
 class BookingsController < ApplicationController
+  include Bookings
   attr_accessor :token
   protect_from_forgery except: [:retrieve, :destroy]
 
@@ -15,13 +16,10 @@ class BookingsController < ApplicationController
   end
 
   def payment
-    selected_flight = Flight.find(session[:flight_id])
-    request = Paypal::Express::Request.new(paypal_request_params)
-    payment_request = Paypal::Payment::Request.new(payment_request_params)
-    response = request_paypal_payment(request, payment_request, selected_flight)
+    payment_service = instantiate_payment_service
+    response = payment_service.make_payment
     session[:token] = response.token
-    paypal_uri = response.redirect_uri
-    redirect_to paypal_uri
+    redirect_to response.redirect_uri
   end
 
   def validate_payment
@@ -50,9 +48,11 @@ class BookingsController < ApplicationController
   def update
     @booking = Booking.find(params[:id])
     user = @booking.user || @booking.unregistered_user
-    user.update(first_name: booking_params[:first_name],
+    user.update(
+                first_name: booking_params[:first_name],
                 last_name: booking_params[:last_name],
-                email: booking_params[:email])
+                email: booking_params[:email]
+                )
     @booking.passengers.destroy_all
     @booking.add_passengers(booking_params)
     UserMailer.update_reservation(user, @booking.id).deliver_now
@@ -70,67 +70,10 @@ class BookingsController < ApplicationController
 
   private
 
-  def paypal_options
-    {
-      no_shipping: true,
-      allow_note: false,
-      pay_on_paypal: true
-    }
-  end
-
-  def paypal_request_params
-    {
-      username: "nwocha.adim-facilitator_api1.gmail.com",
-      password: "65KMEBVFE3V5MQVF",
-      signature: "AiPC9BjkCyDFQXbSkoZcgqH3hpacAWHLrfN1pZw2YLyitsE1A89vwHDf"
-    }
-  end
-
-  def payment_request_params
-    {
-      description: flysafe_description,
-      quantity: 1,
-      amount: session[:total_cost],
-      custom_fields: {
-        CARTBORDERCOLOR: "C00000",
-        LOGOIMG: "http://clipartbest.com//cliparts/McL/oaR/McLoaRqca.svg"
-      }
-    }
-  end
-
-  def request_paypal_payment(request, payment_request, selected_flight)
-    request.setup(
-      payment_request,
-      validate_payment_url(selected_flight),
-      contact_url,
-      paypal_options
-    )
-  end
-
-  def create_booking(flight, reference)
-    retrieved_booking_params = session[:booking_params].stringify_keys
-    user = current_user || create_unregistered_user(retrieved_booking_params)
-    class_level = session[:passengers]["class_level"]
-    @booking = user.bookings.create(reference_number: reference, class_level: class_level)
-    @booking.add_passengers(retrieved_booking_params)
-    @booking.allocate_flight(flight)
-    UserMailer.booking_success(@booking).deliver_now
-  end
-
-  def create_unregistered_user(retrieved_booking_params)
-    UnregisteredUser.create(
-      first_name: retrieved_booking_params["first_name"],
-      last_name: retrieved_booking_params["last_name"],
-      email: retrieved_booking_params["email"]
-    )
-  end
-
-  def retrieve_passengers_from_session
-    passengers = session[:passengers].stringify_keys
-    @no_of_children = passengers["total_children"]
-    @no_of_adults = passengers["total_adults"]
-    @no_of_infants = passengers["total_infants"]
-    @no_of_children + @no_of_adults + @no_of_infants
+  def instantiate_payment_service
+    selected_flight = Flight.find(session[:flight_id])
+    validate_url = validate_payment_url(selected_flight)
+    PaymentService.new(selected_flight, validate_url, contact_url)
   end
 
   def booking_params

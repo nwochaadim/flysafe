@@ -12,15 +12,15 @@ module BookingsHelper
   end
 
   def adult_fare
-    adult_fares[booking_grade]
+    fares[booking_grade]
   end
 
   def child_fare
-    child_fares[booking_grade]
+    fares[booking_grade]
   end
 
   def infant_fare
-    infant_fares[booking_grade]
+    0
   end
 
   def estimate_flight_fare(passengers, grade = nil)
