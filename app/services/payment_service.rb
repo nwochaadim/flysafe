@@ -1,9 +1,11 @@
 class PaymentService
   include Message
-  def initialize(flight, validate_url, contact_url)
+
+  def initialize(flight, validate_url, contact_url, total_cost)
     @flight = flight
     @validate_url = validate_url
     @contact_url = contact_url
+    @total_cost = total_cost
   end
 
   def make_payment
@@ -33,7 +35,7 @@ class PaymentService
       {
         description: flysafe_description,
         quantity: 1,
-        amount: 1000,
+        amount: @total_cost,
         custom_fields: {
           CARTBORDERCOLOR: "C00000",
           LOGOIMG: "http://clipartbest.com//cliparts/McL/oaR/McLoaRqca.svg"
@@ -49,5 +51,4 @@ class PaymentService
         paypal_options
       )
     end
-
 end

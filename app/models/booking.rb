@@ -19,6 +19,17 @@ class Booking < ActiveRecord::Base
     end
   end
 
+  def update_passengers(passengers_param)
+    retrieved_user = user || unregistered_user
+    retrieved_user.update(
+                first_name: passengers_param[:first_name],
+                last_name: passengers_param[:last_name],
+                email: passengers_param[:email]
+                )
+    passengers.destroy_all
+    add_passengers(passengers_param)
+  end
+
   def allocate_flight(flight)
     total_passengers = passengers.where.not("age_grade = 'Infant'").count
     seats_available = flight.seats_available - total_passengers
