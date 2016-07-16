@@ -4,30 +4,28 @@ require "faker"
 Airport.destroy_all
 Route.destroy_all
 
-
-
 aircrafts = %w(Airbus\ A300
-  Airbus\ A318
-  Baade\ 152
-  Boeing\ 707
-  Boeing\ 717
-  Boeing\ 737
-  Comac\ C919
-  Convair\ 880
-  McDonnell\ Douglas\ MD-90
-)
+               Airbus\ A318
+               Baade\ 152
+               Boeing\ 707
+               Boeing\ 717
+               Boeing\ 737
+               Comac\ C919
+               Convair\ 880
+               McDonnell\ Douglas\ MD-90)
 
 def create?(data)
   country_name = data["country"].to_sym
   allowed_country = allowed_countries[country_name]
 end
 
-def create_airport(data, index)
+def create_airport(data, _index)
   DepartingAirport.create(
     name: data["name"],
     country: data["country"],
     state: data["state"],
-    airport_code: data["code"])
+    airport_code: data["code"]
+  )
 end
 
 def allowed_countries
@@ -45,8 +43,6 @@ def retrieve_arriving_airport(state)
   arriving_airport
 end
 
-
-
 def create_routes
   DepartingAirport.all.each do |departing_airport|
     terminating_index = rand(20..50)
@@ -60,11 +56,11 @@ def create_routes
 end
 
 def create_airports_from_file
-  json_file = File.read(Rails.root.to_s+"/app/assets/airports.json")
+  json_file = File.read(Rails.root.to_s + "/app/assets/airports.json")
   json_data = JSON.parse(json_file)
   json_data.each_with_index do |data, index|
     if create?(data)
-      create_airport(data, index)   
+      create_airport(data, index)
     end
   end
 end
@@ -78,5 +74,3 @@ Route.all.each do |route|
   seats_available = rand(100..150)
   route.create_flight(stops: 1, plane_name: plane_name, seats_available: seats_available, date: flight_date)
 end
-
-

@@ -22,10 +22,10 @@ class Booking < ActiveRecord::Base
   def update_passengers(passengers_param)
     retrieved_user = user || unregistered_user
     retrieved_user.update(
-                first_name: passengers_param[:first_name],
-                last_name: passengers_param[:last_name],
-                email: passengers_param[:email]
-                )
+      first_name: passengers_param[:first_name],
+      last_name: passengers_param[:last_name],
+      email: passengers_param[:email]
+    )
     passengers.destroy_all
     add_passengers(passengers_param)
   end

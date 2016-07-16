@@ -43,8 +43,9 @@ module ApplicationHelper
     end
   end
 
- private 
-  def text_field_content(name, value=nil)
+  private
+
+  def text_field_content(name, value = nil)
     placeholder = {
       first_name: "E.g John",
       last_name: "E.g Doe",
@@ -54,7 +55,7 @@ module ApplicationHelper
     text_field_tag(name, value, html_params)
   end
 
-  def select_tag_content(gender=nil)
+  def select_tag_content(gender = nil)
     html_params = { class: "ui fluid dropdown" }
     options = options_for_select([%w(Male Male), %w(Female Female)], gender)
     select_tag(:gender, options, html_params)

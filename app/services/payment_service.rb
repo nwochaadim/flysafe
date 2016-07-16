@@ -15,40 +15,41 @@ class PaymentService
   end
 
   private
-    def paypal_options
-      {
-        no_shipping: true,
-        allow_note: false,
-        pay_on_paypal: true
-      }
-    end
 
-    def paypal_request_params
-      {
-        username: ENV["paypal_user_name"],
-        password: ENV["paypal_password"],
-        signature: ENV["paypal_signature"]
-      }
-    end
+  def paypal_options
+    {
+      no_shipping: true,
+      allow_note: false,
+      pay_on_paypal: true
+    }
+  end
 
-    def payment_request_params
-      {
-        description: flysafe_description,
-        quantity: 1,
-        amount: @total_cost,
-        custom_fields: {
-          CARTBORDERCOLOR: "C00000",
-          LOGOIMG: "http://clipartbest.com//cliparts/McL/oaR/McLoaRqca.svg"
-        }
-      }
-    end
+  def paypal_request_params
+    {
+      username: ENV["paypal_user_name"],
+      password: ENV["paypal_password"],
+      signature: ENV["paypal_signature"]
+    }
+  end
 
-    def request_paypal_payment(request, payment_request, selected_flight)
-      request.setup(
-        payment_request,
-        @validate_url,
-        @contact_url,
-        paypal_options
-      )
-    end
+  def payment_request_params
+    {
+      description: flysafe_description,
+      quantity: 1,
+      amount: @total_cost,
+      custom_fields: {
+        CARTBORDERCOLOR: "C00000",
+        LOGOIMG: "http://clipartbest.com//cliparts/McL/oaR/McLoaRqca.svg"
+      }
+    }
+  end
+
+  def request_paypal_payment(request, payment_request, _selected_flight)
+    request.setup(
+      payment_request,
+      @validate_url,
+      @contact_url,
+      paypal_options
+    )
+  end
 end

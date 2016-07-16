@@ -12,10 +12,10 @@ class FlightsController < ApplicationController
   end
 
   def seats_available
-    id = session[:id]
+    id = session[:flight_id]
     flight = Flight.find_by(id: id)
-    if flight.any?
-      render json: flight.first.to_json(only: [:seats_available])
+    if flight
+      render json: flight.to_json(only: [:seats_available])
     else
       render json: { error: true }
     end

@@ -4,7 +4,7 @@ class BookingsController < ApplicationController
   protect_from_forgery except: [:retrieve, :destroy]
 
   def confirm
-    session[:params] = params
+    session[:booking_params] = params
     @booking_params = params
     render format: :js
   end
@@ -33,6 +33,7 @@ class BookingsController < ApplicationController
 
   def retrieve
     reference_number = params[:reference_number]
+    @booking = Booking.find_by(reference_number: reference_number)
     render format: :js
   end
 
