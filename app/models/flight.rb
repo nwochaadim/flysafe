@@ -7,7 +7,7 @@ class Flight < ActiveRecord::Base
     flights = where(sql_query, date, total_passengers)
     flights.uniq(&:date).select do |flight|
       flight.route.departing_airport.name == departs[0..-7] &&
-        flight.route.arriving_airport.name == arrives[0..-7]
+      flight.route.arriving_airport.name == arrives[0..-7]
     end
   end
 end

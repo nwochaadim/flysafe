@@ -4,8 +4,8 @@ class BookingsController < ApplicationController
   protect_from_forgery except: [:retrieve, :destroy]
 
   def confirm
-    session[:booking_params] = params
-    @booking_params = params
+    session[:booking_params] = booking_params
+    @booking_params = booking_params
     render format: :js
   end
 
@@ -42,17 +42,16 @@ class BookingsController < ApplicationController
 
   def update
     @booking = Booking.find(params[:id])
-    @booking.update_passengers(params)
-    UserMailer.update_reservation(user, @booking.id).deliver_now
+    @booking.update_passengers(booking_params)
+    UserMailer.update_reservation(@booking.id).deliver_now if @booking.user
     redirect_to search_booking_path, notice: booking_success
   end
 
   def destroy
-    bookings = Booking.where(reference_number: params[:id])
-    @booking = bookings.first unless bookings.empty?
-    @user = @booking.user || @booking.unregistered_user
-    UserMailer.delete_reservation(@user, @booking.id).deliver_now
-    @booking.destroy
+    booking = Booking.find_by(reference_number: params[:id])
+    user = booking.user
+    UserMailer.delete_reservation(user.id, booking.id).deliver_now if user
+    booking.destroy
     render json: { success: true }
   end
 
@@ -63,5 +62,14 @@ class BookingsController < ApplicationController
     validate_url = validate_payment_url(selected_flight)
     total_cost = session[:total_cost]
     PaymentService.new(selected_flight, validate_url, contact_url, total_cost)
+  end
+
+  def booking_params
+    passenger_fields = %w(gender first_name last_name)
+    params.permit(
+                  adult: passenger_fields, 
+                  child: passenger_fields,
+                  infant: passenger_fields
+                )
   end
 end

@@ -12,35 +12,19 @@ module ApplicationHelper
   end
 
   def show_first_name
-    if current_user
-      text_field_content(:first_name, current_user.first_name)
-    else
-      text_field_content(:first_name)
-    end
+    text_field_content(:first_name, current_user)
   end
 
   def show_last_name
-    if current_user
-      text_field_content(:last_name, current_user.last_name)
-    else
-      text_field_content(:last_name)
-    end
+    text_field_content(:last_name, current_user)
   end
 
   def show_email
-    if current_user
-      text_field_content(:email, current_user.email)
-    else
-      text_field_content(:email)
-    end
+    text_field_content(:email, current_user)
   end
 
   def show_gender
-    if current_user
-      select_tag_content(current_user.gender)
-    else
-      select_tag_content
-    end
+    select_tag_content(:gender, current_user)
   end
 
   private
@@ -52,7 +36,8 @@ module ApplicationHelper
       email: "johndoe@gmail.com"
     }
     html_params = { placeholder: placeholder[name], required: true }
-    text_field_tag(name, value, html_params)
+    value = value ? value.send(name) : nil
+    text_field_tag("adult[][#{name}]", value, html_params)
   end
 
   def select_tag_content(gender = nil)

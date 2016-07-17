@@ -28,7 +28,7 @@ class FlightsController < ApplicationController
     total_adults = params[:adults].to_i
     total_infants = params[:infants].to_i
     store_passengers_info(total_adults, total_children, total_infants)
-    total_children + total_adults + total_infants + 1
+    total_children + total_adults + total_infants
   end
 
   def store_passengers_info(total_adults, total_children, total_infants)

@@ -1,8 +1,7 @@
 <% if @booking %>
-  <% user = @booking.user|| @booking.unregistered_user %>
   <%= render partial: "modals/edit_reservation_modal", locals: { booking: @booking } %>
   <h3 class="ui top attached header">
-    Booking #<%= "#{@booking.reference_number} -#{user.first_name} #{user.last_name}" %>
+    Booking #<%= "#{@booking.reference_number}" %>
   </h3>
   <div class="ui attached segment">
     <p><h4>Departing Airport: </h4><%= @booking.flight.route.departing_airport.name %></p>
@@ -11,12 +10,13 @@
     <p><h4>Departure Date: </h4> <%= @booking.flight.date.strftime("%B %d, %Y") %> </p>
     <p><h4>Total Flight Fare: </h4> $<%= estimate_flight_fare(@booking.passengers, @booking.class_level) %></p>
     <div class="ui center aligned grid">
-
-    <div class="ui buttons">
-      <button class="ui basic red button" id="cancel-reservation" onclick="deleteConfirmDialog('<%= @booking.reference_number %>')">Cancel Reservation</button>
-      <div class="or"></div>
-      <button class="ui positive button" onclick="editReservation()">Edit Reservation</button>
-    </div>
+    <% if @booking.user %>
+      <div class="ui buttons">
+        <button class="ui basic red button" id="cancel-reservation" onclick="deleteConfirmDialog('<%= @booking.reference_number %>')">Cancel Reservation</button>
+        <div class="or"></div>
+        <button class="ui positive button" onclick="editReservation()">Edit Reservation</button>
+      </div>
+    <% end %>
       
     </div>
   </div>

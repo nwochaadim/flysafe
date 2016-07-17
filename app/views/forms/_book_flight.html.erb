@@ -17,100 +17,8 @@
       <%= label_tag :email, "Email" %>
       <%= show_email %>
     </div>
-
-    <div class="four wide field">
-      <%= label_tag :gender, "Gender" %>
-      <%= show_gender %>
-    </div>
   </div>
 
-<!-- Adult Passengers Information -->
-
-  <% if @no_of_adults > 0 %>
-    <% @no_of_adults.times do |index| %>
-      <div class="custom-form">
-        <h4 class="ui dividing header">Adult Passenger Information</h4>
-        <div class="two fields">
-          <div class="field">
-            <%= label_tag :adult_first_name, "First Name" %>
-            <%= text_field_tag "adult[][first_name]", nil, placeholder: "E.g John", required: true %>
-          </div>
-
-          <div class="field">
-            <%= label_tag :adult_last_name, "Last Name" %>
-            <%= text_field_tag "adult[][last_name]", nil, placeholder: "E.g Doe", required: true %>
-          </div>
-        </div>
-
-         <div class="four wide field">
-          <%= label_tag :adult_gender, "Gender" %>
-          <%= select_tag "adult[][gender]", options_for_select([["Male", "Male"], ["Female", "Female"]]), class: "ui fluid dropdown"%>
-        </div>
-        <button class="ui basic button" onclick="removePassengerForm(this)">Remove Passenger</button>
-      </div>
-    <% end %>
-  <% end %>
-
-<!-- Adult Passengers Information -->
-
-<!-- Child Passengers Information -->
-  <% if @no_of_children >0 %>
-    <% @no_of_children.times do |index|%>
-      <div class="custom-form">
-        <h4 class="ui dividing header">Child Passenger Information</h4>
-        <div class="two fields">
-          <div class="field">
-            <%= label_tag :child_first_name, "First Name" %>
-            <%= text_field_tag "child[][first_name]", nil, placeholder: "E.g John" %>
-          </div>
-
-          <div class="field">
-            <%= label_tag :child_last_name, "Last Name" %>
-            <%= text_field_tag  "child[][last_name]", nil, placeholder: "E.g Doe" %>
-          </div>
-        </div>
-        <div class="four wide field">
-          <%= label_tag :child_gender, "Gender" %>
-          <%= select_tag "child[][gender]", options_for_select([["Male", "Male"], ["Female", "Male"]]), class: "ui fluid dropdown"%>
-        </div>
-        <button class="ui basic button" onclick="removePassengerForm(this)">Remove Passenger</button>
-      </div>
-
-      
-    <% end %>
-  <% end %>
-
-<!-- Child Passengers Information -->
-
-<!-- Infant Passengers Information -->
-  <% if @no_of_infants > 0 %>
-    <% @no_of_infants.times do |index| %>
-      <div class="custom-form">
-        <h4 class="ui dividing header">Infant Passenger Information</h4>
-        <div class="two fields">
-          <div class="field">
-            <%= label_tag :infant_first_name, "First Name" %>
-            <%= text_field_tag "infant[][first_name]", nil, placeholder: "E.g John" %>
-          </div>
-
-          <div class="field">
-            <%= label_tag :infant_last_name, "Last Name" %>
-            <%= text_field_tag "infant[][last_name]", nil, placeholder: "E.g Doe" %>
-          </div>
-        </div>
-
-        <div class="four wide field">
-          <%= label_tag :infant_gender, "Gender" %>
-          <%= select_tag "infant[][gender]", options_for_select([["Male", "Male"], ["Female", "Female"]]), class: "ui fluid dropdown"%>
-        </div>
-        <button class="ui basic button" onclick="removePassengerForm(this)">Remove Passenger</button>
-      </div>
-    <% end %>
-  <% end %>
-
-  <div id="form-holder"></div>
-
-<!-- Infant Passengers Information -->
   <div class="ui center aligned grid">
     <%= submit_tag "Submit", class: "ui basic blue button" %>
   </div>
@@ -128,5 +36,4 @@
       </div>
     </div>
   </div>
-  
 <% end %>
