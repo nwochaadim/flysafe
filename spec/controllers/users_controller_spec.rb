@@ -10,7 +10,14 @@ RSpec.describe UsersController, type: :controller do
       password_confirmation: "secret key" }
   end
 
-  describe 'POST #create' do
+  describe '#new' do
+    it "renders the new template" do
+      get :new
+      expect(response).to render_template(:new)
+    end
+  end
+
+  describe '#create' do
     context "when user's account is created" do
       it "redirect to home page" do
         post :create, valid_attributes
@@ -20,13 +27,13 @@ RSpec.describe UsersController, type: :controller do
 
     context "when user's account is not created" do
       it "render new template" do
-        post :create, first_name: ""
+        post :create, first_name: nil
         expect(response).to render_template(:new)
       end
     end
   end
 
-  describe 'POST #past_bookings' do
+  describe '#past_bookings' do
     let(:user) { create(:user) }
     it "renders past bookings template" do
       post :past_bookings, user_id: user.id

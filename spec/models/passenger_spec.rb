@@ -25,4 +25,10 @@ RSpec.describe Passenger, type: :model do
   describe "Active Model Relation" do
     it { is_expected.to respond_to(:booking) }
   end
+
+  describe ".not_infant" do
+    it "returns all passengers that are not infants" do
+      expect(Passenger.not_infant).to include(passenger)
+    end
+  end
 end

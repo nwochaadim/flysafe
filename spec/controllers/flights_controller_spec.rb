@@ -13,7 +13,7 @@ RSpec.describe FlightsController, type: :controller do
     }
   end
 
-  describe 'GET #search' do
+  describe '#search' do
     before { @flight = create(:flight) }
 
     it "renders search template" do
@@ -23,20 +23,24 @@ RSpec.describe FlightsController, type: :controller do
     end
   end
 
-  describe 'GET #seats_available' do
+  describe '#seats_available' do
     before { @flight = create(:flight) }
 
-    it "renders the number of seats available as json" do
-      session[:flight_id] = @flight.id
-      get :seats_available
-      seats = { seats_available: @flight.seats_available }.to_json
-      expect(response.body).to eq(seats)
+    context "when flight is valid" do
+      it "renders the number of seats available as json" do
+        session[:flight_id] = @flight.id
+        get :seats_available
+        seats = { seats_available: @flight.seats_available }.to_json
+        expect(response.body).to eq(seats)
+      end
     end
 
-    it "renders an error status as json if flight id is invalid" do
-      get :seats_available
-      error = { error: true }.to_json
-      expect(response.body).to eq(error)
+    context "when flight is invalid" do
+      it "renders an error status as json if flight id is invalid" do
+        get :seats_available
+        error = { error: true }.to_json
+        expect(response.body).to eq(error)
+      end
     end
   end
 end

@@ -13,4 +13,13 @@ RSpec.describe "Managing Past Bookings", type: :feature do
       expect(page).to have_content(@booking.flight.route.departing_airport.name)
     end
   end
+
+  feature "when the user enters incorrect booking reference", js: true do
+    scenario "displays record not found" do
+      visit search_booking_path
+      fill_in :reference_number, with: "INVALID"
+      click_on("Search Bookings")
+      expect(page).to have_content("No record Found")
+    end
+  end
 end

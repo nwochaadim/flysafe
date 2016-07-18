@@ -33,4 +33,11 @@ RSpec.describe Airport, type: :model do
     it { is_expected.to respond_to(:state) }
     it { is_expected.to respond_to(:airport_code) }
   end
+
+  describe ".names" do
+    it "lists all airport names along with codes" do
+      expect(Airport.names).
+        to include("#{@airport.name} (#{@airport.airport_code})")
+    end
+  end
 end

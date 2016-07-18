@@ -17,4 +17,13 @@ RSpec.describe "Flight Search", type: :feature do
       expect(page).to have_content("Flights Available")
     end
   end
+
+  feature "when user fills all same arrival and departure info" do
+    scenario "displays flights available", js: true do
+      visit root_path(anchor: "booking")
+      fill_incomplete_form_for_flight_search
+      wait_for_ajax
+      expect(page).to have_content("Error!")
+    end
+  end
 end

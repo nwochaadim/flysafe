@@ -12,7 +12,6 @@ class BookingsController < ApplicationController
 
   def book
     session[:flight_id] ||= params[:selected_flight]
-    retrieve_passengers_from_session
 
     render format: :js
   end

@@ -18,7 +18,7 @@ RSpec.describe UserMailer, type: :mailer do
   end
 
   context '#update_reservation' do
-    before(:each) do
+    before do
       @booking = create(:booking)
       @booking.flight.route.update(arriving_airport: create(:arriving_airport))
     end
@@ -26,6 +26,25 @@ RSpec.describe UserMailer, type: :mailer do
     let(:mail) { UserMailer.update_reservation(@booking.id) }
     it "renders the subject" do
       expect(mail.subject).to eq "Fly Safe. Booking Reservation Updated!"
+    end
+
+    it "renders receiver's email address" do
+      expect(mail.to).to eq [@booking.user.email]
+    end
+
+    it "renders sender's email address" do
+      expect(mail.from).to eq ["noreply@fly-safe.herokuapp.com"]
+    end
+  end
+
+  context '#booking_sucess' do
+    before(:each) do
+      @booking = create(:booking)
+      @booking.flight.route.update(arriving_airport: create(:arriving_airport))
+    end
+    let(:mail) { UserMailer.booking_success(@booking.id) }
+    it "renders the subject" do
+      expect(mail.subject).to eq "Booking was successful"
     end
 
     it "renders receiver's email address" do
