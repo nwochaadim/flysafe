@@ -6,12 +6,13 @@ class SessionController < ApplicationController
 
   def create
     user = User.find_by(email: params[:email])
+
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect_to root_path, notice: login_success
     else
       flash[:errors] = login_failed
-      render "new"
+      render :new
     end
   end
 

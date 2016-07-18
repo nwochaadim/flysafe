@@ -24,7 +24,7 @@ module ApplicationHelper
   end
 
   def show_gender
-    select_tag_content(:gender, current_user)
+    select_tag_content(current_user)
   end
 
   private
@@ -40,9 +40,10 @@ module ApplicationHelper
     text_field_tag("adult[][#{name}]", value, html_params)
   end
 
-  def select_tag_content(gender = nil)
+  def select_tag_content(value = nil)
     html_params = { class: "ui fluid dropdown" }
-    options = options_for_select([%w(Male Male), %w(Female Female)], gender)
+    value = value ? value.gender : nil
+    options = options_for_select([%w(Male Male), %w(Female Female)], value)
     select_tag(:gender, options, html_params)
   end
 end

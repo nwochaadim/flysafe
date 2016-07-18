@@ -1,8 +1,9 @@
-require "securerandom"
 class Booking < ActiveRecord::Base
   belongs_to :user
-  has_many :passengers
   belongs_to :flight
+
+  has_many :passengers, dependent: :destroy
+
   validates :reference_number, presence: true, uniqueness: true
   validates :class_level, presence: true
 
@@ -16,6 +17,7 @@ class Booking < ActiveRecord::Base
     passenger_param.each do |passenger|
       passenger = passenger.merge(age_grade: type.capitalize)
       passengers << Passenger.create(passenger)
+
       save
     end
   end
@@ -26,17 +28,18 @@ class Booking < ActiveRecord::Base
   end
 
   def allocate_flight(flight)
-    total_passengers = passengers.where.not("age_grade = 'Infant'").count
+    total_passengers = passengers.not_infant.count
     seats_available = flight.seats_available - total_passengers
     flight.update(seats_available: seats_available)
     update(flight: flight)
   end
 
-  def self.create_and_allocate(flight, reference, class_level, params, user)
-    booking = self.create(reference_number: reference, class_level: class_level)
-    booking.add_passengers(params)
-    booking.allocate_flight(flight)
-    booking.update(user: user) if booking
+  def self.create_and_allocate(options)
+    booking = create(options.slice(:reference_number, :class_level))
+    booking.add_passengers(options[:booking_params])
+    booking.allocate_flight(options[:flight])
+    booking.update(user: options[:user]) if booking
+
     booking
   end
 end

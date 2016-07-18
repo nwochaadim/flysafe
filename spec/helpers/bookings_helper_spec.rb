@@ -7,19 +7,23 @@ RSpec.describe BookingsHelper, type: :helper do
   end
 
   let(:booking_params) do
-    { first_name: Faker::Name.name,
-      last_name: Faker::Name.name,
-      format: :js,
-      email: Faker::Internet.email,
-      adult: [{ gender: "1", first_name: "John", last_name: "Travolta" }],
+    {
+      adult: [{ first_name: "John", last_name: "Travolta" }],
       child: [{ first_name: "Mercy", last_name: "Johnson" }],
-      infant: [{ first_name: "Michelle", last_name: "Obama" }] }
+      infant: [{ first_name: "Michelle", last_name: "Obama" }]
+    }
   end
 
   describe "calculate flight fare" do
     it "returns the total flight fee" do
       flight_fare = calculate_flight_fare(booking_params)
-      expect(flight_fare).to eq(3000)
+      expect(flight_fare).to eq(2000)
+    end
+
+    it "returns no fee for infant" do
+      params = { infant: [{ first_name: "Michelle", last_name: "Obama" }] }
+      flight_fare = calculate_flight_fare(params)
+      expect(flight_fare).to eq(0)
     end
   end
 
@@ -49,7 +53,8 @@ RSpec.describe BookingsHelper, type: :helper do
 
   describe "estimate flight fare" do
     it "returns the total flight fare for all passengers" do
-      expect(infant_fare).to eq(0)
+      passengers = create_list(:adult_passenger, 3)
+      expect(estimate_flight_fare(passengers, "Economy")).to eq(3000)
     end
   end
 end

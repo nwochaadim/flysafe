@@ -35,6 +35,7 @@ module BookingsHelper
 
   def iterate_passengers(passengers, params, allowed_passengers)
     allowed_passengers.each do |allowed_passenger|
+      allowed_passenger = allowed_passenger.to_sym
       next unless params[allowed_passenger]
       params[allowed_passenger].each do |passenger|
         build_passengers(passengers, passenger, allowed_passenger.capitalize)

@@ -3,13 +3,13 @@ module Bookings
     booking_params = session[:booking_params]
     class_level = session[:passengers]["class_level"]
     @booking = Booking.create_and_allocate(
-                                            flight,
-                                            reference,
-                                            class_level,
-                                            booking_params,
-                                            current_user
-                                          )
-    UserMailer.booking_success(@booking).deliver_now if @booking.user
+      flight: flight,
+      reference_number: reference,
+      class_level: class_level,
+      booking_params: booking_params,
+      user: current_user
+    )
+    UserMailer.booking_success(@booking.id).deliver_now if @booking.user
   end
 
   def retrieve_passengers_from_session

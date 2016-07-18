@@ -1,17 +1,17 @@
 class PaymentService
   include Message
 
-  def initialize(flight, validate_url, contact_url, total_cost)
-    @flight = flight
-    @validate_url = validate_url
-    @contact_url = contact_url
-    @total_cost = total_cost
+  def initialize(options)
+    @flight = options[:flight]
+    @validate_url = options[:validate_url]
+    @contact_url = options[:contact_url]
+    @total_cost = options[:total_cost]
   end
 
   def make_payment
     request = Paypal::Express::Request.new(paypal_request_params)
     payment_request = Paypal::Payment::Request.new(payment_request_params)
-    request_paypal_payment(request, payment_request, @flight)
+    request_paypal_payment(request, payment_request)
   end
 
   private
@@ -44,7 +44,7 @@ class PaymentService
     }
   end
 
-  def request_paypal_payment(request, payment_request, _selected_flight)
+  def request_paypal_payment(request, payment_request)
     request.setup(
       payment_request,
       @validate_url,

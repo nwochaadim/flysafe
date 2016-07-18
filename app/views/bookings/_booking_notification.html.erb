@@ -1,0 +1,17 @@
+<% if flash[:notice] %>
+  <div class="header">
+    Payment Error!
+   </div>
+   <p>Your Payment is not valid</p>
+<% else %>
+   <div class="header">
+    Congratulations!!!
+   </div>
+  <p> Your Flight from <%= @booking.flight.route.departing_airport.name %> to  <%= @booking.flight.route.arriving_airport.name %> has been successfully  booked.</p>
+  <p>Your Booking reference number is <strong> <%= @booking.reference_number %> </strong> </p>
+
+  <%= link_to root_path, class: "ui teal basic button" do %>
+    <i class="home icon"></i>
+    Return Home
+  <% end %>
+<% end %>

@@ -11,7 +11,8 @@ class LandingController < ApplicationController
   end
 
   def create_feedback
-    @contact = Contact.new(allowed_params)
+    @contact = Contact.new(landing_params)
+
     if @contact.save
       redirect_to :root, notice: feedback_success
     else
@@ -21,7 +22,7 @@ class LandingController < ApplicationController
 
   private
 
-  def allowed_params
+  def landing_params
     params.permit(:first_name, :last_name, :email, :phone_number, :comment)
   end
 end

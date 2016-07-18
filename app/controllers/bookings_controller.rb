@@ -1,17 +1,19 @@
 class BookingsController < ApplicationController
   include Bookings
-  attr_accessor :token
+  before_action :set_booking, only: [:retrieve, :destroy, :update]
   protect_from_forgery except: [:retrieve, :destroy]
 
   def confirm
     session[:booking_params] = booking_params
     @booking_params = booking_params
+
     render format: :js
   end
 
   def book
     session[:flight_id] ||= params[:selected_flight]
     retrieve_passengers_from_session
+
     render format: :js
   end
 
@@ -19,6 +21,7 @@ class BookingsController < ApplicationController
     payment_service = instantiate_payment_service
     response = payment_service.make_payment
     session[:token] = response.token
+
     redirect_to response.redirect_uri
   end
 
@@ -32,8 +35,6 @@ class BookingsController < ApplicationController
   end
 
   def retrieve
-    reference_number = params[:reference_number]
-    @booking = Booking.find_by(reference_number: reference_number)
     render format: :js
   end
 
@@ -41,35 +42,38 @@ class BookingsController < ApplicationController
   end
 
   def update
-    @booking = Booking.find(params[:id])
     @booking.update_passengers(booking_params)
     UserMailer.update_reservation(@booking.id).deliver_now if @booking.user
     redirect_to search_booking_path, notice: booking_success
   end
 
   def destroy
-    booking = Booking.find_by(reference_number: params[:id])
-    user = booking.user
-    UserMailer.delete_reservation(user.id, booking.id).deliver_now if user
-    booking.destroy
+    UserMailer.delete_reservation(@booking.id).deliver_now if @booking.user
+    @booking.destroy
+
     render json: { success: true }
   end
 
   private
 
+  def set_booking
+    @booking = Booking.find_by(reference_number: params[:reference_number])
+  end
+
   def instantiate_payment_service
     selected_flight = Flight.find(session[:flight_id])
-    validate_url = validate_payment_url(selected_flight)
-    total_cost = session[:total_cost]
-    PaymentService.new(selected_flight, validate_url, contact_url, total_cost)
+
+    PaymentService.new(
+      selected_flight: selected_flight,
+      validate_url: validate_payment_url(selected_flight),
+      contact_url: contact_url,
+      total_cost: session[:total_cost]
+    )
   end
 
   def booking_params
     passenger_fields = %w(gender first_name last_name)
-    params.permit(
-                  adult: passenger_fields, 
-                  child: passenger_fields,
-                  infant: passenger_fields
-                )
+    params.permit(adult: passenger_fields, child: passenger_fields,
+                  infant: passenger_fields)
   end
 end

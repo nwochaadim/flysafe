@@ -6,6 +6,7 @@ RSpec.describe Booking, type: :model do
   let!(:adult_passenger) { create(:adult_passenger) }
   let(:child_passenger) { create(:child_passenger) }
   let(:infant_passenger) { create(:infant_passenger) }
+
   describe "Initializing a booking" do
     it "validates presence of a reference number" do
       expect { booking.update!(reference_number: nil) }.
@@ -28,11 +29,10 @@ RSpec.describe Booking, type: :model do
     subject { booking }
     it { is_expected.to respond_to(:flight) }
     it { is_expected.to respond_to(:user) }
-    it { is_expected.to respond_to(:unregistered_user) }
   end
 
   describe "Booking a flight" do
-    it "reduces the seats_available on the flight by the number of passengers" do
+    it "reduces the seats_available on the flight by number of passengers" do
       booking.passengers << adult_passenger
       booking.passengers << child_passenger
       expect { booking.allocate_flight(flight) }.

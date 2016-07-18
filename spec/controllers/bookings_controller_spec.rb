@@ -7,13 +7,12 @@ RSpec.describe BookingsController, type: :controller do
   end
 
   let(:valid_attributes) do
-    { first_name: Faker::Name.name,
-      last_name: Faker::Name.name,
+    {
       format: :js,
-      email: Faker::Internet.email,
       adult: [{ first_name: "John", last_name: "Travolta" }],
       child: [{ first_name: "Mercy", last_name: "Johnson" }],
-      infant: [{ first_name: "Michelle", last_name: "Obama" }] }
+      infant: [{ first_name: "Michelle", last_name: "Obama" }]
+    }
   end
 
   describe "POST #confirm" do
@@ -26,7 +25,11 @@ RSpec.describe BookingsController, type: :controller do
   describe "POST #book" do
     it "renders booking page" do
       params = { selected_flight: @booking.flight.id, format: "js" }
-      session[:passengers] = { total_adults: 2, total_children: 1, total_infants: 0 }
+      session[:passengers] = {
+        total_adults: 2,
+        total_children: 1,
+        total_infants: 0
+      }
       post :book, params
       expect(response).to render_template(:book)
     end
@@ -61,7 +64,9 @@ RSpec.describe BookingsController, type: :controller do
 
   describe "PUT #update" do
     it "updates the booking reservation" do
-      attributes = valid_attributes.merge(id: @booking.id)
+      attributes = valid_attributes.merge(
+        reference_number: @booking.reference_number
+      )
       put :update, attributes
       expect(@booking.passengers.count).to eql(3)
     end
@@ -69,7 +74,7 @@ RSpec.describe BookingsController, type: :controller do
 
   describe "DELETE #destroy" do
     it "renders booking search page" do
-      delete :destroy, id: @booking.reference_number
+      delete :destroy, reference_number: @booking.reference_number
       expect(Booking.all).to_not include(@booking)
     end
   end

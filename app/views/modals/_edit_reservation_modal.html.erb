@@ -1,6 +1,6 @@
 <div class="ui long modal mform">
   <div class="ui container">
-    <%= form_tag url_for(action: "update", controller: "bookings", id: booking.id), method: "put", class: "ui form" do %>
+    <%= form_tag url_for(action: "update", controller: "bookings", reference_number: booking.reference_number), method: "put", class: "ui form" do %>
       <h4 class="ui dividing header">Please provide your information</h4>
       <div class="two fields">
         <div class="field">

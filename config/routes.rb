@@ -30,8 +30,8 @@ Rails.application.routes.draw do
     post "/" => :retrieve, as: :retrieve_booking
     get "/payment" => :payment, as: :payment
     post "/confirm" => :confirm, as: :confirm_book
-    put "/:id" => :update
-    delete "/:id" => :destroy
+    put "/:reference_number" => :update
+    delete "/:reference_number" => :destroy
     get "/payment/:flight_id" => :validate_payment, as: :validate_payment
   end
 end

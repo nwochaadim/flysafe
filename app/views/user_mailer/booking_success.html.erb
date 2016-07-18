@@ -1,5 +1,5 @@
 <div>
-  <p>Hi, <%= "#{user.first_name} #{user.last_name}" %></p>
+  <p>Hi, <%= "#{@user.first_name} #{@user.last_name}" %></p>
   <p>Your Flight Booking to <%= "#{@booking.flight.route.arriving_airport.name} from #{@booking.flight.route.departing_airport.name} on #{@booking.flight.date.strftime('%B %d, %Y')} is successful. Below are your flight details" %></p>
 
   <h3>Your Information </h3>
