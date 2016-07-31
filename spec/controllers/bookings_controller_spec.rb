@@ -3,25 +3,16 @@ require "rails_helper"
 RSpec.describe BookingsController, type: :controller do
   before { @booking = create(:booking) }
 
-  let(:valid_attributes) do
-    {
-      format: :js,
-      adult: [{ first_name: "John", last_name: "Doe", email: "a@gmail.com" }],
-      child: [{ first_name: "Mercy", last_name: "Johnson" }],
-      infant: [{ first_name: "Michelle", last_name: "Obama" }]
-    }
-  end
-
   describe "#confirm" do
     it "renders booking confirmation page having all details" do
-      post :confirm, valid_attributes
+      post :confirm, booking_params
       expect(response).to render_template(:confirm)
     end
   end
 
   describe "#book" do
     it "renders booking page" do
-      params = { selected_flight: @booking.flight.id, format: "js" }
+      params = { selected_flight: @booking.flight.id, format: :js }
       post :book, params
       expect(response).to render_template(:book)
     end
@@ -32,7 +23,6 @@ RSpec.describe BookingsController, type: :controller do
       session[:flight_id] = @booking.flight.id
       paypal_construct = Struct.new(:token, :redirect_uri)
       paypal_response = paypal_construct.new("TOKEN", "http://paypal.com")
-
       allow_any_instance_of(PaymentService).to receive(:make_payment).
         and_return(paypal_response)
       get :payment
@@ -43,7 +33,7 @@ RSpec.describe BookingsController, type: :controller do
 
   describe "#validate_payment" do
     before(:each) do
-      session[:booking_params] = valid_attributes
+      session[:booking_params] = booking_params
       session[:token] = SecureRandom.hex(6)
       session[:flight_id] = @booking.flight.id
       session[:passengers] = { class_level: "Economy" }.stringify_keys
@@ -85,7 +75,7 @@ RSpec.describe BookingsController, type: :controller do
 
   describe "#update" do
     it "updates the booking reservation" do
-      attributes = valid_attributes.merge(
+      attributes = booking_params.merge(
         reference_number: @booking.reference_number
       )
       put :update, attributes

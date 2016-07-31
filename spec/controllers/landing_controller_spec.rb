@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe LandingController, type: :controller do
   let(:landing_params) { attributes_for(:contact) }
-  
+
   describe '#index' do
     it "renders the index template" do
       get :index
@@ -33,7 +33,7 @@ RSpec.describe LandingController, type: :controller do
     end
 
     context "when all required parameters are not provided" do
-      it "re-renders the new template" do
+      it "re-renders the contact_us template with form errors" do
         post :create_feedback, {}
         expect(response).to render_template(:contact_us)
       end

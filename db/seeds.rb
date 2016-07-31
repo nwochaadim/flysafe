@@ -6,15 +6,15 @@ Flight.destroy_all
 
 def aircrafts
   %w(
-   Airbus\ A300
-   Airbus\ A318
-   Baade\ 152
-   Boeing\ 707
-   Boeing\ 717
-   Boeing\ 737
-   Comac\ C919
-   Convair\ 880
-   McDonnell\ Douglas\ MD-90
+    Airbus\ A300
+    Airbus\ A318
+    Baade\ 152
+    Boeing\ 707
+    Boeing\ 717
+    Boeing\ 737
+    Comac\ C919
+    Convair\ 880
+    McDonnell\ Douglas\ MD-90
   )
 end
 
@@ -39,7 +39,7 @@ end
 def create_airports_from_file
   json_file = File.read(Rails.root.to_s + "/app/assets/airports.json")
   json_data = JSON.parse(json_file)
-  json_data.each do |data, index|
+  json_data.each do |data, _index|
     if create?(data)
       create_airport(data)
     end
@@ -75,13 +75,13 @@ def create_flights(airport, arriving_airport)
     date = Faker::Date.forward(23)
     plane_name = aircrafts[rand(0..8)]
     Flight.create(
-                stops: 1,
-                plane_name: plane_name,
-                seats_available: seats_available, 
-                date: date,
-                to_airport_id: arriving_airport.id,
-                from_airport_id: airport.id
-              )
+      stops: 1,
+      plane_name: plane_name,
+      seats_available: seats_available,
+      date: date,
+      to_airport_id: arriving_airport.id,
+      from_airport_id: airport.id
+    )
   end
 end
 

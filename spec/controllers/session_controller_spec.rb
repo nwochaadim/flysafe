@@ -5,7 +5,7 @@ RSpec.describe SessionController, type: :controller do
 
   describe '#new' do
     it "renders new template" do
-      get :new 
+      get :new
       expect(response).to render_template(:new)
     end
   end
@@ -19,24 +19,18 @@ RSpec.describe SessionController, type: :controller do
     end
 
     context "as an unauthenticated user" do
-      before { post :create, email: "", password: "" }
-      it "renders the new template" do
+      it "renders the new template, displaying errors" do
+        post :create, email: "", password: ""
         expect(response).to render_template(:new)
-      end
-
-      it "notifies the user of an invalid email or password" do
         expect(flash[:errors]).to eq("Invalid email or password")
       end
     end
   end
 
   describe '#destroy' do
-    before { get :destroy }
-    it "destroys users sessions" do
+    it "destroys users sessions and redirects to the home page" do
+      get :destroy
       expect(session[:user_id]).to eq(nil)
-    end
-
-    it "redirects user to login page" do
       expect(response).to redirect_to(root_path)
     end
   end

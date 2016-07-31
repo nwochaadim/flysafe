@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe UsersController, type: :controller do
   let(:user) { create(:user) }
-  let(:valid_attributes){ attributes_for(:user) }
+  let(:valid_attributes) { attributes_for(:user) }
 
   describe '#new' do
     it "renders the new template" do
@@ -12,16 +12,16 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe '#create' do
-    context "when user's account is created" do
-      it "redirect to home page" do
-        post :create, valid_attributes
+    context "when valid user data is passed" do
+      it "creates account and redirects to home page" do
+        expect{ post :create, valid_attributes }.to change(User, :count).by(1)
         expect(response).to redirect_to(root_path)
       end
     end
 
-    context "when user's account is not created" do
-      it "render new template" do
-        post :create, first_name: nil
+    context "when invalid user data is passed" do
+      it "does not create account and renders the new template with errors" do
+        expect{ post :create, first_name: nil }.to_not change(User, :count)
         expect(response).to render_template(:new)
       end
     end

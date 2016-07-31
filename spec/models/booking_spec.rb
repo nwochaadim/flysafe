@@ -15,7 +15,7 @@ RSpec.describe Booking, type: :model do
       expect { booking.update!(reference_number: nil) }.
         to raise_error(ActiveRecord::RecordInvalid)
     end
-    
+
     it "validates presence of a class_level" do
       expect { booking.update!(class_level: nil) }.
         to raise_error(ActiveRecord::RecordInvalid)

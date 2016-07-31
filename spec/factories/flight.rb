@@ -4,7 +4,7 @@ FactoryGirl.define do
     plane_name "Boeing 737"
     seats_available 10
     date Faker::Date.forward(23)
-    
+
     transient do
       airport { create(:airport) }
       arriving_airport { create(:airport) }

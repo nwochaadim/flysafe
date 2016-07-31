@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "Managing Past Bookings", type: :feature do
   let(:booking) { create(:booking) }
-  
+
   feature "when the user enters the correct booking reference", js: true do
     scenario "displays the booking details" do
       visit search_booking_path

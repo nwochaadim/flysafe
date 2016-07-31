@@ -19,7 +19,7 @@ module FormHelper
     select("1", from: :infants)
     select("1", from: :children)
     page.execute_script("$('.ui.basic.blue.button').click()")
- end
+  end
 
   def fill_form_for_sign_up
     password = Faker::Internet.password

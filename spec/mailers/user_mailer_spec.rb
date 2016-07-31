@@ -24,7 +24,6 @@ RSpec.describe UserMailer, type: :mailer do
   end
 
   context '#update_reservation' do
-
     let(:mail) { UserMailer.update_reservation(@booking.id) }
     it "renders the subject" do
       expect(mail.subject).to eq "Fly Safe. Booking Reservation Updated!"

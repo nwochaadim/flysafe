@@ -6,14 +6,6 @@ RSpec.describe BookingsHelper, type: :helper do
     session[:passengers]["class_level"] = "Economy"
   end
 
-  let(:booking_params) do
-    {
-      adult: [{ first_name: "John", last_name: "Travolta" }],
-      child: [{ first_name: "Mercy", last_name: "Johnson" }],
-      infant: [{ first_name: "Michelle", last_name: "Obama" }]
-    }
-  end
-
   describe "calculate flight fare" do
     it "returns the total flight fee" do
       flight_fare = calculate_flight_fare(booking_params)

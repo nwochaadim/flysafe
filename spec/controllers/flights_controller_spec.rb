@@ -2,22 +2,10 @@ require "rails_helper"
 
 RSpec.describe FlightsController, type: :controller do
   before(:all) { @flight = create(:flight, :departing, :arriving) }
-  let(:valid_attributes) do
-    {
-      departs: "Abuja Intenational Airport (ABV)",
-      arrives: "Benin Airport (BNI)",
-      grade: "Economy",
-      adults: "1",
-      children: "1",
-      infants: "1",
-      date: "2016-06-27"
-    }
-  end
 
   describe '#search' do
     it "renders search template" do
-      valid_attributes[:format] = :js
-      get :search, valid_attributes
+      get :search, flight_params
       expect(response).to render_template(:search)
     end
   end
