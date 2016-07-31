@@ -29,12 +29,10 @@
         <% @retrieved_flights.each_with_index do |flight, index| %>
           <tr>
             <td class="collapsing">
-              <div class="ui fitted slider checkbox">
-                <%= radio_button_tag "selected_flight", flight.id, required: true %> <%= label_tag %>
-              </div>
+              <%= radio_button_tag "selected_flight", flight.id, checked=false, required: true %> <%= label_tag %>
             </td>
-            <td><%= flight.route.departing_airport.name %></td>
-            <td><%= flight.route.arriving_airport.name %></td>
+            <td><%= flight.from_airport.name %></td>
+            <td><%= flight.to_airport.name %></td>
             <td><%= flight.stops %></td>
             <td><%= flight.date.strftime("%B %d, %Y") %></td>
             <td><%= flight.plane_name %></td>

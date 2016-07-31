@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   scope "/users", controller: :users do
     get "/signup" => :new, as: :signup
-    get "/:user_id/bookings" => :past_bookings, as: :past_bookings
+    get "/bookings" => :past_bookings, as: :past_bookings
     post "/" => :create
   end
 

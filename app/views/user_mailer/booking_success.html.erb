@@ -1,6 +1,6 @@
 <div>
   <p>Hi, <%= "#{@user.first_name} #{@user.last_name}" %></p>
-  <p>Your Flight Booking to <%= "#{@booking.flight.route.arriving_airport.name} from #{@booking.flight.route.departing_airport.name} on #{@booking.flight.date.strftime('%B %d, %Y')} is successful. Below are your flight details" %></p>
+  <p>Your Flight Booking to <%= "#{@booking.flight.to_airport.name} from #{@booking.flight.from_airport.name} on #{@booking.flight.date.strftime('%B %d, %Y')} is successful. Below are your flight details" %></p>
 
   <h3>Your Information </h3>
   <hr/>
@@ -8,7 +8,7 @@
   <b>Name: </b> <%= "#{@user.first_name} #{@user.last_name}" %><br/>
   <b>Email: </b> <%= "#{@user.email}" %>
   
-  <% if @booking.passengers.any? %>
+  <% if @booking.passengers.many? %>
     <h4>Passengers Information</h4>
     <hr/>
     <ol>
@@ -18,5 +18,5 @@
     </ol><br/>
   <% end %>
 
-  <p><b>Total Fare: </b> <%= @new_cost %> </p>
+  <p><b>Total Fare: </b> <%= "$#{@new_cost}" %> </p>
 </div>

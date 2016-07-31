@@ -9,6 +9,6 @@ module Bookings
       booking_params: booking_params,
       user: current_user
     )
-    UserMailer.booking_success(@booking.id).deliver_now if @booking.user
+    UserMailer.booking_success(@booking.id).deliver_now
   end
 end

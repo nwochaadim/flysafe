@@ -10,8 +10,8 @@
     <% bookings.each do |booking| %>
       <tr id="<%= booking.reference_number %>">
         <td><%= booking.reference_number %></td>
-        <td><%= booking.flight.route.departing_airport.name %></td>
-        <td><%= booking.flight.route.arriving_airport.name %></td>
+        <td><%= booking.flight.from_airport.name %></td>
+        <td><%= booking.flight.to_airport.name %></td>
         <td><%= booking.passengers.count %></td>
         <td><%= booking.flight.plane_name %></td>
         <td><%= booking.flight.date.strftime("%B %d, %Y") %></td>

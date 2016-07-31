@@ -1,5 +1,5 @@
 <div>
   <p>Hi, <%= "#{@user.first_name} #{@user.last_name}" %></p>
-  <p>Your Flight Booking to <%= "#{@booking.flight.route.arriving_airport.name} from #{@booking.flight.route.departing_airport.name} on #{@booking.flight.date.strftime('%B %d, %Y')} has been successfully cancelled" %></p>
+  <p>Your Flight Booking to <%= "#{@booking.flight.to_airport.name} from #{@booking.flight.from_airport.name} on #{@booking.flight.date.strftime('%B %d, %Y')} has been successfully cancelled" %></p>
   <p>Please contact us if you did not initiate this action </p>
 </div>

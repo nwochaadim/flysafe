@@ -54,13 +54,6 @@ function passengerFormString(type){
             '<input type="text" name="'+type+"[][last_name]"+'" placeholder: "E.g Doe" required = true />',
           '</div>',
         '</div>',
-        '<div class="four wide field">',
-          '<label for="gender">Gender</label>',
-          '<select name="'+type+"[][gender]"+'" class="ui fluid dropdown">',
-            '<option value="Male">Male</option>',
-            '<option value="Female">Female</option>',
-          '</select>',
-        '</div>',
         '<button class="ui basic button" onclick="removePassengerForm(this)">Remove Passenger</button>',
         '<br/><br/>',
       '</div>'

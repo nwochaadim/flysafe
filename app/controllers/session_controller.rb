@@ -11,14 +11,14 @@ class SessionController < ApplicationController
       session[:user_id] = user.id
       redirect_to root_path, notice: login_success
     else
-      flash[:errors] = login_failed
+      flash.now[:errors] = login_failed
       render :new
     end
   end
 
   def destroy
     session[:user_id] = nil
-    redirect_to login_path, notice: logout_success
+    redirect_to root_path, notice: logout_success
   end
 
   private

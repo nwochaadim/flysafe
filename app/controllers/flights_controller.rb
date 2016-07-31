@@ -3,7 +3,10 @@ class FlightsController < ApplicationController
 
   def search
     @retrieved_flights = Flight.search(
-      params[:departs], params[:arrives], search_date, total_passengers
+      params[:departs],
+      params[:arrives],
+      search_date,
+      total_passengers
     )
 
     render format: :js
@@ -22,9 +25,11 @@ class FlightsController < ApplicationController
   private
 
   def total_passengers
-    data = { total_children: params[:children],
+    data = { 
+             total_children: params[:children],
              total_adults: params[:adults],
-             total_infants: params[:infants] }
+             total_infants: params[:infants] 
+           }
     store_passengers_info
     data.values.map(&:to_i).inject(0) { |sum, x| sum + x }
   end

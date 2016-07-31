@@ -31,3 +31,6 @@
   margin-top: 0px !important;
 }
 
+.ui.no-bottom-margin{
+  margin-bottom: 0px !important
+}

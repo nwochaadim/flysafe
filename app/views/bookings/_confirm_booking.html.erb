@@ -6,8 +6,7 @@
     <% @booking_params["adult"].each.with_index(1) do |adult, index|  %>
       <h3 class="ui dividing header">Adult Passenger <%= index %> Information</h2>
       <p>Name: <span> <%= adult["first_name"] + " " + adult["last_name"] %> </span></p>
-      <p>Fee: <span><%= adult_fare %></span></p>
-
+      <p>Fee: <span><%= "$#{adult_fare}" %></span></p>
     <% end %>
   <% end %>
 
@@ -15,7 +14,7 @@
     <% @booking_params["child"].each.with_index(1) do |child, index|  %>
       <h3 class="ui dividing header">Child Passenger <%= index %> Information</h2>
       <p>Name: <span> <%= child["first_name"] + " " + child["last_name"] %> </span></p>
-      <p>Fee: <span><%= child_fare %></span></p>
+      <p>Fee: <span><%= "$#{child_fare}" %></span></p>
     <% end %>
   <% end %>
 
@@ -24,7 +23,7 @@
     <% @booking_params["infant"].each.with_index(1) do |infant, index|  %>
       <h3 class="ui dividing header">Infant Passenger <%= index %> Information</h2>
       <p>Name: <span> <%= infant["first_name"] + " " + infant["last_name"] %> </span></p>
-      <p>Fee: <span><%= infant_fare %></span></p>
+      <p>Fee: <span><%= "$#{infant_fare}" %></span></p>
     <% end %>
   <% end %>
 

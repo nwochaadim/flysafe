@@ -6,7 +6,7 @@ class UserMailer < ApplicationMailer
 
   def booking_success(booking_id)
     @booking = Booking.find(booking_id)
-    @user = @booking.user
+    @user = @booking.user || @booking.passengers.first
     @new_cost = new_cost(@booking.passengers, @booking.class_level.to_sym)
     mail(to: @user.email, subject: "Booking was successful")
   end

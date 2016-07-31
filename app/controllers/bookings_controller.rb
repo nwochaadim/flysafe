@@ -71,8 +71,11 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    passenger_fields = %w(gender first_name last_name)
-    params.permit(adult: passenger_fields, child: passenger_fields,
-                  infant: passenger_fields)
+    passenger_fields = %w(first_name last_name email)
+    params.permit(
+      adult: passenger_fields,
+      child: passenger_fields,
+      infant: passenger_fields
+    )
   end
 end
