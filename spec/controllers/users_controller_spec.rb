@@ -1,14 +1,8 @@
 require "rails_helper"
 
 RSpec.describe UsersController, type: :controller do
-  let(:valid_attributes) do
-    { first_name: Faker::Name.name,
-      last_name: Faker::Name.name,
-      email: Faker::Internet.email,
-      phone: Faker::PhoneNumber.subscriber_number(11),
-      password: "secret key",
-      password_confirmation: "secret key" }
-  end
+  let(:user) { create(:user) }
+  let(:valid_attributes){ attributes_for(:user) }
 
   describe '#new' do
     it "renders the new template" do
@@ -34,9 +28,9 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe '#past_bookings' do
-    let(:user) { create(:user) }
     it "renders past bookings template" do
-      post :past_bookings, user_id: user.id
+      session[:user_id] = user.id
+      post :past_bookings
       expect(response).to render_template(:past_bookings)
     end
   end

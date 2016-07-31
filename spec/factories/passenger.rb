@@ -2,7 +2,6 @@ FactoryGirl.define do
   factory :passenger, class: Passenger do
     first_name Faker::Name.name
     last_name Faker::Name.name
-    gender %w(Male Female).sample
   end
 
   factory :adult_passenger, parent: :passenger do

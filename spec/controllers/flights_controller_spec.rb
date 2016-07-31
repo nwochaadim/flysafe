@@ -1,6 +1,7 @@
 require "rails_helper"
 
 RSpec.describe FlightsController, type: :controller do
+  before(:all) { @flight = create(:flight, :departing, :arriving) }
   let(:valid_attributes) do
     {
       departs: "Abuja Intenational Airport (ABV)",
@@ -14,8 +15,6 @@ RSpec.describe FlightsController, type: :controller do
   end
 
   describe '#search' do
-    before { @flight = create(:flight) }
-
     it "renders search template" do
       valid_attributes[:format] = :js
       get :search, valid_attributes
@@ -24,8 +23,6 @@ RSpec.describe FlightsController, type: :controller do
   end
 
   describe '#seats_available' do
-    before { @flight = create(:flight) }
-
     context "when flight is valid" do
       it "renders the number of seats available as json" do
         session[:flight_id] = @flight.id

@@ -3,6 +3,6 @@ module LoginHelper
     visit login_path
     fill_in "email", with: user.email
     fill_in "password", with: "secret_key"
-    click_button "Login"
+    page.execute_script("$('.ui.fluid.large.teal.submit.button').click()")
   end
 end

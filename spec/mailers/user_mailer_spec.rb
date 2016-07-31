@@ -1,8 +1,14 @@
 require "rails_helper"
 
 RSpec.describe UserMailer, type: :mailer do
+  before(:all) do
+    @booking = create(:booking)
+    flight = create(:flight, :departing, :arriving)
+    @booking.update(flight: flight)
+  end
+
   context '#welcome' do
-    before(:each) { @user = create(:user) }
+    before(:all) { @user = create(:user, email: "a@gmail.com") }
     let(:mail) { UserMailer.welcome(@user.id) }
     it "renders the subject" do
       expect(mail.subject).to eq "Welcome to FlySafe"
@@ -18,10 +24,6 @@ RSpec.describe UserMailer, type: :mailer do
   end
 
   context '#update_reservation' do
-    before do
-      @booking = create(:booking)
-      @booking.flight.route.update(arriving_airport: create(:arriving_airport))
-    end
 
     let(:mail) { UserMailer.update_reservation(@booking.id) }
     it "renders the subject" do
@@ -37,11 +39,7 @@ RSpec.describe UserMailer, type: :mailer do
     end
   end
 
-  context '#booking_sucess' do
-    before(:each) do
-      @booking = create(:booking)
-      @booking.flight.route.update(arriving_airport: create(:arriving_airport))
-    end
+  context '#booking_success' do
     let(:mail) { UserMailer.booking_success(@booking.id) }
     it "renders the subject" do
       expect(mail.subject).to eq "Booking was successful"
@@ -57,11 +55,6 @@ RSpec.describe UserMailer, type: :mailer do
   end
 
   context '#delete_reservation' do
-    before(:each) do
-      @booking = create(:booking)
-      @booking.flight.route.update(arriving_airport: create(:arriving_airport))
-    end
-
     let(:mail) { UserMailer.delete_reservation(@booking.id) }
     it "renders the subject" do
       expect(mail.subject).to eq "Fly Safe. Booking Reservation Cancelled!"

@@ -1,16 +1,16 @@
 require "rails_helper"
 
 RSpec.describe SessionController, type: :controller do
+  let(:user) { create(:user) }
+
   describe '#new' do
-    before { get :new }
     it "renders new template" do
+      get :new 
       expect(response).to render_template(:new)
     end
   end
 
   describe '#create' do
-    let(:user) { create(:user) }
-
     context "as an authenticated user" do
       it "redirects to root path" do
         post :create, email: user.email, password: "secret_key"
@@ -37,7 +37,7 @@ RSpec.describe SessionController, type: :controller do
     end
 
     it "redirects user to login page" do
-      expect(response).to redirect_to(login_path)
+      expect(response).to redirect_to(root_path)
     end
   end
 end

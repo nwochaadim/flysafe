@@ -13,7 +13,7 @@ RSpec.describe "Signing in Process", type: :feature do
       visit login_path
       fill_in "email", with: "invalid email"
       fill_in "password", with: "invalid email"
-      click_button "Login"
+      page.execute_script("$('.ui.fluid.large.teal.submit.button').click()")
       expect(page).to have_content("Invalid email or password")
     end
   end

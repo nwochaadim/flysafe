@@ -1,15 +1,12 @@
 require "rails_helper"
 
 RSpec.describe BookingsController, type: :controller do
-  before(:each) do
-    @booking = create(:booking)
-    @booking.flight.route.update(arriving_airport: create(:arriving_airport))
-  end
+  before { @booking = create(:booking) }
 
   let(:valid_attributes) do
     {
       format: :js,
-      adult: [{ first_name: "John", last_name: "Travolta" }],
+      adult: [{ first_name: "John", last_name: "Doe", email: "a@gmail.com" }],
       child: [{ first_name: "Mercy", last_name: "Johnson" }],
       infant: [{ first_name: "Michelle", last_name: "Obama" }]
     }
@@ -34,7 +31,7 @@ RSpec.describe BookingsController, type: :controller do
     it "redirects to paypal" do
       session[:flight_id] = @booking.flight.id
       paypal_construct = Struct.new(:token, :redirect_uri)
-      paypal_response = paypal_construct.new("TOKEN", "http://google.com")
+      paypal_response = paypal_construct.new("TOKEN", "http://paypal.com")
 
       allow_any_instance_of(PaymentService).to receive(:make_payment).
         and_return(paypal_response)
@@ -55,6 +52,8 @@ RSpec.describe BookingsController, type: :controller do
     context "when payment is valid" do
       it "creates booking and renders booking template" do
         params = { token: session[:token], flight_id: @booking.flight.id }
+        allow_any_instance_of(ActionMailer::MessageDelivery).
+          to receive(:deliver_now).and_return(true)
         get :validate_payment, params
         expect(response).to render_template(:validate_payment)
       end

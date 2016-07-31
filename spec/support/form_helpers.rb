@@ -1,7 +1,11 @@
 module FormHelper
-  def fill_form_for_flight_search
-    select("Benin Airport (BNI)", from: "departs")
-    select("Lagos Murtala Muhammed Airport (LOS)", from: "arrives")
+  def fill_form_for_flight_search(flight)
+    depart_airport = "#{flight.from_airport.name}"\
+                     " (#{flight.from_airport.airport_code})"
+    arrive_airport = "#{flight.to_airport.name}"\
+                     " (#{flight.to_airport.airport_code})"
+    select(depart_airport, from: "departs")
+    select(arrive_airport, from: "arrives")
     select("Economy", from: :grade)
     select("1", from: :adults)
     select("1", from: :infants)
@@ -10,8 +14,6 @@ module FormHelper
   end
 
   def fill_incomplete_form_for_flight_search
-    select("Benin Airport (BNI)", from: "departs")
-    select("Benin Airport (BNI)", from: "arrives")
     select("Economy", from: :grade)
     select("1", from: :adults)
     select("1", from: :infants)

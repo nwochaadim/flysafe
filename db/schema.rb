@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20160730162346) do
     t.integer  "seats_available"
     t.datetime "date"
     t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "updated_at",      null: false 
     t.integer  "to_airport_id"
     t.integer  "from_airport_id"
   end

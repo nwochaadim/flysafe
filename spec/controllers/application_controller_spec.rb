@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe ApplicationController, type: :controller do
-  before(:each) { @user = create(:user) }
+  before { @user = create(:user) }
 
   describe "#current_user" do
     context "when user is logged in" do

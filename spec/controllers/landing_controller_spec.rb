@@ -1,15 +1,8 @@
 require "rails_helper"
 
 RSpec.describe LandingController, type: :controller do
-  let(:landing_params) do
-    {
-      first_name: Faker::Name.name,
-      last_name: Faker::Name.name,
-      email: Faker::Internet.email,
-      phone_number: Faker::PhoneNumber.phone_number,
-      comment: Faker::Lorem.paragraphs(2).join(" ")
-    }
-  end
+  let(:landing_params) { attributes_for(:contact) }
+  
   describe '#index' do
     it "renders the index template" do
       get :index

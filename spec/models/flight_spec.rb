@@ -14,7 +14,8 @@ RSpec.describe Flight, type: :model do
     it { is_expected.to respond_to(:plane_name) }
     it { is_expected.to respond_to(:seats_available) }
     it { is_expected.to respond_to(:date) }
-    it { is_expected.to respond_to(:route) }
+    it { is_expected.to respond_to(:from_airport) }
+    it { is_expected.to respond_to(:to_airport) }
   end
 
   describe "Active Model Relation" do

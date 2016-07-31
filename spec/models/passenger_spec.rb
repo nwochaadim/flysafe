@@ -20,6 +20,7 @@ RSpec.describe Passenger, type: :model do
     it { is_expected.to respond_to(:first_name) }
     it { is_expected.to respond_to(:last_name) }
     it { is_expected.to respond_to(:age_grade) }
+    it { is_expected.to respond_to(:email) }
   end
 
   describe "Active Model Relation" do

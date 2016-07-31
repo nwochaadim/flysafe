@@ -8,8 +8,8 @@ RSpec.describe UsersController, type: :routing do
     end
 
     it 'routes to #past_bookings' do
-      expect(get: "/users/1/bookings").
-        to route_to('users#past_bookings', user_id: "1")
+      expect(get: "/users/bookings").
+        to route_to('users#past_bookings')
     end
   end
 end

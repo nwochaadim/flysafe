@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Airport, type: :model do
-  before(:each) { @airport = create(:airport) }
+  before(:each) { @airport = create(:airport, flights_count: 2) }
 
   describe "Initializing Airport" do
     let(:airport1) { build(:airport, name: nil) }
@@ -32,6 +32,8 @@ RSpec.describe Airport, type: :model do
     it { is_expected.to respond_to(:country) }
     it { is_expected.to respond_to(:state) }
     it { is_expected.to respond_to(:airport_code) }
+    it { is_expected.to respond_to(:departing_flights) }
+    it { is_expected.to respond_to(:arriving_flights) }
   end
 
   describe ".names" do
