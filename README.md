@@ -1,5 +1,6 @@
 ## Fly Safe [![CircleCI](https://circleci.com/gh/andela-anwocha/flysafe/tree/develop.svg?style=svg)](https://circleci.com/gh/andela-anwocha/flysafe/tree/develop) [![Coverage Status](https://coveralls.io/repos/github/andela-anwocha/flysafe/badge.svg?branch=ft-booking-page-management-121376557)](https://coveralls.io/github/andela-anwocha/flysafe?branch=ft-booking-page-management-121376557) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/andela-anwocha/flysafe/badges/quality-score.png?b=ft-booking-page-management-121376557)](https://scrutinizer-ci.com/g/andela-anwocha/flysafe/?branch=ft-booking-page-management-121376557)
 
+A flight booking application that enables you to make booking reservations. It can be viewed [here](https://fly-safe.herokuapp.com)
 ## Getting Started
 1. Clone the repository:
     ````
@@ -45,3 +46,12 @@
     ```sh
         $ bundle exec rspec spec
     ```
+
+## Contributing
+
+1. Fork it: [Fork a-bucketlist on Github](https://github.com/andela-anwocha/flysafe/fork)
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create a new Pull Request
+a
