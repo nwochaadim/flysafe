@@ -7,9 +7,6 @@ module FormHelper
     select(depart_airport, from: "departs")
     select(arrive_airport, from: "arrives")
     select("Economy", from: :grade)
-    select("1", from: :adults)
-    select("1", from: :infants)
-    select("1", from: :children)
     page.execute_script("$('.ui.basic.blue.button').click()")
   end
 
@@ -40,6 +37,19 @@ module FormHelper
     fill_in :phone, with: Faker::PhoneNumber.phone_number
     fill_in :password, with: password
     fill_in :password_confirmation, with: password
+    page.execute_script("$('.ui.basic.blue.button').click()")
+  end
+
+  def fill_form_for_booking
+    fill_in 'adult__first_name', with: Faker::Name.name
+    fill_in 'adult__last_name', with: Faker::Name.name
+    fill_in 'adult__email', with: Faker::Internet.email
+    page.execute_script("$('.ui.basic.blue.button').click()")
+  end
+
+  def fill_incomplete_form_for_booking
+    fill_in 'adult__first_name', with: Faker::Name.name
+    fill_in 'adult__last_name', with: ""
     page.execute_script("$('.ui.basic.blue.button').click()")
   end
 end

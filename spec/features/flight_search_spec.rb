@@ -12,7 +12,7 @@ RSpec.describe "Flight Search", type: :feature do
     end
   end
 
-  feature "when user fills all same arrival and departure info" do
+  feature "when user fills same arrival and departure info" do
     scenario "displays flights available", js: true do
       visit root_path(anchor: "booking")
       fill_incomplete_form_for_flight_search
