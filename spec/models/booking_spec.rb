@@ -11,14 +11,14 @@ RSpec.describe Booking, type: :model do
   end
 
   describe "ActiveRecord Validation" do
-    it { should validate_presence_of(:reference_number) }
-    it { should validate_presence_of(:class_level) }
+    it { is_expected.to validate_presence_of(:reference_number) }
+    it { is_expected.to validate_presence_of(:class_level) }
   end
 
   describe "ActivRecord Relationships" do
-    it { should belong_to(:flight) }
-    it { should belong_to(:user) }
-    it { should have_many(:passengers) }
+    it { is_expected.to belong_to(:flight) }
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to have_many(:passengers) }
   end
 
   describe "#allocate_flight" do
