@@ -1,0 +1,16 @@
+<%= render partial: "notice" %>
+<%= render 'login_header' %>
+<div class="ui fluid container">
+  <div class="ui middle aligned center aligned grid no-margin">
+    <div class="column">
+      <h2 class="ui teal header">
+          Log-in to Fly Safe
+      </h2>
+      <%= render partial: "forms/login" %>
+      <div class="ui message">
+          New to Fly Safe? 
+          <%= link_to "Sign Up", signup_path %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="ui long modal mform">
+  <div class="ui container">
+    <%= form_tag url_for(action: "update", controller: "bookings", reference_number: booking.reference_number), method: "put", class: "ui form" do %>
+      <h4 class="ui dividing header">Please provide your information</h4>
+      <div class="two fields">
+        <div class="field">
+          <%= label_tag :first_name, "First Name" %>
+          <%= show_first_name %>
+        </div>
+
+        <div class="field">
+          <%= label_tag :last_name, "Last Name" %>
+          <%= show_last_name %>
+        </div>
+      </div>
+
+      <div class="eight wide field">
+        <%= label_tag :email, "Email" %>
+        <%= show_email %>
+      </div>
+
+      <div class="four wide field">
+        <%= label_tag :gender, "Gender" %>
+        <%= show_gender %>
+      </div>
+
+      <div id="passenger-form"></div>
+      <div class="ui center aligned grid">
+        <%= submit_tag "Submit", class: "ui basic blue button" %>
+      </div><br/>
+    <% end %>
+    <div class="ui center aligned grid">
+       <div class="ui buttons">
+        <button class="ui basic blue button" onclick="addPassengerForm('adult')">Add Adult Passenger</button>
+        <button class="ui basic teal button" onclick="addPassengerForm('child')">Add Child Passenger</button>
+        <button class="ui basic red button" onclick="addPassengerForm('infant')">Add Infant Passenger</button>
+      </div>
+    </div>
+  </div>
+</div>

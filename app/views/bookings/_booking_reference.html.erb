@@ -1,0 +1,30 @@
+<% if @booking %>
+  <%= render partial: "modals/edit_reservation_modal", locals: { booking: @booking } %>
+  <h3 class="ui top attached header">
+    Booking #<%= "#{@booking.reference_number}" %>
+  </h3>
+  <div class="ui attached segment">
+    <p><h4>Departing Airport: </h4><%= @booking.flight.from_airport.name %></p>
+    <p><h4>Arriving Airport: </h4><%= @booking.flight.to_airport.name %></p>
+    <p><h4>Number of passengers: </h4><%= @booking.passengers.count %> <button class="custom-button" onclick="showPassenger()">View</button></p>
+    <p><h4>Departure Date: </h4> <%= @booking.flight.date.strftime("%B %d, %Y") %> </p>
+    <p><h4>Total Flight Fare: </h4> $<%= estimate_flight_fare(@booking.passengers, @booking.class_level) %></p>
+    <div class="ui center aligned grid">
+    <% if @booking.user %>
+      <div class="ui buttons">
+        <button class="ui basic red button" id="cancel-reservation" onclick="deleteConfirmDialog('<%= @booking.reference_number %>')">Cancel Reservation</button>
+        <div class="or"></div>
+        <button class="ui positive button" onclick="editReservation()">Edit Reservation</button>
+      </div>
+    <% end %>
+      
+    </div>
+  </div>
+<% else %>
+  <div class="ui message">
+    <div class="header">
+      No record Found
+    </div>
+    <p>We have searched our records and no booking reference number matches <b> <%= @reference_number %> </b> </p>
+  </div>
+<% end %>

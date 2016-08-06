@@ -1,0 +1,45 @@
+<%= form_tag "/users", method: "post", class: "ui form" do %>
+  <h4 class="ui dividing header">Please provide your information</h4>
+  <div class="two fields">
+    <div class="field">
+      <%= label_tag :first_name, "First Name" %>
+      <%= text_field_tag :first_name, nil, placeholder: "First Name", required: true %>
+    </div>
+
+    <div class="field">
+      <%= label_tag :last_name, "Last Name" %>
+      <%= text_field_tag :last_name, nil, placeholder: "Last Name", required: true  %>
+    </div>
+  </div>
+
+  <div class="two fields">
+    <div class="eight wide field">
+      <%= label_tag :email, "Email" %>
+      <%= text_field_tag :email, nil, placeholder: "E.g johndoe@gmail.com", required: true  %>
+    </div>
+
+    <div class="eight wide field">
+      <%= label_tag :phone, "Phone Number" %>
+      <%= text_field_tag :phone, nil, placeholder: "(+234) 74460478", required: true  %>
+    </div>
+  </div>
+
+  <div class="eight wide field">
+    <%= label_tag :phone, "Gender" %>
+    <%= select_tag :gender, options_for_select([["Male", "Male"], ["Female", "Female"]]), class: "ui fluid dropdown" %>
+  </div>
+
+  <div class="two fields">
+    <div class="eight wide field">
+      <%= label_tag :password, "Password" %>
+      <%= password_field_tag :password, nil, required: true %>
+    </div>
+   
+    <div class="eight wide field">
+      <%= label_tag :password_confirmation, "Confirm Password" %>
+      <%= password_field_tag :password_confirmation, nil, required: true %>
+    </div>
+  </div>
+
+  <%= submit_tag "Create Account", class: "ui basic blue button" %>
+<% end %>

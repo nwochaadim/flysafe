@@ -1,0 +1,31 @@
+<%= render partial: "notice" %>
+<%= render partial: "header" %>
+  <div class="ui modal" id="passengers-modal">
+    <div class="header">Passengers</div>
+      <div class="content">
+        <p>
+          <div class="ui list" id="passenger-list">
+          </div>
+        </p>
+      </div>
+  </div>
+
+  <div class="ui centered grid">
+    <div class="ui container">
+       <h1 class="ui horizontal divider header">
+        <i class="search icon"></i>
+        Search Bookings
+      </h1>
+      <%= form_tag retrieve_booking_path, method: "post", remote: true do %>
+        <div class="ui fluid icon input">
+          <%= text_field_tag :reference_number, nil, placeholder: "Search Bookings via reference number...", required: true %>
+          <i class="search icon"></i>
+        </div><br/>
+        <%= submit_tag "Search Bookings", class: "ui teal button" %>
+      <% end %>
+    </div>
+  </div>
+  <div class="ui container" id="search-result-container">
+  </div>
+  <%= render partial: "modals/confirm_delete_modal" %>
+<%= render partial: "footer" %>

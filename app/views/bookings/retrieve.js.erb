@@ -1,0 +1,4 @@
+$(document).ready(function(){
+  $("#search-result-container").html("<%= escape_javascript(render partial: 'booking_reference') %>");
+  $("#passenger-list").html("<%= escape_javascript(render partial: 'passenger_booking_reference') %>");
+})

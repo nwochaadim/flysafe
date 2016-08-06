@@ -1,0 +1,46 @@
+<%= form_tag search_flights_path,  method: "post", class: "ui form", remote: true do %>
+  <h4 class="ui dividing header">Search Flights</h4>
+  <div class="three fields">
+    <div class="field">
+      <%= label_tag :departs, "Departs" %>
+      <%= select_tag :departs, options_for_select(@airport_names), class: "ui search fluid dropdown" %>
+    </div>
+
+    <div class="field">
+      <%= label_tag :arrives, "Arrives" %>
+      <%= select_tag :arrives, options_for_select(@airport_names), class: "ui search fluid dropdown" %>
+    </div>
+
+    <div class="field">
+      <%= label_tag :grade, "Class" %>
+      <%= select_tag :grade, options_for_select([["Economy", "Economy"], ["Business", "Business"]]), class: "ui search fluid dropdown" %>
+    </div>
+  </div>
+
+  <div class="six wide field">
+    <%= label_tag :date, "Date" %>
+    <%= date_field_tag "date", "" %>
+  </div>
+  
+  <h4 class="ui dividing header">Passengers</h4>
+  <div class="three fields">
+    <div class="field">
+      <%= label_tag :adults, "Number of Adults(12+)" %>
+      <%= select_tag :adults, options_for_select(0..6), class: "ui fluid dropdown" %>
+    </div>
+
+    <div class="field">
+      <%= label_tag :children, "Number of Children (age 2-11)" %>
+      <%= select_tag :children, options_for_select(0..6), class: "ui fluid dropdown" %>
+    </div>
+
+    <div class="field">
+      <%= label_tag :infants, "Number of Infants (under 2)" %>
+      <%= select_tag :infants, options_for_select(0..2), class: "ui fluid dropdown" %>
+    </div>
+  </div>
+  <%= submit_tag "Search", class: "ui basic blue button", onclick: "validateFields(event)" do %>
+    <i class="search icon"></i>
+  <% end %>
+
+<% end %>

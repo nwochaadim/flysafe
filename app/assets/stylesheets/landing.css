@@ -1,0 +1,37 @@
+.ui.image {
+  position: absolute;
+  top: 0px;
+  z-index: -1;
+  height: 700px !important;
+ }
+
+.ui.centered.grid{
+  margin-top: 20px;
+}
+
+section#booking{
+  position: relative;
+  top: 400px;
+  margin-bottom: 100px;
+}
+
+.ui.centered.grid{
+  margin-bottom: 100px;
+  margin-top: 0px !important;
+}
+
+h1.ui.center.aligned.icon.header{
+  margin-top: 120px;
+}
+
+section#footer{
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  z-index: 1000;
+}
+
+.ui.form{
+  width: 800px;
+  min-width: 200px;
+}

@@ -1,0 +1,25 @@
+<%= render 'header' %>
+<h1 class="ui horizontal divider header">
+  <i class="text telephone icon"></i>
+  Contact Us
+</h1>
+
+<div class="ui container">
+  <div class="ui info message">
+    <i class="close icon"></i>
+    <div class="header">
+      We are happy to hear from you
+    </div>
+    <p>Please fill the form below</p>
+  </div>
+</div>
+
+
+<div class="ui centered grid">
+  <div class="centered row">
+    <div class="ui segment">
+      <%= render partial: 'forms/contact_us' %>
+    </div>
+  </div>
+</div>
+<%= render 'footer' %>

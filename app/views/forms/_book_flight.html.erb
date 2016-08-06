@@ -1,0 +1,41 @@
+<%= form_tag confirm_book_path, method: "post", class: "ui form", remote: true do %>
+  <h4 class="ui dividing header">Please provide your information</h4>
+  <div class="two fields">
+    <div class="field">
+      <%= label_tag :first_name, "First Name" %>
+      <%= show_first_name %>
+    </div>
+
+    <div class="field">
+      <%= label_tag :last_name, "Last Name" %>
+      <%= show_last_name %>
+    </div>
+  </div>
+
+  <div class="two fields">
+    <div class="eight wide field">
+      <%= label_tag :email, "Email" %>
+      <%= show_email %>
+    </div>
+  </div>
+
+  <div id="form-holder"></div>
+
+  <div class="ui center aligned grid">
+    <%= submit_tag "Submit", class: "ui basic blue button" %>
+  </div>
+
+  <div class="ui center aligned grid">
+    <div class="ui teal buttons">
+      <div class="ui button" id="dropDown">Add Passenger</div>
+      <div class="ui floating dropdown icon button">
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <div class="item">Adult</div>
+          <div class="item"> Child</div>
+          <div class="item">Infant</div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

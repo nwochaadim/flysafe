@@ -1,0 +1,10 @@
+<div class="ui small inverted menu">
+  <%= link_to 'Home', root_path, class: root_class %>
+  <%= active_link_to 'Manage Bookings', search_booking_path, class_active: 'active item', class_inactive: 'item' %>
+  <%= active_link_to 'About Us', about_path, class_active: 'active item', class_inactive: 'item' %>
+  <%= active_link_to 'Contact Us', contact_path, class_active: 'active item', class_inactive: 'item' %>
+
+  <div class="right menu">
+    <%= render partial: "right_menu" %>
+  </div>
+</div>

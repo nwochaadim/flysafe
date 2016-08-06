@@ -1,0 +1,33 @@
+<%= form_tag feedback_path, method: "post", class: "ui form" do %>
+  <h4 class="ui dividing header">Please provide your information</h4>
+  <div class="two fields">
+    <div class="field">
+      <%= label_tag :first_name, "First Name" %>
+      <%= show_first_name %>
+    </div>
+
+    <div class="field">
+      <%= label_tag :last_name, "Last Name" %>
+      <%= show_last_name %>
+    </div>
+  </div>
+
+  <div class="two fields">
+    <div class="eight wide field">
+      <%= label_tag :email, "Email" %>
+      <%= show_email %>
+    </div>
+
+    <div class="eight wide field">
+      <%= label_tag :phone_number, "Phone Number" %>
+      <%= text_field_tag :phone_number, nil, placeholder: "(+234) 734452890" %>
+    </div>
+  </div>
+
+  <div class="twelve wide field">
+    <%= label_tag :comment, "Drop Your Comment" %>
+    <%= text_area_tag :comment, nil, required: true %>
+  </div>
+ 
+  <%= submit_tag "Submit", class: "ui basic blue button" %>
+<% end %>
